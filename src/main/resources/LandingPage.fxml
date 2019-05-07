@@ -6,9 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="277.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GrupoGuay.App">
+<AnchorPane prefHeight="277.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GrupoGuay.App">
    <children>
-      <Label layoutX="142.0" layoutY="48.0" text="Bienvenid@ a EspacioUPM" />
+      <Label layoutX="77.0" layoutY="59.0" text="Bienvenid@ a EspacioUPM" />
       <PasswordField fx:id="txtPass" layoutX="139.0" layoutY="139.0" />
       <TextField fx:id="txtAlias" layoutX="138.0" layoutY="100.0" />
       <Label layoutX="99.0" layoutY="104.0" text="Alias:" />

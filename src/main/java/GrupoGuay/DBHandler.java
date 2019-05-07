@@ -1,5 +1,6 @@
 package GrupoGuay;
 
+import GrupoGuay.Modelos.Publicacion;
 import GrupoGuay.Modelos.Usuario;
 
 import java.sql.*;
@@ -47,6 +48,21 @@ public class DBHandler {
             pStmt.setBytes(4, usuario.getSalt());
 
             return pStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean setPublicacion(Publicacion publicacion) {
+        try (PreparedStatement pStmt = mConnection.prepareStatement("INSERT INTO `publicaciones` VALUES (NULL, ?, ?, ?, ?)")) {
+            pStmt.setString(1, publicacion.getAutor().getAlias());
+            pStmt.setString(2, publicacion.getFecha().toString());
+            pStmt.setString(3, publicacion.getCuerpo() != null ? publicacion.getCuerpo() : "NULL");
+            if (publicacion.getReferencia() != null)
+                pStmt.setInt(4, publicacion.getReferencia().getId());
+            else
+                pStmt.setNull(4, Types.INTEGER);
         } catch (SQLException e) {
             e.printStackTrace();
         }

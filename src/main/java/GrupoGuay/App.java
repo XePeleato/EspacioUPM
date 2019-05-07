@@ -1,13 +1,19 @@
 package GrupoGuay;
 
+import GrupoGuay.Controladores.EspacioUPMController;
+import GrupoGuay.Controladores.TimelineController;
 import GrupoGuay.Modelos.Usuario;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,13 +25,26 @@ import java.io.IOException;
  */
 public class App extends Application
 {
-    public Button btnLogin;
-    public TextField txtAlias;
-    public PasswordField txtPass;
+   @FXML public Button btnLogin;
+   @FXML public TextField txtAlias;
+   @FXML public PasswordField txtPass;
 
-    public TextField txtMail;
-    public PasswordField txtRegPass;
-    public Button btnSendReg;
+    @FXML public TextField txtMail;
+    @FXML public PasswordField txtRegPass;
+    @FXML public Button btnSendReg;
+
+    public static EspacioUPMController mController;
+    private static App instance;
+
+    public static Usuario mThisUser;
+
+    public App() {
+        instance = this;
+    }
+
+    public static App getInstance() {
+        return instance;
+    }
 
     public static void main( String[] args )
     {
@@ -35,13 +54,15 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/LandingPage.fxml"));
-        Parent root = loader.load();
-        primaryStage.setTitle("| EspacioUPM |");
-        primaryStage.setScene(new Scene(root, 408, 277));
+        App.getInstance().mController = new EspacioUPMController();
+        App.getInstance().mController.setStage(primaryStage);
+        App.getInstance().mController.replaceScene("/LandingPage.fxml");
+        //primaryStage.setResizable(false);
+        //primaryStage.setTitle("| EspacioUPM |");
         primaryStage.show();
     }
 
+    @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
         Usuario usuario = DBHandler.getDefault().getUsuario(txtAlias.getText());
 
@@ -60,9 +81,10 @@ public class App extends Application
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Contraseña correcta.", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            try {
+                mThisUser = usuario;
+                mController.replaceScene("/TimelinePage.fxml");
+            } catch (IOException e) { e.printStackTrace(); }
         }
     }
 
