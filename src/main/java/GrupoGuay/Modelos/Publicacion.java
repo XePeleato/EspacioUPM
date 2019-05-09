@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class Publicacion {
     private int mId;
-    private Usuario mAutor;
+    private String mAutor;
     private String mCuerpo;
     private LocalDateTime mFecha;
     private Publicacion mReferencia;
 
-    public Publicacion(Usuario autor, String cuerpo, Publicacion referencia)
+    public Publicacion(String autor, String cuerpo, Publicacion referencia)
     {
         mAutor = autor;
         if (cuerpo != null)
@@ -24,7 +24,7 @@ public class Publicacion {
         return mId;
     }
 
-    public Usuario getAutor() {
+    public String getAutor() {
         return mAutor;
     }
 
