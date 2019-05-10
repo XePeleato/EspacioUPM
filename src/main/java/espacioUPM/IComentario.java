@@ -11,12 +11,10 @@ package espacioUPM;//
 
 
 
-public class IComentario {
-	public String getAutor() {
+public interface IComentario {
+	public String getAutor();
 	
-	}
-	
-	public String getContenido() {
-	
-	}
+	public String getContenido();
+
+	public String getPublicacionMadre();
 }

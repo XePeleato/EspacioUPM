@@ -9,19 +9,18 @@ package espacioUPM;//
 //
 //
 
-
-import java.util.HashMap;
-
 public interface IDB_Publicacion {
+
 	Publicacion getPublicacion(String id);
-	
+
 	boolean setPublicacion(Publicacion publi);
+
+	Publicacion[] getPublicaciones(Usuario usuario);
 	
-	 Publicacion[] getPublicaciones(Usuario usuario);
+	boolean borrarPublicacion(Publicacion publi);
 	
-	 boolean borrarPublicacion(Publicacion publi);
+	boolean puntuar(Usuario usuario, Publicacion publi, int puntuacion);
 	
-	 boolean puntuar(Usuario usuario, Publicacion publi, int puntuacion);
-	
-	 void comentar(Publicacion publi, Usuario usuario, String contenido);
+	void comentar(Publicacion publi, Usuario usuario, String contenido);
+
 }

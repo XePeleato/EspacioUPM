@@ -10,9 +10,46 @@ package espacioUPM;//
 //
 
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class PublicacionFactory {
-	public void createPublicacion(data : String) : Publicacion() {
-	
+
+	private static final IDB_Publicacion DB = DB_Main.getInstance();
+
+	// Clase estática - no debe instanciarse
+	private PublicacionFactory() {}
+
+	private static boolean isURL(String data) {
+		return false; //TODO
+	}
+
+	public static Publicacion createPublicacion(String id, String data,
+										 String autor, LocalDateTime fecha,
+										 ArrayList<Comentario> comentarios,
+										 int numLikes, int numDislikes) {
+		if(isURL(data)) {
+			return new PublicacionEnlace(id, autor, fecha, comentarios, numLikes, numDislikes, data);
+		}
+		else {
+			Publicacion ref = DB.getPublicacion(data);
+			if(data != null) {
+				return new PublicacionReferencia(id, autor, fecha, comentarios, numLikes, numDislikes, ref);
+			}
+			return new PublicacionTexto(id, autor, fecha, comentarios, numLikes, numDislikes, data);
+		}
+	}
+
+	public static Publicacion createPublicacion(String autor, String data) {
+		if(isURL(data)) {
+			return new PublicacionEnlace(autor, data);
+		}
+		else {
+			Publicacion ref = DB.getPublicacion(data);
+			if(data != null) {
+				return new PublicacionReferencia(autor, ref);
+			}
+			return new PublicacionTexto(autor, data);
+		}
 	}
 }

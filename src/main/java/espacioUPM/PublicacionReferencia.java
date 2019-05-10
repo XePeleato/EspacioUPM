@@ -21,8 +21,9 @@ public class PublicacionReferencia extends Publicacion {
 		publicacionRef = pub;
 	}
 
-	public void PublicacionReferencia(String autor, String ref) {
-	
+	public PublicacionReferencia(String autor, Publicacion ref) {
+		super(autor);
+		this.publicacionRef = ref;
 	}
 	
 	public void mostrarPublicacion() {

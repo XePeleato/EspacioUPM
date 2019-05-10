@@ -13,14 +13,12 @@ package espacioUPM;//
 
 public class Usuario {
 	private String alias;
-	private String correoUPM;
 	public void darseDeBaja() {
 	
 	}
 	
 	public Usuario(String alias) {
 	    this.alias = alias;
-	
 	}
 	
 	public void escribirPublicacion() {

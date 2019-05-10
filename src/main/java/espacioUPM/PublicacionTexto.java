@@ -14,15 +14,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PublicacionTexto extends Publicacion {
-	private String contenido;
+	private String txt;
 
 	public PublicacionTexto(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, String txt) {
 		super(idPublicacion, autor, fecha, comentarios, numLikes, numDislikes);
-		contenido = txt;
+		this.txt = txt;
 	}
 
-	public void PublicacionTexto(String autor, String contenido) {
-	
+	public PublicacionTexto(String autor, String txt) {
+		super(autor);
+		this.txt = txt;
 	}
 	
 	public void mostrarPublicacion() {
@@ -30,6 +31,6 @@ public class PublicacionTexto extends Publicacion {
 	}
 
 	public String getContenido() {
-		return contenido;
+		return txt;
 	}
 }

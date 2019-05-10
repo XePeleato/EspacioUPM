@@ -21,7 +21,19 @@ public abstract class Publicacion extends IPublicacion {
 	private int numLikes;
 	private int numDislikes;
 
-	public Publicacion(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes)
+	private static final IDB_Publicacion DB = DB_Main.getInstance();
+
+	public Publicacion(String autor) {
+	    IDPublicacion = "0";//DB.getNewID(); TODO: implementar getNewID
+        this.autor = autor;
+        this.fecha = LocalDateTime.now();
+        this.comentarios = new ArrayList<>();
+        this.numLikes = 0;
+        this.numDislikes = 0;
+    }
+
+	public Publicacion(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
+                       int numLikes, int numDislikes)
 	{
 		IDPublicacion = idPublicacion;
 		this.autor = autor;
@@ -36,7 +48,6 @@ public abstract class Publicacion extends IPublicacion {
 	}
 
 	public void comentar(Usuario autor, String contenido) {
-
 	}
 
 	public void like(Usuario usuario) {

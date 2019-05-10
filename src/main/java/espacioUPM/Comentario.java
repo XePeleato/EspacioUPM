@@ -11,18 +11,21 @@ package espacioUPM;//
 
 
 
-public class Comentario extends IComentario {
+public class Comentario implements IComentario {
+
 	private String autor;
-	private Object contenido: String;
-	public void Comentario(String autor, String contenido) {
-	
+	private String contenido;
+	private String pub_id;
+
+	public Comentario(String autor, String contenido, String pub_id) {
+		this.autor = autor;
+		this.contenido = contenido;
+		this.pub_id = pub_id;
 	}
+
+	public String getPublicacionMadre() { return pub_id; }
+
+	public String getAutor() { return autor; }
 	
-	public String getAutor() {
-	
-	}
-	
-	public String getContenido() {
-	
-	}
+	public String getContenido() { return contenido; }
 }

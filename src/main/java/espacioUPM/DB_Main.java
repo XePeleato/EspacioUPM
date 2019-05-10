@@ -9,9 +9,6 @@ package espacioUPM;//
 //
 //
 
-
-import GrupoGuay.DBHandler;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
 
     }
 
-    public DB_Main getInstance() {
+    public static DB_Main getInstance() {
 
         if (instancia == null) {
             instancia = new DB_Main();
@@ -97,44 +94,88 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         return false;
 
     }
+    
+    public Publicacion getPublicacion(String id) {
+        Publicacion ret = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM publicaciones WHERE id = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                String autor = rs.getString("autor");
+
+                String cuerpo = rs.getString("id_ref") != null ?
+                        rs.getString("id_ref") :
+                        rs.getString("cuerpo");
+
+                LocalDateTime date = LocalDateTime.parse(rs.getString("fecha"));
+                ArrayList<Comentario> comentarios = getComentarios(id);
+                int numLikes = getLikes(id);
+                int numDislikes = getDislikes(id);
+                ret = PublicacionFactory.createPublicacion(id, cuerpo, autor, date, comentarios, numLikes, numDislikes);
+            }
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+
+        return ret;
+    }
+
 
     public Publicacion[] getPublicaciones(Usuario usuario) {
 
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM `publicaciones` WHERE `autor` = ?"))
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id FROM publicaciones WHERE autor = ?"))
         {
             pStmt.setString(1, usuario.getAlias());
-
-            ResultSet cur = pStmt.executeQuery();
-
+            ResultSet rs = pStmt.executeQuery();
             ArrayList<Publicacion> ret = new ArrayList<>();
-
-            while(cur.next()) {
-
-
-                if(cur.getString("cuerpo") == null)
-                {
-                    Publicacion ref = null;
-                    try(PreparedStatement pStmt2 = connection.prepareStatement("SELECT * FROM publicaciones where id = ?"))
-                    {
-                        pStmt.setInt(1, cur.getInt("id_ref"));
-
-                        ResultSet cur2 = pStmt2.executeQuery();
-
-                        cur2.next();
-
-                        ref = new PublicacionTexto(String.valueOf(cur2.getInt("id")), cur2.getString("autor"), LocalDateTime.parse(cur2.getString("fecha")), null, 0, 0, cur2.getString("cuerpo"));
-                        ret.add(new PublicacionReferencia(cur.getString("autor"), cur.getString("cuerpo"), LocalDateTime.parse(cur.getString("fecha")), null, 0, 0, ref));
-                    }
-                } else
-                    ret.add(new PublicacionTexto(cur.getString("autor"), cur.getString("cuerpo"), LocalDateTime.parse(cur.getString("fecha")), null, 0, 0, cur.getString("cuerpo")));
-
+            while(rs.next()) {
+                ret.add(getPublicacion(rs.getString("id")));
             }
             return ret.toArray(Publicacion[]::new);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return null;
+        catch (SQLException e) { e.printStackTrace(); }
 
+        return null;
+    }
+
+    //DONE
+    public ArrayList<Comentario> getComentarios(String publication_id) {
+        ArrayList<Comentario> ret = new ArrayList<>();
+        try {
+            PreparedStatement comentarios = connection.prepareStatement("SELECT * FROM comentarios WHERE id_publicacion = ?");
+            comentarios.setString(1, publication_id);
+            ResultSet rs = comentarios.executeQuery();
+            while(rs.next()) {
+                String autor = rs.getString("alias");
+                String contenido = rs.getString("texto");
+                ret.add(new Comentario(autor,contenido,publication_id));
+            }
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+
+        return ret;
+    }
+
+    //DONE
+    public int getLikes(String publication_id) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = 1");
+            statement.setString(1, publication_id);
+            return statement.executeQuery().getInt("numero");
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+        return 0;
+    }
+
+    //DONE
+    public int getDislikes(String publication_id) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = -1");
+            statement.setString(1, publication_id);
+            return statement.executeQuery().getInt("numero");
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+        return 0;
     }
 
     public boolean borrarPublicacion(Publicacion publi) {
@@ -193,7 +234,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
 
     @Override
     public boolean borrarUsuario(Usuario usuario) {
-        try (PreparedStatement pStmt = connection.prepareStatement("DROP FROM usuarios WHERE alias = ?")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM usuarios WHERE alias = ?")) {
             pStmt.setString(1, usuario.getAlias());
             pStmt.execute();
         } catch (SQLException e) {
@@ -203,7 +244,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
     }
 
     public boolean borrarMiembroComunidad(String id, String alias) {
-        try (PreparedStatement pStmt = connection.prepareStatement("DROP FROM miembros_comunidad WHERE id_usuario = ? AND id_comunidad = ?")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_usuario = ? AND id_comunidad = ?")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
             pStmt.execute();
@@ -238,7 +279,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
     }
 
     public boolean dejarDeSeguir(String seguidor, String seguido) {
-        try (PreparedStatement pStmt = connection.prepareStatement("DROP FROM seguimiento WHERE seguidor = ? AND seguido = ?")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM seguimiento WHERE seguidor = ? AND seguido = ?")) {
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
             pStmt.execute();
@@ -261,39 +302,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
 
     }
 
-    public Publicacion getPublicacion(String id) {
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM publicaciones WHERE id = ?")) {
-            pStmt.setInt(1, Integer.decode(id));
-            ResultSet cur = pStmt.executeQuery();
-
-            cur.next();
-
-            Publicacion ret;
-
-            if(cur.getString("cuerpo") == null)
-            {
-                Publicacion ref = null;
-                try(PreparedStatement pStmt2 = connection.prepareStatement("SELECT * FROM publicaciones where id = ?"))
-                {
-                    pStmt.setInt(1, cur.getInt("id_ref"));
-
-                    ResultSet cur2 = pStmt2.executeQuery();
-
-                    cur2.next();
-
-                    ref = new PublicacionTexto(String.valueOf(cur2.getInt("id")), cur2.getString("autor"), LocalDateTime.parse(cur2.getString("fecha")), null, 0, 0, cur2.getString("cuerpo"));
-                    ret = new PublicacionReferencia(cur.getString("autor"), cur.getString("cuerpo"), LocalDateTime.parse(cur.getString("fecha")), null, 0, 0, ref);
-                }
-            } else
-                ret = new PublicacionTexto(cur.getString("autor"), cur.getString("cuerpo"), LocalDateTime.parse(cur.getString("fecha")), null, 0, 0, cur.getString("cuerpo"));
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
-
     public boolean hacerAdminComunidad(String id, String alias) {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET admin = 1 WHERE id_comunidad = ? AND id_usuario = ?")) {
             pStmt.setString(1, alias);
@@ -313,7 +321,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
             ResultSet cur = pStmt.executeQuery();
 
             while (cur.next()) {
-                ret.add(new Usuario(cur.getString("id_usuario")));
+                ret.add(getUsuario(cur.getString("id_usuario")));
             }
 
         } catch (SQLException e) {
