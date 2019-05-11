@@ -1,10 +1,14 @@
 package espacioUPM;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
+public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB_PasswordHandler {
     private Connection connection;
     private static DB_Main instancia;
     private  DB_Main() {
@@ -128,7 +132,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
 
     public Publicacion[] getPublicaciones(Usuario usuario) {
 
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id FROM publicaciones WHERE autor = ?"))
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id FROM publicaciones WHERE autor = ? ORDER BY fecha DESC"))
         {
             pStmt.setString(1, usuario.getAlias());
             ResultSet rs = pStmt.executeQuery();
@@ -393,5 +397,31 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public boolean comprobarPasswd(String alias, String passwd) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT contrasenya, salt FROM Usuarios WHERE alias = ?");
+            statement.setString(1, alias);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                return hash(passwd, rs.getBytes("salt")) == rs.getBytes("contrasenya");
+            }
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+        return false;
+    }
+
+    private byte[] hash(String txt, byte[] salt) {
+        PBEKeySpec spec = new PBEKeySpec(txt.toCharArray(), salt, 10000, 256);
+
+        try {
+            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            return skf.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
