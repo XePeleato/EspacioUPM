@@ -11,20 +11,12 @@ package espacioUPM;//
 
 
 
-public class IAdministracionComunidad {
-	public boolean modificarPermisos(String alias) {
-		return false;
-	}
+public interface IAdministracionComunidad {
+	public boolean modificarPermisos(String alias);
 	
-	public boolean aceptarNuevoMiembro(String alias) {
-		return false;
-	}
+	public boolean aceptarNuevoMiembro(String alias);
 	
-	public boolean expulsarMiembro(String alias) {
-		return false;
-	}
+	public boolean expulsarMiembro(String alias);
 	
-	public boolean rechazarNuevoMiembro(String alias) {
-		return false;
-	}
+	public boolean rechazarNuevoMiembro(String alias);
 }

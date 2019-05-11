@@ -11,13 +11,14 @@ package espacioUPM;//
 
 
 
-public class Comunidad extends IAdministracionComunidad {
+public class Comunidad implements IAdministracionComunidad {
 	private String nombre;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
 
-	public  Comunidad(String id, Usuario fundador) {
+	public Comunidad(String id, Usuario fundador) {
 		nombre = id;
 		DB.hacerAdminComunidad(id, fundador.getAlias());
+
 	}
 	
 	public void unirse(String alias) {
@@ -35,16 +36,23 @@ public class Comunidad extends IAdministracionComunidad {
 	public String getNombre() {
 		return nombre;
 	}
-	
-	public boolean modificarPermisos(Usuario usuario) {
-		return DB.hacerAdminComunidad(nombre, usuario.getAlias());
+	@Override
+	public boolean aceptarNuevoMiembro(String alias) {
+		return DB.aceptarMiembroComunidad(nombre, alias);
 	}
-	
-	public boolean aceptarNuevoMiembro(Usuario usuario) {
-		return DB.aceptarMiembroComunidad(nombre, usuario.getAlias());
+
+	@Override
+	public boolean rechazarNuevoMiembro(String alias) {
+		return false;
 	}
-	
-	public boolean expulsarMiembro(Usuario usuario) {
-		return DB.borrarMiembroComunidad(nombre, usuario.getAlias());
+
+	@Override
+	public boolean expulsarMiembro(String alias) {
+		return DB.borrarMiembroComunidad(nombre, alias);
+	}
+
+	@Override
+	public boolean modificarPermisos(String alias) {
+		return DB.hacerAdminComunidad(nombre, alias);
 	}
 }
