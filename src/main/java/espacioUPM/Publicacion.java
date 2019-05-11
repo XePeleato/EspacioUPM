@@ -13,7 +13,7 @@ package espacioUPM;//
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public abstract class Publicacion extends IPublicacion {
+public abstract class Publicacion implements IPublicacion {
 	private String IDPublicacion;
 	private String autor;
 	private LocalDateTime fecha;
@@ -24,7 +24,7 @@ public abstract class Publicacion extends IPublicacion {
 	private static final IDB_Publicacion DB = DB_Main.getInstance();
 
 	public Publicacion(String autor) {
-	    IDPublicacion = "0";//DB.getNewID(); TODO: implementar getNewID
+	    IDPublicacion = DB.getNewID();
         this.autor = autor;
         this.fecha = LocalDateTime.now();
         this.comentarios = new ArrayList<>();
@@ -48,14 +48,15 @@ public abstract class Publicacion extends IPublicacion {
 	}
 
 	public void comentar(Usuario autor, String contenido) {
+		DB.comentar(this, autor, contenido);
 	}
 
 	public void like(Usuario usuario) {
-
+		DB.puntuar(usuario, this, 1);
 	}
 
 	public void dislike(Usuario usuario) {
-
+		DB.puntuar(usuario, this, -1);
 	}
 
 	public void mostrarPublicacion() {
@@ -63,7 +64,7 @@ public abstract class Publicacion extends IPublicacion {
 	}
 
 	public void referenciar(Usuario usuario) {
-	
+		DB.setPublicacion(new PublicacionReferencia(usuario.getAlias(), this));
 	}
 
 	public String getIDPublicacion() {

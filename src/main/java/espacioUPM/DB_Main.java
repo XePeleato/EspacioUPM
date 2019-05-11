@@ -60,7 +60,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
     }
 
     public boolean setUsuario(String alias, String correo, byte[] password, byte[] salt) {
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (NULL, ?, ?, ?, ?)")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (?, ?, ?, ?)")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, correo);
             pStmt.setBytes(3, password);
@@ -72,6 +72,18 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         }
         return false;
 
+    }
+    public String getNewID() {
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT MAX(id) FROM publicaciones")) {
+            ResultSet rs = pStmt.executeQuery();
+            rs.next();
+
+            return String.valueOf(rs.getInt("id"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean setPublicacion(Publicacion publi) {
@@ -87,6 +99,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
                     pStmt.setInt(4, Integer.decode(((PublicacionReferencia)publi).getPublicacionRef().getIDPublicacion()));
                     pStmt.setNull(4, Types.INTEGER);
             }
+
+            return pStmt.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,7 +175,9 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try{
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = 1");
             statement.setString(1, publication_id);
-            return statement.executeQuery().getInt("numero");
+            ResultSet rs =  statement.executeQuery();
+            rs.next();
+            return rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
@@ -172,7 +188,9 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try{
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = -1");
             statement.setString(1, publication_id);
-            return statement.executeQuery().getInt("numero");
+            ResultSet rs =  statement.executeQuery();
+            rs.next();
+            return rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
@@ -182,11 +200,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try (PreparedStatement pStmt = connection.prepareStatement("DROP * FROM publicaciones WHERE id = ?"))
         {
             pStmt.setInt(1, Integer.decode(publi.getIDPublicacion()));
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public String[] getSeguidos(Usuario usuario) {
@@ -225,56 +243,67 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
             pStmt.setString(1, aliasNuevo);
             pStmt.setString(2, usuario.getAlias());
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean borrarUsuario(Usuario usuario) {
         try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM usuarios WHERE alias = ?")) {
             pStmt.setString(1, usuario.getAlias());
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public boolean borrarMiembroComunidad(String id, String alias) {
         try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_usuario = ? AND id_comunidad = ?")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public boolean insertarMiembroComunidad(String id, String alias) {
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, ?)")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, ?, 0)")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
             pStmt.setBoolean(3, false);
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
+    }
+
+    public boolean aceptarMiembroComunidad(String id, String alias) {
+        try (PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET aceptado = 1 WHERE id_usuario = ? AND id_comunidad = ?")) {
+            pStmt.setString(1, alias);
+            pStmt.setString(2, id);
+            return pStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean seguir(String seguidor, String seguido) {
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO seguimiento VALUES (?, ?)")){
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
 
     }
 
@@ -282,11 +311,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM seguimiento WHERE seguidor = ? AND seguido = ?")) {
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
-            pStmt.execute();
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
 
     }
 
@@ -295,10 +324,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
             pStmt.setString(1, usuario.getAlias());
             pStmt.setInt(2, puntuacion);
             pStmt.setInt(3, Integer.decode(publi.getIDPublicacion()));
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
 
     }
 
@@ -306,10 +336,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET admin = 1 WHERE id_comunidad = ? AND id_usuario = ?")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
+            return pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -335,6 +366,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion {
             pStmt.setString(1, usuario.getAlias());
             pStmt.setString(2, contenido);
             pStmt.setInt(3, Integer.decode(publi.getIDPublicacion()));
+            pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

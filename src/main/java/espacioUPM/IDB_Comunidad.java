@@ -13,6 +13,8 @@ package espacioUPM;//
 
 public interface IDB_Comunidad {
 	boolean insertarMiembroComunidad(String id, String alias);
+
+	boolean aceptarMiembroComunidad(String id, String alias);
 	
 	boolean borrarMiembroComunidad(String id, String alias);
 	

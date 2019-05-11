@@ -11,6 +11,7 @@ package espacioUPM;//
 
 public interface IDB_Publicacion {
 
+	String getNewID();
 	Publicacion getPublicacion(String id);
 
 	boolean setPublicacion(Publicacion publi);

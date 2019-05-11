@@ -24,7 +24,7 @@ public class NewTweetController implements Initializable {
     public void onBtnSendTweetClick(ActionEvent actionEvent)
     {
         String tweet = txtAreaTweet.getText();
-        Publicacion pub = new Publicacion(App.mThisUser, tweet, null);
+        Publicacion pub = new Publicacion(App.mThisUser.getAlias(), tweet, null);
         DBHandler.getDefault().setPublicacion(pub);
     }
 

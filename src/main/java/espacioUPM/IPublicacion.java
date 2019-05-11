@@ -11,24 +11,13 @@ package espacioUPM;//
 
 
 
-public class IPublicacion {
-	public void verComentarios() {
+public interface IPublicacion {
+	void verComentarios();
 	
-	}
+	void comentar(Usuario autor, String contenido);
+	void like(Usuario usuario);
 	
-	public void comentar(Usuario autor, String contenido) {
+	void dislike(Usuario usuario);
 	
-	}
-	
-	public void like(Usuario usuario) {
-	
-	}
-	
-	public void dislike(Usuario usuario) {
-	
-	}
-	
-	public void referenciar(Usuario usuario) {
-	
-	}
+	void referenciar(Usuario usuario);
 }
