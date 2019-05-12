@@ -237,10 +237,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
             pStmt.setString(1, aliasNuevo);
             pStmt.setString(2, usuario.getAlias());
-            pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -253,9 +250,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("DELETE FROM usuarios WHERE alias = ?");
             pStmt.setString(1, usuario.getAlias());
             pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -267,10 +262,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_usuario = ? AND id_comunidad = ?");
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -283,10 +275,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
             pStmt.setBoolean(3, false);
-            pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -297,7 +286,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET aceptado = 1 WHERE id_usuario = ? AND id_comunidad = ?")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            return pStmt.execute();
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -308,10 +297,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO seguimiento VALUES (?, ?)")){
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
-            pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -322,10 +308,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         try (PreparedStatement pStmt = connection.prepareStatement("DELETE FROM seguimiento WHERE seguidor = ? AND seguido = ?")) {
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
-            pStmt.execute();
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -338,6 +321,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(1, usuario.getAlias());
             pStmt.setInt(2, puntuacion);
             pStmt.setString(3, publi.getIDPublicacion());
+            pStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -363,9 +347,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET admin = 1 WHERE id_comunidad = ? AND id_usuario = ?");
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            //TODO: forma de saber si se ha hecho todo (si el usuario no existe, no va a dar SQLException,
-            // pero sí que queremos que devuelva false)
-            return true;
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
