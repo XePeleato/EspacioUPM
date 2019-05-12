@@ -1,5 +1,7 @@
-package espacioUPM;//
+package espacioUPM.Publicacion;//
 
+
+import espacioUPM.Usuario;
 
 public interface IPublicacion {
 	void verComentarios();

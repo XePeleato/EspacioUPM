@@ -1,4 +1,7 @@
-package espacioUPM;
+package espacioUPM.Database;
+
+import espacioUPM.*;
+import espacioUPM.Publicacion.*;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -386,6 +389,25 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
         return ret.toArray(Usuario[]::new);
     }
+
+    public Publicacion[] getTimeline(Comunidad comunidad) {
+        ArrayList<Publicacion> ret = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid " +
+                                                                          "FROM publicaciones AS p, miembros_comunidad AS mc" +
+                                                                          "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad" +
+                                                                          "ORDER BY p.fecha DESC");
+            statement.setString(1, comunidad.getNombre());
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                ret.add(getPublicacion(rs.getString("pubid")));
+            }
+            return (Publicacion[]) ret.toArray();
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+        return null;
+    }
+
 
     public void comentar(Publicacion publi, Usuario usuario, String contenido) {
         try {

@@ -1,5 +1,7 @@
 package espacioUPM;
 
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Usuario;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertNotNull;

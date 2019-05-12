@@ -8,7 +8,11 @@ package espacioUPM;//
 //  @ Author : 
 //
 //
-import java.util.Random;
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Comunidad;
+import espacioUPM.Publicacion.Publicacion;
+
+import java.util.ArrayList;
 
 public class Comunidad implements IAdministracionComunidad {
 	private String nombre;
@@ -28,17 +32,12 @@ public class Comunidad implements IAdministracionComunidad {
 		return DB.borrarMiembroComunidad(nombre, alias);
 	}
 	
-	public Publicacion[] visualizarTimelineCompartido() {
-		Publicacion[] ret = new Publicacion[50];
-		Usuario[] usuarios = DB.getMiembros(this);
-		Random r = new Random();
-		for (int i = 0; i < 50; i++) {
-			//la idea es que genere 50 publicaciones de los miembros cogidos al azar
-			//al azar los miembros, no las publicaciones.
-			//las publicaciones deberían ser las más recientes de cada miembro
-			//(getPublicaciones de un usuario las devuelve ordenadas por fecha)
-		}
-		return ret;
+	public Publicacion[] visualizarTimelineCompartido(int pagina) {
+		ArrayList<Publicacion> ret = new ArrayList<>();
+		Publicacion[] publicaciones = DB.getTimeline(this);
+		for (int i = pagina*50, j = 0; i < publicaciones.length && j < 50; i++, j++)
+			ret.add(publicaciones[i]);
+		return ret.toArray(Publicacion[]::new);
 	}
 	
 	public String getNombre() {

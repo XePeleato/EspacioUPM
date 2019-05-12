@@ -1,4 +1,8 @@
-package espacioUPM;
+package espacioUPM.Publicacion;
+
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.Usuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
