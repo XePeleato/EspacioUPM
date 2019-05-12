@@ -20,7 +20,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class MainController {
-    private static Stage mStage;
+    private Stage mStage;
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
