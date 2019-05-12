@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static App instance;
-    private static Usuario thisUser;
+    public static Usuario thisUser;
     private MainController controller;
     public App() {
         instance = this;
@@ -16,6 +16,7 @@ public class App extends Application {
     public static App getInstance() {
         return instance;
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

@@ -6,7 +6,6 @@ public class EntryPoint {
     private EntryPoint() {}
 
     public static void main(String[] args) {
-        App app = new App();
-        app.start();
+        App.launch(args);
     }
 }

@@ -20,7 +20,7 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>GrupoGuay.App</mainClass>
+              <mainClass>espacioUPM.EntryPoint</mainClass>
               <useUniqueVersions>false</useUniqueVersions>
             </manifest>
           </archive>
@@ -41,7 +41,7 @@
           <outputDirectory>${project.build.directory}/bin</outputDirectory>
           <archive>
             <manifest>
-              <mainClass>GrupoGuay.App</mainClass>
+              <mainClass>espacioUPM.EntryPoint</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -64,17 +64,9 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.2</version>
         <configuration>
-          <mainClass>GrupoGuay.App</mainClass>
+          <mainClass>GrupoGuay.EntryPoint</mainClass>
         </configuration>
       </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>10</source>
-                <target>10</target>
-            </configuration>
-        </plugin>
     </plugins>
   </build>
   <dependencies>

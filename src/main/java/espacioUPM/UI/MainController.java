@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App;
+import espacioUPM.Database.DB_Main;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,12 +9,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MainController {
     private Stage mStage;
+    @FXML TextField txtAlias;
+    @FXML TextField txtPass;
+
     public void initialize() {
     }
 
@@ -40,31 +50,27 @@ public class MainController {
     }
 
     public void Alert(String message) {
-        //TODO
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.show();
     }
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = DBHandler.getDefault().getUsuario(txtAlias.getText());
+        Usuario usuario = DB_Main.getInstance().getUsuario(txtAlias.getText());
 
         if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Por favor rellene ambos campos.", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            Alert("Por favor rellene ambos campos.");
         }
         else if (usuario == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "El usuario especificado no existe.", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            Alert("El usuario especificado no existe.");
         }
-        else if (!usuario.checkPassword(txtPass.getText())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Contraseña incorrecta.", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+        else if (!DB_Main.getInstance().comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
+            Alert("Contraseña incorrecta.");
         } else {
             try {
-                mThisUser = usuario;
-                mController.replaceScene("/TimelinePage.fxml");
+                App.thisUser = usuario;
+                replaceScene("/TimelinePage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
