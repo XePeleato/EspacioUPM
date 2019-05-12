@@ -10,7 +10,7 @@ package espacioUPM;//
 //
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Comunidad;
-import espacioUPM.Publicacion.Publicacion;
+import espacioUPM.Publicaciones.Publicacion;
 
 import java.util.ArrayList;
 

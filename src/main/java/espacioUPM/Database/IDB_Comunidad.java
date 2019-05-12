@@ -11,7 +11,7 @@ package espacioUPM.Database;//
 
 
 import espacioUPM.Comunidad;
-import espacioUPM.Publicacion.Publicacion;
+import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 
 public interface IDB_Comunidad {

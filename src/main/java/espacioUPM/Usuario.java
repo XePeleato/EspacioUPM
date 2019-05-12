@@ -10,7 +10,7 @@ package espacioUPM;//
 //
 
 
-import espacioUPM.Publicacion.Publicacion;
+import espacioUPM.Publicaciones.Publicacion;
 
 public class Usuario {
 	private String alias;

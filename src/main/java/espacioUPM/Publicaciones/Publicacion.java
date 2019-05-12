@@ -1,4 +1,4 @@
-package espacioUPM.Publicacion;
+package espacioUPM.Publicaciones;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
