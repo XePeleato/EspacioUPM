@@ -2,6 +2,8 @@ package espacioUPM.UI;
 
 import espacioUPM.App;
 import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_PasswordHandler;
+import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +24,9 @@ public class MainController {
     private Stage mStage;
     @FXML TextField txtAlias;
     @FXML TextField txtPass;
+
+    static final IDB_Usuario DB_user = DB_Main.getInstance();
+    static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
     public void initialize() {
     }
@@ -49,24 +54,23 @@ public class MainController {
         return root;
     }
 
-    public void Alert(String message) {
+    public void alert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.show();
     }
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = DB_Main.getInstance().getUsuario(txtAlias.getText());
+        Usuario usuario = DB_user.getUsuario(txtAlias.getText());
 
         if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
-            Alert("Por favor rellene ambos campos.");
+            alert("Por favor rellene ambos campos.");
         }
         else if (usuario == null) {
-            Alert("El usuario especificado no existe.");
+            alert("El usuario especificado no existe.");
         }
-        else if (!DB_Main.getInstance().comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
-            Alert("Contraseña incorrecta.");
+        else if (!DB_pass.comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
+            alert("Contraseña incorrecta.");
         } else {
             try {
                 App.thisUser = usuario;
@@ -77,13 +81,12 @@ public class MainController {
 
     public void onBtnRegisterClick(ActionEvent actionEvent) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/RegisterPage.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Registro");
-            stage.setScene(new Scene(root, 408, 277));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            mStage.setTitle("| Registro |");
+            replaceScene("/RegisterPage.fxml");
+        }catch(IOException e) {
+            System.out.println("oops");
+            // SE METE SIEMPRE AQUÍ Y NO SÉ POR QUÉ,
+            // SI ALGUIEN SE ENTERA QUE LO ARREGLE PLS
         }
     }
 }

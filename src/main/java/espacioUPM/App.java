@@ -1,5 +1,6 @@
 package espacioUPM;
 
+import espacioUPM.Database.DB_Main;
 import espacioUPM.UI.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        DB_Main.getInstance(); // Conectamos con la BD
         controller = new MainController();
         controller.setStage(primaryStage);
         controller.replaceScene("/LandingPage.fxml");

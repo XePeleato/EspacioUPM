@@ -144,7 +144,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getString("id")));
             }
-            return ret.toArray(Publicacion[]::new);
+            return (Publicacion[])ret.toArray();
         }
         catch (SQLException e) { e.printStackTrace(); }
 
@@ -215,7 +215,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
+        return (String[])ret.toArray();
     }
 
     public String[] getSeguidores(Usuario usuario) {
@@ -231,8 +231,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
-    }
+        return (String[])ret.toArray();    }
 
     public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
@@ -370,8 +369,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(Usuario[]::new);
-    }
+        return (Usuario[])ret.toArray();    }
 
     public Publicacion[] getTimeline(Comunidad comunidad) {
         ArrayList<Publicacion> ret = new ArrayList<>();
