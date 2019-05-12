@@ -11,19 +11,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Random;
 
 public class MainController {
-    private Stage mStage;
+    private static Stage mStage;
     @FXML TextField txtAlias;
-    @FXML TextField txtPass;
+    @FXML PasswordField txtPass;
+
+    /* Registro */
+    @FXML TextField txtMail;
+    @FXML PasswordField txtRegPass;
 
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
@@ -84,9 +87,20 @@ public class MainController {
             mStage.setTitle("| Registro |");
             replaceScene("/RegisterPage.fxml");
         }catch(IOException e) {
-            System.out.println("oops");
-            // SE METE SIEMPRE AQUÍ Y NO SÉ POR QUÉ,
-            // SI ALGUIEN SE ENTERA QUE LO ARREGLE PLS
+            e.printStackTrace();
         }
+    }
+
+    public void onBtnRegSendClick(ActionEvent actionEvent) {
+        if (DB_user.setUsuario(txtMail.getText().split("@")[0], txtMail.getText(), txtRegPass.getText())) {
+            mStage.setTitle("| Login |");
+            try {
+                replaceScene("/LandingPage.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else
+            alert("Fallo al registrarse");
     }
 }

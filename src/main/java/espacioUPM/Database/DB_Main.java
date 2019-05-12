@@ -7,10 +7,13 @@ import espacioUPM.Usuario;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB_PasswordHandler {
     private Connection connection;
@@ -58,18 +61,27 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     }
 
     public boolean setUsuario(String alias, String correo, byte[] password, byte[] salt) {
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (NULL, ?, ?, ?, ?)")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (?, ?, ?, ?)")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, correo);
             pStmt.setBytes(3, password);
             pStmt.setBytes(4, salt);
 
-            return pStmt.execute();
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
+    }
 
+    public boolean setUsuario(String alias, String correo, String pass) {
+        Random r = new SecureRandom();
+        byte[] salt = new byte[16];
+
+        r.nextBytes(salt);
+        byte[] password = hash(pass, salt);
+
+       return setUsuario(alias, correo, password, salt);
     }
 
     public String getNewID() {
@@ -409,7 +421,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setString(1, alias);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                return hash(passwd, rs.getBytes("salt")) == rs.getBytes("contrasenya");
+                return Arrays.equals(hash(passwd, rs.getBytes("salt")), rs.getBytes("contrasenya"));
             }
         }
         catch(SQLException e) { e.printStackTrace(); }

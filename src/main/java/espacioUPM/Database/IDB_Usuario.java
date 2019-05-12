@@ -17,6 +17,8 @@ public interface IDB_Usuario {
 	
 	 boolean setUsuario(Usuario usuario);
 
+	 boolean setUsuario(String alias, String correo, String password);
+
 	 boolean setUsuario(String alias, String correo, byte[] password, byte[] salt);
 	
 	 String[] getSeguidos(Usuario usuario);
