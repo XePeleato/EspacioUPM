@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08478490-81c0-44d7-ae2d-2394d4b15834" name="Default Changelist" comment="unas pocas cosas">
+      <change afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/UI/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Comentario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/Comentario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Comunidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Comunidad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/DB_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/DB_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IComentario.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IComentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/IComentario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IDB_Comunidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Comunidad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IDB_Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IDB_PasswordHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_PasswordHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IDB_Publicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Publicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IDB_Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IPublicacion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/IPublicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/IPublicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/Publicacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionEnlace.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionEnlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionEnlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionReferencia.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionReferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionReferencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionTexto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/PublicacionTexto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionTexto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/espacioUPM/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/espacioUPM/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/espacioUPM/DBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/espacioUPM/DBTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/LandingPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/LandingPage.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,46 +37,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_PasswordHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/IAdministracionComunidad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+            <state relative-caret-position="380">
+              <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Comunidad.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Comunidad.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionEnlace.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-92">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="402">
+              <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,46 +58,62 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionReferencia.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="29" column="4" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+            <state relative-caret-position="171">
+              <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionTexto.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="304">
+              <caret line="20" column="60" lean-forward="true" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/IComentario.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/LandingPage.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            <state relative-caret-position="209">
+              <caret line="11" column="71" lean-forward="true" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/UI/MainController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="59" column="61" lean-forward="true" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/IPublicacion.java">
+        <entry file="file://$PROJECT_DIR$/src/main/GrupoGuay/Controladores/EspacioUPMController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            <state relative-caret-position="152">
+              <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="39" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/Publicacion.java">
+        <entry file="file://$PROJECT_DIR$/src/main/GrupoGuay/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+            <state relative-caret-position="798">
+              <caret line="100" column="5" lean-forward="true" selection-start-line="64" selection-start-column="3" selection-end-line="100" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -160,6 +128,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -202,6 +171,11 @@
         <option value="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionTexto.java" />
         <option value="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionEnlace.java" />
         <option value="$PROJECT_DIR$/src/main/java/espacioUPM/Publicacion/PublicacionReferencia.java" />
+        <option value="$PROJECT_DIR$/src/main/java/espacioUPM/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/espacioUPM/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/espacioUPM/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/LandingPage.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/espacioUPM/UI/MainController.java" />
       </list>
     </option>
   </component>
@@ -228,10 +202,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="222" />
+    <option name="x" value="-4" />
     <option name="y" value="39" />
-    <option name="width" value="1579" />
-    <option name="height" value="894" />
+    <option name="width" value="1928" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -240,6 +214,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -263,6 +238,37 @@
               <item name="EspacioUPM" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="GrupoGuay" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EspacioUPM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="GrupoGuay" type="462c0819:PsiDirectoryNode" />
+              <item name="Controladores" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EspacioUPM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="GrupoGuay" type="462c0819:PsiDirectoryNode" />
+              <item name="Modelos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EspacioUPM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="GrupoGuay" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EspacioUPM" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -280,7 +286,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="espacioUPM" type="462c0819:PsiDirectoryNode" />
-              <item name="Database" type="462c0819:PsiDirectoryNode" />
+              <item name="Main.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="Twitter" type="b2602c69:ProjectViewProjectNode" />
@@ -293,14 +299,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557647012240" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557663569116" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -359,17 +364,19 @@
       <workItem from="1557513667710" duration="2499000" />
       <workItem from="1557599919024" duration="1173000" />
       <workItem from="1557601373525" duration="3402000" />
-      <workItem from="1557645056071" duration="1937000" />
+      <workItem from="1557645056071" duration="2137000" />
+      <workItem from="1557661497313" duration="2065000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23349000" />
+    <option name="totallyTimeSpent" value="25614000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="39" width="1920" height="1041" extended-state="6" />
+    <frame x="-4" y="39" width="1928" height="1045" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22145145" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22358592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -400,6 +407,38 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" weight="0.2710779" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22358592" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32968238" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32968238" />
+      <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32968238" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Database Console" order="12" visible="true" weight="0.32968238" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32968238" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.32977587" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" weight="0.2710779" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -409,27 +448,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="unas pocas cosas" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/13-ea+7/javafx-graphics-13-ea+7-linux.jar!/javafx/application/Application.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GrupoGuay/Modelos/Comunidad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GrupoGuay/Modelos/Publicacion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GrupoGuay/Modelos/Usuario.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -554,10 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/LandingPage.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/NewTweetPage.fxml">
       <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -578,13 +592,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/PasswordHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/IAdministracionComunidad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-11-jdk/lib/src.zip!/java.base/jdk/internal/util/Preconditions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -628,26 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Comunidad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1039#1040#0" expanded="true" />
-            <element signature="e#1059#1060#0" expanded="true" />
-            <element signature="e#1123#1124#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
-            <element signature="e#1243#1244#0" expanded="true" />
-            <element signature="e#1262#1263#0" expanded="true" />
-            <element signature="e#1322#1323#0" expanded="true" />
-            <element signature="e#1376#1377#0" expanded="true" />
-            <element signature="e#1438#1439#0" expanded="true" />
-            <element signature="e#1489#1490#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -729,8 +716,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Database/IDB_Comunidad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        <state relative-caret-position="209">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11.0.2/javafx-graphics-11.0.2-linux.jar!/javafx/scene/layout/VBox.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/IAdministracionComunidad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="54" selection-start-line="20" selection-start-column="54" selection-end-line="20" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11.0.2/javafx-graphics-11.0.2-linux.jar!/javafx/application/Application.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/GrupoGuay/ui/LandingPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/UI/TweetController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/GrupoGuay/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="100" column="5" lean-forward="true" selection-start-line="64" selection-start-column="3" selection-end-line="100" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/GrupoGuay/Controladores/EspacioUPMController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="39" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/LandingPage.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="71" lean-forward="true" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="20" column="60" lean-forward="true" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/Comunidad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/espacioUPM/UI/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="59" column="61" lean-forward="true" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
