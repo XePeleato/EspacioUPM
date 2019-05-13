@@ -327,11 +327,22 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public void puntuar(Usuario usuario, Publicacion publi, int puntuacion) {
+    public void puntuar(Usuario usuario, Publicacion publi, Puntuacion puntuacion) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO likes VALUES (?, ?, ?)");
             pStmt.setString(1, usuario.getAlias());
-            pStmt.setInt(2, puntuacion);
+            int puntuacionInt = 0;
+            switch (puntuacion) {
+                case LIKE:
+                    puntuacionInt = 1;
+                    break;
+                case DISLIKE:
+                    puntuacionInt = -1;
+                    break;
+                default:
+                    break;
+            }
+            pStmt.setInt(2, puntuacionInt);
             pStmt.setString(3, publi.getIDPublicacion());
             pStmt.executeUpdate();
         } catch (SQLException e) {
@@ -339,19 +350,27 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public int getPuntuacion(Usuario usuario, Publicacion publi) {
+    public Puntuacion getPuntuacion(Usuario usuario, Publicacion publi) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT valor FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
             statement.setString(1, usuario.getAlias());
             statement.setString(2, publi.getIDPublicacion());
 
             ResultSet rs = statement.executeQuery();
-
-            if(rs.next()) return rs.getInt("valor");
-            else return 0;
+            if(rs.next()) {
+                switch (rs.getInt("valor")) {
+                    case 0:
+                        return Puntuacion.NEUTRO;
+                    case 1:
+                        return Puntuacion.LIKE;
+                    case -1:
+                        return Puntuacion.DISLIKE;
+                }
+            }
+            return Puntuacion.NEUTRO;
         }
         catch(SQLException e) { e.printStackTrace(); }
-        return 0;
+        return Puntuacion.NEUTRO;
     }
 
     public boolean hacerAdminComunidad(String id, String alias) {
