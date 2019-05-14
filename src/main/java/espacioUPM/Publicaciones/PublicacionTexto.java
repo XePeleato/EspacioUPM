@@ -21,7 +21,7 @@ public class PublicacionTexto extends Publicacion {
 		this.txt = txt;
 	}
 
-	PublicacionTexto(String autor, String txt) {
+	public PublicacionTexto(String autor, String txt) {
 		super(autor);
 		this.txt = txt;
 	}

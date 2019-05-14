@@ -13,6 +13,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -31,6 +32,10 @@ public class MainController implements Initializable {
     /* Registro */
     @FXML TextField txtMail;
     @FXML PasswordField txtRegPass;
+
+    /* Principal */
+    @FXML BorderPane borderPaneMain;
+    @FXML Button btnTimeline;
 
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
@@ -79,7 +84,7 @@ public class MainController implements Initializable {
         } else {
             try {
                 App.thisUser = usuario;
-                replaceScene("/TimelinePage.fxml");
+                replaceScene("/LoggedInPage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
@@ -107,6 +112,18 @@ public class MainController implements Initializable {
         }
         else
             alert("Fallo al registrarse");
+    }
+
+    public void onBtnTimelineClick(ActionEvent actionEvent) {
+        try {
+            borderPaneMain.setCenter(FXMLLoader.load(getClass().getResource("/TimelinePage.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onBtnProfileClick(ActionEvent actionEvent) {
+        // TODO: Esto acaba en algún momento? En plan, el trabajo...
     }
 
     @Override

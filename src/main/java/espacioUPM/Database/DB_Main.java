@@ -10,9 +10,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 
 public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB_PasswordHandler {
@@ -99,10 +103,10 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(2, publi.getFecha().toString());
             if (publi instanceof PublicacionTexto) {
                 pStmt.setString(3, ((PublicacionTexto) publi).getContenido());
-                pStmt.setNull(3, Types.VARCHAR);
+                pStmt.setNull(4, Types.INTEGER);
             } else {
                     pStmt.setInt(4, Integer.decode(((PublicacionReferencia)publi).getPublicacionRef().getIDPublicacion()));
-                    pStmt.setNull(4, Types.INTEGER);
+                    pStmt.setNull(3, Types.VARCHAR);
             }
 
             return pStmt.execute();
@@ -127,7 +131,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                         rs.getString("id_ref") :
                         rs.getString("cuerpo");
 
-                LocalDateTime date = LocalDateTime.parse(rs.getString("fecha"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime date = LocalDateTime.parse(rs.getString("fecha"), formatter);
                 ArrayList<Comentario> comentarios = getComentarios(id);
                 int numLikes = getLikes(id);
                 int numDislikes = getDislikes(id);
@@ -150,7 +155,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getString("id")));
             }
-            return (Publicacion[])ret.toArray();
+            return ret.toArray(Publicacion[]::new);
         }
         catch (SQLException e) { e.printStackTrace(); }
 
@@ -178,9 +183,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     //DONE
     public int getLikes(String publication_id) {
         try{
-            PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = 1");
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS numero FROM likes WHERE id_publicacion = ? AND valor = 1");
             statement.setString(1, publication_id);
-            return statement.executeQuery().getInt("numero");
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
@@ -189,9 +196,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     //DONE
     public int getDislikes(String publication_id) {
         try{
-            PreparedStatement statement = connection.prepareStatement("SELECT COUNT (*) AS numero FROM likes WHERE id_publicacion = ? AND valor = -1");
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS numero FROM likes WHERE id_publicacion = ? AND valor = -1");
             statement.setString(1, publication_id);
-            return statement.executeQuery().getInt("numero");
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
@@ -221,7 +230,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (String[])ret.toArray();
+        return ret.toArray(String[]::new);
     }
 
     public String[] getSeguidores(Usuario usuario) {
@@ -237,7 +246,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (String[])ret.toArray();    }
+        return ret.toArray(String[]::new);
+    }
 
     public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
