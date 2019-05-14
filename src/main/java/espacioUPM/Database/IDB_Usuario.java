@@ -12,7 +12,7 @@ package espacioUPM.Database;//
 
 import espacioUPM.Usuario;
 
-public interface IDB_Usuario {
+public interface IDB_Usuario extends IDB_PasswordHandler{
 	 Usuario getUsuario(String alias);
 	
 	 boolean setUsuario(Usuario usuario);

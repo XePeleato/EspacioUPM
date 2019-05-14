@@ -12,8 +12,10 @@ package espacioUPM;//
 
 import espacioUPM.Publicaciones.Publicacion;
 
+
 public class Usuario {
 	private String alias;
+
 	public void darseDeBaja() {
 	
 	}
@@ -42,8 +44,8 @@ public class Usuario {
 	
 	}
 	
-	public void buscar() {
-	
+	public void buscar(String alias) {
+
 	}
 
     public String getAlias() {

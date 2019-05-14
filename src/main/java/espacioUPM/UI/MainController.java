@@ -1,5 +1,8 @@
 package espacioUPM.UI;
 
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Comunidad;
+import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,11 +11,20 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
 
 public class MainController {
     private Stage mStage;
+    private static final IDB_Comunidad DB = DB_Main.getInstance();
+
+    @FXML public TextArea txtAlias;
+    @FXML public PasswordField txtPass;
+    private static Usuario mThisUser;
+    private static MainController mController;
+
     public void initialize() {
     }
 
@@ -39,13 +51,10 @@ public class MainController {
         return root;
     }
 
-    public void Alert(String message) {
-        //TODO
-    }
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = DBHandler.getDefault().getUsuario(txtAlias.getText());
+        Usuario usuario = DB.getUsuario(txtAlias.getText());
 
         if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Por favor rellene ambos campos.", ButtonType.OK);
@@ -57,7 +66,7 @@ public class MainController {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }
-        else if (!usuario.checkPassword(txtPass.getText())) {
+        else if (DB.comprobarPasswd(txtAlias.getText(),txtPass.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Contraseña incorrecta.", ButtonType.OK);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
