@@ -24,7 +24,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    private Stage mStage;
+    private static Stage mStage;
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
