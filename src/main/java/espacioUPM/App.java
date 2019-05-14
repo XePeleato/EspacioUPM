@@ -24,7 +24,7 @@ public class App extends Application {
         DB_Main.getInstance(); // Conectamos con la BD
         controller = new MainController();
         controller.setStage(primaryStage);
-        controller.replaceScene("LandingPage.fxml");
+        controller.replaceScene("/LandingPage.fxml");
         primaryStage.setTitle("| EspacioUPM |");
         primaryStage.show();
     }

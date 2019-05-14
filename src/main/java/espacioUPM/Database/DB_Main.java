@@ -21,7 +21,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     private  DB_Main() {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:3307/twitter2?user=serv&password=Habichuelas73");
+            connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:8080/twitter2?user=serv&password=Habichuelas73");
             System.out.println("[+] DB Conectada.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
     public Usuario getUsuario(String alias) {
 
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM `Usuarios` WHERE `alias` = ?"))
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias FROM `Usuarios` WHERE `alias` = ?"))
         {
             pStmt.setString(1, alias);
 
@@ -53,11 +53,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
         return null;
 
-    }
-
-    @Override
-    public boolean setUsuario(Usuario usuario) {
-        return false;
     }
 
     public boolean setUsuario(String alias, String correo, byte[] password, byte[] salt) {
@@ -359,12 +354,12 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
                 switch (rs.getInt("valor")) {
-                    case 0:
-                        return Puntuacion.NEUTRO;
                     case 1:
                         return Puntuacion.LIKE;
                     case -1:
                         return Puntuacion.DISLIKE;
+                    default:
+                        return Puntuacion.NEUTRO;
                 }
             }
             return Puntuacion.NEUTRO;
@@ -405,10 +400,10 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     public Publicacion[] getTimeline(Comunidad comunidad) {
         ArrayList<Publicacion> ret = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid " +
+            PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
                                                                           "FROM publicaciones AS p, miembros_comunidad AS mc" +
                                                                           "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad" +
-                                                                          "ORDER BY p.fecha DESC");
+                                                                          "ORDER BY fec DESC");
             statement.setString(1, comunidad.getNombre());
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {

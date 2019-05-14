@@ -40,7 +40,7 @@ public class MainController {
 
     public Parent replaceScene(String fxml) throws IOException
     {
-        Parent root = FXMLLoader.load(getClass().getResource(fxml), null, new JavaFXBuilderFactory());
+        Parent root = FXMLLoader.load(this.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
         if (mStage == null) {
             System.out.println("[-] Ouch");
             return null;
@@ -92,7 +92,10 @@ public class MainController {
     }
 
     public void onBtnRegSendClick(ActionEvent actionEvent) {
-        if (DB_user.setUsuario(txtMail.getText().split("@")[0], txtMail.getText(), txtRegPass.getText())) {
+        Random r = new Random();
+        byte[] salt = new byte[16];
+        r.nextBytes(salt);
+        if (DB_user.setUsuario(txtMail.getText().split("@")[0], txtMail.getText(), txtRegPass.getText().getBytes(), salt)) {
             mStage.setTitle("| Login |");
             try {
                 replaceScene("/LandingPage.fxml");

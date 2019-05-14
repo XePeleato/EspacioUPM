@@ -14,10 +14,6 @@ import espacioUPM.Usuario;
 
 public interface IDB_Usuario {
 	 Usuario getUsuario(String alias);
-	
-	 boolean setUsuario(Usuario usuario);
-
-	 boolean setUsuario(String alias, String correo, String password);
 
 	 boolean setUsuario(String alias, String correo, byte[] password, byte[] salt);
 	
