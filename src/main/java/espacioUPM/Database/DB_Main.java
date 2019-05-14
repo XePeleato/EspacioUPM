@@ -35,7 +35,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             instancia = new DB_Main();
         }
         return instancia;
-
     }
 
     public Usuario getUsuario(String alias) {

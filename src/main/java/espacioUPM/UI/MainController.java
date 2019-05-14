@@ -12,6 +12,7 @@ import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 public class MainController {
-    private static Stage mStage;
+    private Stage mStage;
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
@@ -31,28 +32,23 @@ public class MainController {
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
-    public void initialize() {
+    public MainController(Stage s) {
+        mStage = s;
     }
 
     public void setStage(Stage stage) {
         this.mStage = stage;
     }
 
-    public Parent replaceScene(String fxml) throws IOException
-    {
-        Parent root = FXMLLoader.load(this.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
+    public Parent replaceScene(String fxml) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
+        Parent root = loader.load();
         if (mStage == null) {
             System.out.println("[-] Ouch");
             return null;
         }
-        Scene scene = mStage.getScene();
-        if (scene == null) {
-            scene = new Scene(root, 600, 400);
-            mStage.setScene(scene);
-        }
-        else
-            mStage.getScene().setRoot(root);
-
+        Scene scene = new Scene(root);
+        mStage.setScene(scene);
         mStage.sizeToScene();
         return root;
     }
@@ -73,6 +69,7 @@ public class MainController {
             alert("El usuario especificado no existe.");
         }
         else if (!DB_pass.comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
+            System.out.println("contraseña incorrecta");
             alert("Contraseña incorrecta.");
         } else {
             try {
@@ -86,8 +83,8 @@ public class MainController {
         try {
             mStage.setTitle("| Registro |");
             replaceScene("/RegisterPage.fxml");
-        }catch(IOException e) {
-            e.printStackTrace();
+        }catch(NullPointerException | IOException e) {
+            System.out.println("oops");
         }
     }
 

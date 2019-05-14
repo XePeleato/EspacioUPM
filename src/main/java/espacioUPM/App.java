@@ -22,8 +22,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         DB_Main.getInstance(); // Conectamos con la BD
-        controller = new MainController();
-        controller.setStage(primaryStage);
+        controller = new MainController(primaryStage);
         controller.replaceScene("/LandingPage.fxml");
         primaryStage.setTitle("| EspacioUPM |");
         primaryStage.show();
