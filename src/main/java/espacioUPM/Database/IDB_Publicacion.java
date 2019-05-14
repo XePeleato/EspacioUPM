@@ -1,6 +1,7 @@
 package espacioUPM.Database;
 
 import espacioUPM.Publicaciones.Publicacion;
+import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuario;
 
 public interface IDB_Publicacion {
@@ -15,10 +16,10 @@ public interface IDB_Publicacion {
 	
 	void borrarPublicacion(Publicacion publi);
 	
-	void puntuar(Usuario usuario, Publicacion publi, int puntuacion);
+	void puntuar(Usuario usuario, Publicacion publi, Puntuacion puntuacion);
 	
 	void comentar(Publicacion publi, Usuario usuario, String contenido);
 
-	int getPuntuacion(Usuario usuario, Publicacion publi);
+	Puntuacion getPuntuacion(Usuario usuario, Publicacion publi);
 
 }

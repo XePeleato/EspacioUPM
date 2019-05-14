@@ -1,5 +1,6 @@
 package espacioUPM;
 
+import espacioUPM.Database.DB_Main;
 import espacioUPM.UI.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -7,7 +8,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static App instance;
-    private static Usuario thisUser;
+    public static Usuario thisUser;
     private MainController controller;
     public App() {
         instance = this;
@@ -17,10 +18,11 @@ public class App extends Application {
         return instance;
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        controller = new MainController();
-        controller.setStage(primaryStage);
+        DB_Main.getInstance(); // Conectamos con la BD
+        controller = new MainController(primaryStage);
         controller.replaceScene("/LandingPage.fxml");
         primaryStage.setTitle("| EspacioUPM |");
         primaryStage.show();

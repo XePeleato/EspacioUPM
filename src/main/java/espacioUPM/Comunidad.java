@@ -37,7 +37,7 @@ public class Comunidad implements IAdministracionComunidad {
 		Publicacion[] publicaciones = DB.getTimeline(this);
 		for (int i = pagina*50, j = 0; i < publicaciones.length && j < 50; i++, j++)
 			ret.add(publicaciones[i]);
-		return ret.toArray(Publicacion[]::new);
+		return (Publicacion[])ret.toArray();
 	}
 	
 	public String getNombre() {

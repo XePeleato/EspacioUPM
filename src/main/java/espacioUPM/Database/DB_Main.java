@@ -7,10 +7,13 @@ import espacioUPM.Usuario;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB_PasswordHandler {
     private Connection connection;
@@ -18,7 +21,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     private  DB_Main() {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:3307/twitter2?user=serv&password=Habichuelas73");
+            connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:8080/twitter2?user=serv&password=Habichuelas73");
             System.out.println("[+] DB Conectada.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,12 +35,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             instancia = new DB_Main();
         }
         return instancia;
-
     }
 
     public Usuario getUsuario(String alias) {
 
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM `Usuarios` WHERE `alias` = ?"))
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias FROM `Usuarios` WHERE `alias` = ?"))
         {
             pStmt.setString(1, alias);
 
@@ -52,24 +54,28 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
     }
 
-    @Override
-    public boolean setUsuario(Usuario usuario) {
-        return false;
-    }
-
     public boolean setUsuario(String alias, String correo, byte[] password, byte[] salt) {
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (NULL, ?, ?, ?, ?)")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `Usuarios` VALUES (?, ?, ?, ?)")) {
             pStmt.setString(1, alias);
             pStmt.setString(2, correo);
             pStmt.setBytes(3, password);
             pStmt.setBytes(4, salt);
 
-            return pStmt.execute();
+            return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
+    }
 
+    public boolean setUsuario(String alias, String correo, String pass) {
+        Random r = new SecureRandom();
+        byte[] salt = new byte[16];
+
+        r.nextBytes(salt);
+        byte[] password = hash(pass, salt);
+
+       return setUsuario(alias, correo, password, salt);
     }
 
     public String getNewID() {
@@ -144,7 +150,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getString("id")));
             }
-            return ret.toArray(Publicacion[]::new);
+            return (Publicacion[])ret.toArray();
         }
         catch (SQLException e) { e.printStackTrace(); }
 
@@ -215,7 +221,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
+        return (String[])ret.toArray();
     }
 
     public String[] getSeguidores(Usuario usuario) {
@@ -231,8 +237,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
-    }
+        return (String[])ret.toArray();    }
 
     public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
@@ -316,11 +321,22 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public void puntuar(Usuario usuario, Publicacion publi, int puntuacion) {
+    public void puntuar(Usuario usuario, Publicacion publi, Puntuacion puntuacion) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO likes VALUES (?, ?, ?)");
             pStmt.setString(1, usuario.getAlias());
-            pStmt.setInt(2, puntuacion);
+            int puntuacionInt = 0;
+            switch (puntuacion) {
+                case LIKE:
+                    puntuacionInt = 1;
+                    break;
+                case DISLIKE:
+                    puntuacionInt = -1;
+                    break;
+                default:
+                    break;
+            }
+            pStmt.setInt(2, puntuacionInt);
             pStmt.setString(3, publi.getIDPublicacion());
             pStmt.executeUpdate();
         } catch (SQLException e) {
@@ -328,19 +344,27 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public int getPuntuacion(Usuario usuario, Publicacion publi) {
+    public Puntuacion getPuntuacion(Usuario usuario, Publicacion publi) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT valor FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
             statement.setString(1, usuario.getAlias());
             statement.setString(2, publi.getIDPublicacion());
 
             ResultSet rs = statement.executeQuery();
-
-            if(rs.next()) return rs.getInt("valor");
-            else return 0;
+            if(rs.next()) {
+                switch (rs.getInt("valor")) {
+                    case 1:
+                        return Puntuacion.LIKE;
+                    case -1:
+                        return Puntuacion.DISLIKE;
+                    default:
+                        return Puntuacion.NEUTRO;
+                }
+            }
+            return Puntuacion.NEUTRO;
         }
         catch(SQLException e) { e.printStackTrace(); }
-        return 0;
+        return Puntuacion.NEUTRO;
     }
 
     public boolean hacerAdminComunidad(String id, String alias) {
@@ -370,16 +394,15 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(Usuario[]::new);
-    }
+        return (Usuario[])ret.toArray();    }
 
     public Publicacion[] getTimeline(Comunidad comunidad) {
         ArrayList<Publicacion> ret = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid " +
+            PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
                                                                           "FROM publicaciones AS p, miembros_comunidad AS mc" +
                                                                           "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad" +
-                                                                          "ORDER BY p.fecha DESC");
+                                                                          "ORDER BY fec DESC");
             statement.setString(1, comunidad.getNombre());
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
@@ -411,7 +434,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setString(1, alias);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                return hash(passwd, rs.getBytes("salt")) == rs.getBytes("contrasenya");
+                return Arrays.equals(hash(passwd, rs.getBytes("salt")), rs.getBytes("contrasenya"));
             }
         }
         catch(SQLException e) { e.printStackTrace(); }

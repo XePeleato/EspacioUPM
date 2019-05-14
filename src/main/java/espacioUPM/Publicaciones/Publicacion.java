@@ -3,7 +3,6 @@ package espacioUPM.Publicaciones;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Usuario;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -46,17 +45,17 @@ public abstract class Publicacion implements IPublicacion {
 	}
 
 	public void like(Usuario usuario) {
-	    int puntuacionAnterior = DB.getPuntuacion(usuario, this);
-	    if (puntuacionAnterior == 0 || puntuacionAnterior == -1)
-            DB.puntuar(usuario, this, 1);
-	    else DB.puntuar(usuario, this, 0); // Si el usuario da like cuando ya había like este se quita
+	    Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this);
+	    if (puntuacionAnterior == Puntuacion.NEUTRO || puntuacionAnterior == Puntuacion.DISLIKE)
+            DB.puntuar(usuario, this, Puntuacion.LIKE);
+	    else DB.puntuar(usuario, this, Puntuacion.NEUTRO); // Si el usuario da like cuando ya había like este se quita
 	}
 
 	public void dislike(Usuario usuario) {
-        int puntuacionAnterior = DB.getPuntuacion(usuario, this);
-        if (puntuacionAnterior == 0 || puntuacionAnterior == 1)
-            DB.puntuar(usuario, this, -1);
-        else DB.puntuar(usuario, this, 0); // Si el usuario da dislike cuando ya había dislike este se quita
+        Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this);
+        if (puntuacionAnterior == Puntuacion.NEUTRO || puntuacionAnterior == Puntuacion.LIKE)
+            DB.puntuar(usuario, this, Puntuacion.DISLIKE);
+        else DB.puntuar(usuario, this, Puntuacion.NEUTRO); // Si el usuario da dislike cuando ya había dislike este se quita
 	}
 
 	public void mostrarPublicacion() {

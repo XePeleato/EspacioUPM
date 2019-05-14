@@ -4,6 +4,7 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Usuario;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -21,6 +22,7 @@ public class DBTest {
         Usuario us = DB.getUsuario("test");
 
         assertNotNull(us);
+        assertEquals(us.getAlias(), "test");
 
         DB.borrarUsuario(us);
     }

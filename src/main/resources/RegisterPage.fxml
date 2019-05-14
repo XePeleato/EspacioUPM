@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="238.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GrupoGuay.App">
+<AnchorPane prefHeight="238.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.MainController">
    <children>
       <TextField fx:id="txtMail" layoutX="137.0" layoutY="74.0" />
       <PasswordField fx:id="txtRegPass" layoutX="137.0" layoutY="119.0" />
-      <Label layoutX="64.0" layoutY="78.0" text="Correo UPM: " />
-      <Label layoutX="71.0" layoutY="123.0" text="Contraseña: " />
-      <Button fx:id="btnSendReg" layoutX="306.0" layoutY="119.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" text="Enviar" />
+      <Label layoutX="42.0" layoutY="79.0" text="Correo UPM: " />
+      <Label layoutX="42.0" layoutY="124.0" text="Contraseña: " />
+      <Button fx:id="btnSendReg" layoutX="308.0" layoutY="119.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" text="Enviar" />
    </children>
 </AnchorPane>
