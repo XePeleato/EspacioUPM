@@ -17,7 +17,7 @@ public abstract class Publicacion implements IPublicacion {
 	private static final IDB_Publicacion DB = DB_Main.getInstance();
 
 	public Publicacion(String autor) {
-	    IDPublicacion = DB.getNewID();
+	    IDPublicacion = "0"; // DB.getNewID(); FIXME: ya hablaremos sobre esto, pero de momento explota
         this.autor = autor;
         this.fecha = LocalDateTime.now();
         this.comentarios = new ArrayList<>();
