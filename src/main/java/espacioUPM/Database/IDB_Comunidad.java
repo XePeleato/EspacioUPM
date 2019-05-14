@@ -14,7 +14,7 @@ import espacioUPM.Comunidad;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 
-public interface IDB_Comunidad extends IDB_Usuario {
+public interface IDB_Comunidad {
 	boolean insertarMiembroComunidad(String id, String alias);
 
 	boolean aceptarMiembroComunidad(String id, String alias);

@@ -41,6 +41,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         {
             pStmt.setString(1, alias);
 
+
             ResultSet ret = pStmt.executeQuery();
 
             return ret.next() ? new Usuario(ret.getString("alias")) : null;
@@ -411,7 +412,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
                 return hash(passwd, rs.getBytes("salt")) == rs.getBytes("contrasenya");
-
             }
         }
         catch(SQLException e) { e.printStackTrace(); }

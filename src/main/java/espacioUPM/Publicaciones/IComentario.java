@@ -12,9 +12,9 @@ package espacioUPM.Publicaciones;//
 
 
 public interface IComentario {
-	String getAutor();
+	public String getAutor();
 	
-	String getContenido();
+	public String getContenido();
 
-	String getPublicacionMadre();
+	public String getPublicacionMadre();
 }
