@@ -8,7 +8,10 @@ public interface IDB_Publicacion {
 
 	String getNewID();
 
-	Publicacion getPublicacion(String id);
+	Publicacion getPublicacion(int id);
+
+	//Publicacion getPublicacion(String cuerpo);
+
 
 	boolean setPublicacion(Publicacion publi);
 

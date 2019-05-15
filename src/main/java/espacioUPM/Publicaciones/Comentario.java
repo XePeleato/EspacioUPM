@@ -15,15 +15,15 @@ public class Comentario implements IComentario {
 
 	private String autor;
 	private String contenido;
-	private String pub_id;
+	private int pub_id;
 
-	public Comentario(String autor, String contenido, String pub_id) {
+	public Comentario(String autor, String contenido, int pub_id) {
 		this.autor = autor;
 		this.contenido = contenido;
 		this.pub_id = pub_id;
 	}
 
-	public String getPublicacionMadre() { return pub_id; }
+	public int getPublicacionMadre() { return pub_id; }
 
 	public String getAutor() { return autor; }
 	

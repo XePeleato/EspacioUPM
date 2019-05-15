@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class PublicacionTexto extends Publicacion {
 	private String txt;
 
-	PublicacionTexto(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, String txt) {
+	PublicacionTexto(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, String txt) {
 		super(idPublicacion, autor, fecha, comentarios, numLikes, numDislikes);
 		this.txt = txt;
 	}

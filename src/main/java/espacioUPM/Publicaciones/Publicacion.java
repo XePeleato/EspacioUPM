@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Publicacion implements IPublicacion {
-	private String IDPublicacion;
+	private int IDPublicacion;
 	private String autor;
 	private LocalDateTime fecha;
 	private ArrayList<Comentario> comentarios;
@@ -18,7 +18,7 @@ public abstract class Publicacion implements IPublicacion {
 	private static final IDB_Publicacion DB = DB_Main.getInstance();
 
 	public Publicacion(String autor) {
-	    IDPublicacion = "0"; // DB.getNewID(); FIXME: ya hablaremos sobre esto, pero de momento explota
+	    IDPublicacion =  0; //DB.getNewID(); //FIXME: ya hablaremos sobre esto, pero de momento explota
         this.autor = autor;
         this.fecha = LocalDateTime.now();
         this.comentarios = new ArrayList<>();
@@ -26,7 +26,7 @@ public abstract class Publicacion implements IPublicacion {
         this.numDislikes = 0;
     }
 
-	public Publicacion(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
+	public Publicacion(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
                        int numLikes, int numDislikes)
 	{
 		IDPublicacion = idPublicacion;
@@ -67,7 +67,7 @@ public abstract class Publicacion implements IPublicacion {
 	
 	}
 
-	public String getIDPublicacion() {
+	public int getIDPublicacion() {
 		return IDPublicacion;
 	}
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class PublicacionEnlace extends Publicacion {
 	private String url;
 
-	PublicacionEnlace(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
+	PublicacionEnlace(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
 							 int numLikes, int numDislikes, String url) {
 		super(idPublicacion, autor, fecha, comentarios, numLikes, numDislikes);
 		this.url = url;

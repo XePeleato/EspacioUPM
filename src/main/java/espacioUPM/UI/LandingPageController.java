@@ -37,7 +37,7 @@ public class LandingPageController implements Initializable {
             controller.alert("El usuario especificado no existe.");
         }
         else if (!DB_pass.comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
-            System.out.println("contraseña incorrecta");
+            System.out.println("Contraseña incorrecta.");
             controller.alert("Contraseña incorrecta.");
         } else {
             try {

@@ -33,7 +33,7 @@ public class PublicacionFactory {
 		return true;
 	}
 
-	public static Publicacion createPublicacion(String id, String data,
+	public static Publicacion createPublicacion(int id, String data,
 										 String autor, LocalDateTime fecha,
 										 ArrayList<Comentario> comentarios,
 										 int numLikes, int numDislikes) {
@@ -41,7 +41,11 @@ public class PublicacionFactory {
 			return new PublicacionEnlace(id, autor, fecha, comentarios, numLikes, numDislikes, data);
 		}
 		else {
-			Publicacion ref = DB.getPublicacion(data);
+            Publicacion ref = null;
+		    if (data.startsWith("/ref"))
+                ref = DB.getPublicacion(Integer.decode(data.split("/ref")[1]));
+
+
 			if(ref != null) {
 				return new PublicacionReferencia(id, autor, fecha, comentarios, numLikes, numDislikes, ref);
 			}
@@ -54,8 +58,12 @@ public class PublicacionFactory {
 			return new PublicacionEnlace(autor, data);
 		}
 		else {
-			Publicacion ref = DB.getPublicacion(data);
+            Publicacion ref = null;
+            if (data.startsWith("/ref"))
+                ref = DB.getPublicacion(Integer.decode(data.split("/ref")[1]));
+
 			if(ref != null) {
+				System.out.println("Creando pReferencia");
 				return new PublicacionReferencia(autor, ref);
 			}
 			return new PublicacionTexto(autor, data);

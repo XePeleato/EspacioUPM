@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class PublicacionReferencia extends Publicacion {
 	private Publicacion publicacionRef;
 
-	PublicacionReferencia(String idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, Publicacion pub) {
+	PublicacionReferencia(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, Publicacion pub) {
 		super(idPublicacion, autor, fecha, comentarios, numLikes, numDislikes);
 		publicacionRef = pub;
 	}
