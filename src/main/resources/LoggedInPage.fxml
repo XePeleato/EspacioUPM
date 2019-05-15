@@ -10,8 +10,9 @@
          <children>
             <Button fx:id="btnTimeline" mnemonicParsing="false" onAction="#onBtnTimelineClick" text="Timeline" />
             <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#onBtnProfileClick" text="Perfil" />
-            <Button mnemonicParsing="false" text="Buscador" />
-            <Button mnemonicParsing="false" text="Ajustes" />
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onBtnSearchClick" text="Buscador" />
+            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#onBtnSettingsClick" text="Ajustes" />
+            <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewClick" text="Nueva Publicación..." />
          </children>
       </HBox>
    </bottom>

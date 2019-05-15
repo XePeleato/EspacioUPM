@@ -33,6 +33,10 @@ public class MainController implements Initializable {
     /* Principal */
     @FXML BorderPane borderPaneMain;
     @FXML Button btnTimeline;
+    @FXML Button btnProfile;
+    @FXML Button btnSearch;
+    @FXML Button btnSettings;
+    @FXML Button btnNew;
 
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
@@ -81,16 +85,32 @@ public class MainController implements Initializable {
         alert.show();
     }
 
-    public void onBtnTimelineClick(ActionEvent actionEvent) {
+    public void replaceComponent(String fxml) {
         try {
-            borderPaneMain.setCenter(FXMLLoader.load(getClass().getResource("/TimelinePage.fxml")));
+            borderPaneMain.setCenter(FXMLLoader.load(getClass().getResource(fxml)));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("[+] Nueva subescena: " + fxml);
+    }
+
+    public void onBtnTimelineClick(ActionEvent actionEvent) {
+        replaceComponent("/TimelinePage.fxml");
     }
 
     public void onBtnProfileClick(ActionEvent actionEvent) {
         // TODO: Esto acaba en algún momento? En plan, el trabajo...
+    }
+
+    public void onBtnSearchClick(ActionEvent actionEvent) {
+        replaceComponent("/BuscadorPage.fxml");
+    }
+
+    public void onBtnSettingsClick(ActionEvent actionEvent) {
+    }
+
+    public void onBtnNewClick(ActionEvent actionEvent) {
+        replaceComponent("/NewTweetPage.fxml");
     }
 
     @Override

@@ -51,12 +51,4 @@ public class TimelineController implements Initializable {
         }
 
     }
-
-    public void onBtnNewClick(ActionEvent actionEvent) {
-        /*try {
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
 }
