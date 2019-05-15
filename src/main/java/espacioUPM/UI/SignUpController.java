@@ -19,17 +19,17 @@ public class SignUpController {
 
     /* Registro */
     @FXML
-    TextField txtAlias;
+    public TextField txtAlias;
     @FXML
-    TextField txtMail;
+    public TextField txtMail;
     @FXML
-    PasswordField txtRegPass;
+    public PasswordField txtRegPass;
     @FXML
-    PasswordField txtRegPassRepeat;
+    public PasswordField txtRegPassRepeat;
     @FXML
-    Button btnSendReg;
+    public Button btnSendReg;
     @FXML
-    Button btnBack;
+    public Button btnBack;
 
     public void onBtnRegSendClick(ActionEvent actionEvent) {
         String alias = txtAlias.getText();

@@ -7,17 +7,20 @@ import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LandingPageController {
+public class LandingPageController implements Initializable {
 
     @FXML
-    TextField txtAlias;
+    public TextField txtAlias;
     @FXML
-    PasswordField txtPass;
+    public PasswordField txtPass;
 
     private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
     private static IDB_Usuario DB_user = DB_Main.getInstance();
@@ -52,5 +55,10 @@ public class LandingPageController {
         }catch(NullPointerException | IOException e) {
             System.out.println("oops");
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

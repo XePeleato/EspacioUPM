@@ -72,7 +72,7 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         mStage.setScene(scene);
         mStage.sizeToScene();
-        System.out.println("[+]Nueva escena: "+fxml);
+        System.out.println("[+] Nueva escena: " + fxml);
         return root;
     }
 
