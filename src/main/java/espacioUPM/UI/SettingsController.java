@@ -1,8 +1,8 @@
 package espacioUPM.UI;
 
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class SettingsController {
     private Stage mStage;

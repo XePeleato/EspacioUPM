@@ -1,7 +1,7 @@
 package espacioUPM.UI;
 
-import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 public class OpcionesAdminController {
     public Button btnHacerAdmin, btnEliminar;
 

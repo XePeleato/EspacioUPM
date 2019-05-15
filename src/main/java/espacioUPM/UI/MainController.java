@@ -1,6 +1,5 @@
 package espacioUPM.UI;
 
-import espacioUPM.App;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;
@@ -9,19 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.SecureRandom;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -40,6 +36,8 @@ public class MainController implements Initializable {
 
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
+
+    public MainController() {}
 
     public static MainController getInstance() {
         if(instance == null) {

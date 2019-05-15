@@ -1,6 +1,5 @@
 package espacioUPM.UI;
 
-import com.sun.tools.javac.Main;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;

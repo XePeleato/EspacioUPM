@@ -1,11 +1,9 @@
 package espacioUPM.UI;
 
-import espacioUPM.App;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
-import espacioUPM.Publicaciones.PublicacionTexto;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
