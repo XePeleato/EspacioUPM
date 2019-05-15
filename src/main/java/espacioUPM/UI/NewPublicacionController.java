@@ -20,11 +20,7 @@ public class NewPublicacionController implements Initializable {
     public TextArea txtAreaTweet;
     public Button btnSendTweet;
 
-    private Usuario thisUser;
-
-    public NewPublicacionController(Usuario thisUser) {
-        this.thisUser = thisUser;
-    }
+    public NewPublicacionController() {}
 
     private static Stage thisStage;
     private static IDB_Publicacion DB = DB_Main.getInstance();
@@ -37,11 +33,11 @@ public class NewPublicacionController implements Initializable {
 
     public void onBtnSendTweetClick(ActionEvent actionEvent)
     {
-
         String tweet = txtAreaTweet.getText();
-        Publicacion pub = PublicacionFactory.createPublicacion(thisUser.getAlias(), tweet);
+        Publicacion pub = PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), tweet);
         DB.setPublicacion(pub);
-        thisStage.close();
+
+        MainController.getInstance().replaceComponent("/TimelinePage.fxml");
     }
 
 

@@ -37,6 +37,8 @@ public class MainController implements Initializable {
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
+    static BorderPane sBorderPane;
+
     public MainController() {}
 
     public static MainController getInstance() {
@@ -80,7 +82,7 @@ public class MainController implements Initializable {
     public void replaceComponent(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
-            borderPaneMain.setCenter(loader.load());
+            (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,6 +111,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        sBorderPane = borderPaneMain;
         replaceComponent("/TimelinePage.fxml");
     }
 }

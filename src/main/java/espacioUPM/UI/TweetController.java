@@ -51,7 +51,7 @@ public class TweetController implements Initializable {
     public void onClickDislike(ActionEvent actionEvent){
         pub.dislike(MainController.thisUser);
     }
-    public void onClickBorrar(ActionEvent actionEvent){
+    public void onClickDelete(ActionEvent actionEvent){
         DB_Pub.borrarPublicacion(pub.getIDPublicacion());
     }
 }
