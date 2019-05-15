@@ -41,12 +41,6 @@ public class MainController implements Initializable {
     static final IDB_Usuario DB_user = DB_Main.getInstance();
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
-    public MainController() {}
-
-    public MainController(Stage s) {
-        mStage = s;
-    }
-
     public static MainController getInstance() {
         if(instance == null) {
             instance = new MainController();
@@ -99,7 +93,7 @@ public class MainController implements Initializable {
     }
 
     public void onBtnProfileClick(ActionEvent actionEvent) {
-        // TODO: Esto acaba en algún momento? En plan, el trabajo...
+        // TODO: aún no existe ProfilePage.fxml
     }
 
     public void onBtnSearchClick(ActionEvent actionEvent) {
@@ -107,6 +101,7 @@ public class MainController implements Initializable {
     }
 
     public void onBtnSettingsClick(ActionEvent actionEvent) {
+        // TODO: aún no existe SettingsPage.fxml
     }
 
     public void onBtnNewClick(ActionEvent actionEvent) {

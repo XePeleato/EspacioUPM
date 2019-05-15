@@ -25,11 +25,11 @@ public class Usuario {
 	public void escribirPublicacion() {
 	
 	}
-	
 	public boolean borrarPublicacion(Publicacion publi) {
 	    return true;
 	}
-	
+
+
 	public void visualizarTimeline() {
 	
 	}
