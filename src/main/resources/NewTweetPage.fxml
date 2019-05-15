@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="326.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.NewPublicacionController">
+   <bottom>
+      <Button fx:id="btnSendTweet" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#onSendTweetClick" text="Enviar" BorderPane.alignment="TOP_RIGHT" />
+   </bottom>
+   <center>
+      <TextArea fx:id="txtAreaTweet" prefHeight="200.0" prefWidth="200.0" promptText="Escribe tu mensaje..." BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

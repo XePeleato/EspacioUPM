@@ -14,9 +14,11 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.TreeSet;
 
 public class TimelineController implements Initializable {
-    @FXML ScrollPane timelinePane;
+    @FXML
+    ScrollPane timelinePane;
 
     private static IDB_Usuario DB_user = DB_Main.getInstance();
     private static IDB_Publicacion DB_publi = DB_Main.getInstance();
@@ -28,15 +30,18 @@ public class TimelineController implements Initializable {
         LinkedList<Publicacion> publicaciones = new LinkedList<>();
         timelinePane.setContent(root);
 
+        String[] seguidos = DB_user.getSeguidos(controller.getThisUser());
 
-            String[] seguidos = DB_user.getSeguidos(controller.getThisUser());
+        Publicacion[] nuestras = DB_publi.getPublicaciones(MainController.thisUser);
+
+        TreeSet<Publicacion> total = new TreeSet<>(Arrays.asList(nuestras));
 
             for (String seguido : seguidos) {
                 Publicacion[] pubs = DB_publi.getPublicaciones(new Usuario(seguido));
-                publicaciones.addAll(Arrays.asList(pubs));
+                total.addAll(Arrays.asList(pubs));
             }
 
-        for (Publicacion pub : publicaciones) {
+        for (Publicacion pub : total) {
             Tweet tweet = new Tweet();
             tweet.setTweet(pub);
             root.getChildren().add(tweet);

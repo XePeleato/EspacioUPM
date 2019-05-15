@@ -106,7 +106,7 @@ public class MainController implements Initializable {
     }
 
     public void onBtnNewClick(ActionEvent actionEvent) {
-        // TODO: aún no existe NewPubPage.fxml
+        replaceComponent("/NewTweetPage.fxml");
     }
 
     @Override

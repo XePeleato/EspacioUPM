@@ -7,7 +7,7 @@ import espacioUPM.Usuario;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public abstract class Publicacion implements IPublicacion {
+public abstract class Publicacion implements IPublicacion, Comparable {
 	private int IDPublicacion;
 	private String autor;
 	private LocalDateTime fecha;
@@ -89,5 +89,12 @@ public abstract class Publicacion implements IPublicacion {
 
 	public int getNumDislikes() {
 		return numDislikes;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (!(o instanceof Publicacion)) return -1;
+
+		return ((Publicacion) o).getFecha().compareTo(fecha);
 	}
 }

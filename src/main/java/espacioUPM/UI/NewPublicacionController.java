@@ -22,16 +22,13 @@ public class NewPublicacionController implements Initializable {
 
     public NewPublicacionController() {}
 
-    private static Stage thisStage;
     private static IDB_Publicacion DB = DB_Main.getInstance();
-
-    public void setStage(Stage stage) { thisStage = stage; }
 
     public void initialize() {
 
     }
 
-    public void onBtnSendTweetClick(ActionEvent actionEvent)
+    public void onSendTweetClick(ActionEvent actionEvent)
     {
         String tweet = txtAreaTweet.getText();
         Publicacion pub = PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), tweet);
