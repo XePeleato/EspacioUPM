@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private static App instance;
-    public static Usuario thisUser;
     private MainController controller;
     public App() {
         instance = this;

@@ -4,7 +4,9 @@ import espacioUPM.App;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
+import espacioUPM.Publicaciones.PublicacionFactory;
 import espacioUPM.Publicaciones.PublicacionTexto;
+import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,7 +21,15 @@ public class NewPublicacionController implements Initializable {
 
     public TextArea txtAreaTweet;
     public Button btnSendTweet;
+
+    private Usuario thisUser;
+
+    public NewPublicacionController(Usuario thisUser) {
+        this.thisUser = thisUser;
+    }
+
     private static Stage thisStage;
+    private static IDB_Publicacion DB = DB_Main.getInstance();
 
     public void setStage(Stage stage) { thisStage = stage; }
 
@@ -31,8 +41,8 @@ public class NewPublicacionController implements Initializable {
     {
 
         String tweet = txtAreaTweet.getText();
-        Publicacion pub = new PublicacionTexto(App.thisUser.getAlias(), tweet);
-        DB_Main.getInstance().setPublicacion(pub);
+        Publicacion pub = PublicacionFactory.createPublicacion(thisUser.getAlias(), tweet);
+        DB.setPublicacion(pub);
         thisStage.close();
     }
 

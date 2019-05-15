@@ -25,13 +25,10 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    private static Stage mStage;
-    @FXML TextField txtAlias;
-    @FXML PasswordField txtPass;
 
-    /* Registro */
-    @FXML TextField txtMail;
-    @FXML PasswordField txtRegPass;
+    private static Stage mStage;
+    public static Usuario thisUser;
+    private static MainController instance;
 
     /* Principal */
     @FXML BorderPane borderPaneMain;
@@ -46,8 +43,23 @@ public class MainController implements Initializable {
         mStage = s;
     }
 
+    public static MainController getInstance() {
+        if(instance == null) {
+            instance = new MainController();
+        }
+        return instance;
+    }
+
     public void setStage(Stage stage) {
         this.mStage = stage;
+    }
+
+    public Usuario getThisUser() { return thisUser; }
+
+    public void setThisUser(Usuario value) { thisUser = value; }
+
+    public void setTitle(String txt) {
+        mStage.setTitle(txt);
     }
 
     public Parent replaceScene(String fxml) throws IOException {
@@ -60,58 +72,13 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         mStage.setScene(scene);
         mStage.sizeToScene();
+        System.out.println("[+]Nueva escena: "+fxml);
         return root;
     }
 
     public void alert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
         alert.show();
-    }
-
-    @FXML
-    public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = DB_user.getUsuario(txtAlias.getText());
-
-        if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
-            alert("Por favor rellene ambos campos.");
-        }
-        else if (usuario == null) {
-            alert("El usuario especificado no existe.");
-        }
-        else if (!DB_pass.comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
-            System.out.println("contraseña incorrecta");
-            alert("Contraseña incorrecta.");
-        } else {
-            try {
-                App.thisUser = usuario;
-                replaceScene("/LoggedInPage.fxml");
-            } catch (IOException e) { e.printStackTrace(); }
-        }
-    }
-
-    public void onBtnRegisterClick(ActionEvent actionEvent) {
-        try {
-            mStage.setTitle("| Registro |");
-            replaceScene("/RegisterPage.fxml");
-        }catch(NullPointerException | IOException e) {
-            System.out.println("oops");
-        }
-    }
-
-    public void onBtnRegSendClick(ActionEvent actionEvent) {
-        Random r = new Random();
-        byte[] salt = new byte[16];
-        r.nextBytes(salt);
-        if (DB_user.setUsuario(txtMail.getText().split("@")[0], txtMail.getText(), txtRegPass.getText().getBytes(), salt)) {
-            mStage.setTitle("| Login |");
-            try {
-                replaceScene("/LandingPage.fxml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else
-            alert("Fallo al registrarse");
     }
 
     public void onBtnTimelineClick(ActionEvent actionEvent) {

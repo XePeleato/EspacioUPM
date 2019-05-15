@@ -2,6 +2,7 @@ espacioUPM/Database/IDB_Usuario.class
 espacioUPM/Publicaciones/Publicacion.class
 espacioUPM/UI/SignUpController.class
 espacioUPM/Database/IDB_Publicacion.class
+espacioUPM/UI/TimelineController.class
 espacioUPM/Publicaciones/Comentario.class
 espacioUPM/Database/DB_Main.class
 espacioUPM/Database/DB_Main$1.class
@@ -9,6 +10,7 @@ espacioUPM/Comunidad.class
 espacioUPM/UI/SettingsController.class
 espacioUPM/Publicaciones/IComentario.class
 espacioUPM/UI/NewPublicacionController.class
+espacioUPM/UI/Tweet.class
 espacioUPM/Publicaciones/PublicacionFactory.class
 espacioUPM/UI/MainController.class
 espacioUPM/IAdministracionComunidad.class
@@ -19,6 +21,7 @@ espacioUPM/UI/ComunidadController.class
 espacioUPM/Usuario.class
 espacioUPM/UI/BuscadorController.class
 espacioUPM/Publicaciones/PublicacionEnlace.class
+espacioUPM/UI/LandingPageController.class
 espacioUPM/UI/ComentarioController.class
 espacioUPM/Publicaciones/Puntuacion.class
 espacioUPM/Publicaciones/IPublicacion.class

@@ -6,12 +6,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="238.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.MainController">
+<AnchorPane prefHeight="238.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SignUpController">
    <children>
-      <TextField fx:id="txtMail" layoutX="137.0" layoutY="74.0" />
-      <PasswordField fx:id="txtRegPass" layoutX="137.0" layoutY="119.0" />
-      <Label layoutX="42.0" layoutY="79.0" text="Correo UPM: " />
-      <Label layoutX="42.0" layoutY="124.0" text="Contraseña: " />
-      <Button fx:id="btnSendReg" layoutX="308.0" layoutY="119.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" text="Enviar" />
+      <TextField fx:id="txtMail" layoutX="137.0" layoutY="106.0" />
+      <TextField fx:id="txtAlias" layoutX="137.0" layoutY="60.0" />
+      <PasswordField fx:id="txtRegPass" layoutX="137.0" layoutY="154.0" />
+      <Label layoutX="43.0" layoutY="111.0" text="Correo UPM: " />
+      <Label layoutX="78.0" layoutY="65.0" text="Alias: " />
+      <Label layoutX="43.0" layoutY="159.0" text="Contraseña: " />
+      <Button fx:id="btnSendReg" layoutX="308.0" layoutY="154.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" text="Enviar" />
    </children>
 </AnchorPane>
