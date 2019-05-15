@@ -37,8 +37,11 @@ public class BuscadorController {
         root.getChildren().add(new Label("Usuarios: "));
 
         if (us != null)
-            for (Usuario u : us)
-                root.getChildren().add(new Label(u.getAlias()));
+            for (Usuario u : us) {
+                SearchedUser sUs = new SearchedUser();
+                sUs.setUser(u);
+                root.getChildren().add(sUs);
+            }
 
         root.getChildren().add(new Label("Comunidades: "));
 
