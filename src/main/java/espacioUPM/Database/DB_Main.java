@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB_PasswordHandler {
@@ -52,7 +53,25 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             e.printStackTrace();
         }
         return null;
+    }
 
+    public Usuario[] buscarUsuario(String alias) {
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias FROM `Usuarios` WHERE `alias` LIKE(?)"))
+        {
+            pStmt.setString(1, '%' + alias + '%');
+
+
+            ResultSet rs = pStmt.executeQuery();
+
+            LinkedList<Usuario> ret = new LinkedList<>();
+            while (rs.next())
+                ret.add(new Usuario(rs.getString("alias")));
+
+            return ret.toArray(Usuario[]::new);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean setUsuario(String alias, String correo, byte[] password, byte[] salt) {
@@ -140,37 +159,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
         return ret;
     }
-
-    /*
-    public Publicacion getPublicacion(String cuerpo) {
-        Publicacion ret = null;
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM publicaciones WHERE cuerpo = ?");
-            statement.setString(1, cuerpo);
-            ResultSet rs = statement.executeQuery();
-            if(rs.next()) {
-                int id = rs.getInt("id");
-                String autor = rs.getString("autor");
-
-                //String cuerpo = rs.getString("id_ref") != null ?
-                //        rs.getString("id_ref") :
-                //        rs.getString("cuerpo");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime date = LocalDateTime.parse(rs.getString("fecha"), formatter);
-                ArrayList<Comentario> comentarios = getComentarios(id);
-                int numLikes = getLikes(id);
-                int numDislikes = getDislikes(id);
-                ret = PublicacionFactory.createPublicacion(id, cuerpo, autor, date, comentarios, numLikes, numDislikes);
-            }
-        }
-        catch(SQLException e) { e.printStackTrace(); }
-
-        return ret;
-    }
-    */
-
-
 
     public Publicacion[] getPublicaciones(Usuario usuario) {
 
@@ -448,6 +436,23 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             return (Publicacion[]) ret.toArray();
         }
         catch(SQLException e) { e.printStackTrace(); }
+        return null;
+    }
+
+    public Comunidad[] buscarComunidad(String id) {
+        LinkedList<Comunidad> ret = new LinkedList<>();
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM comunidades WHERE id LIKE(?)"))
+        {
+            pStmt.setString(1, '%' + id + '%');
+            ResultSet rs = pStmt.executeQuery();
+
+            while (rs.next())
+                ret.add(new Comunidad(rs.getString("id"), new Usuario(rs.getString("fundador"))));
+
+            return ret.toArray(Comunidad[]::new);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

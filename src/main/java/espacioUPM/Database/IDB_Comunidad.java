@@ -26,4 +26,6 @@ public interface IDB_Comunidad {
 	Usuario[] getMiembros(Comunidad comunidad);
 
 	Publicacion[] getTimeline(Comunidad comunidad);
+
+	Comunidad[] buscarComunidad(String id);
 }
