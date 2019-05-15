@@ -17,9 +17,9 @@ public interface IDB_Publicacion {
 
 	Publicacion[] getPublicaciones(Usuario usuario);
 	
-	void borrarPublicacion(Publicacion publi);
+	void borrarPublicacion(int publi);
 	
-	void puntuar(Usuario usuario, Publicacion publi, Puntuacion puntuacion);
+	void puntuar(Usuario usuario, int publi, Puntuacion puntuacion);
 	
 	void comentar(Publicacion publi, Usuario usuario, String contenido);
 

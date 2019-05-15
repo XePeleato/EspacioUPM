@@ -62,10 +62,9 @@ public class PublicacionFactory {
             if (data.startsWith("/ref"))
                 ref = DB.getPublicacion(Integer.decode(data.split("/ref")[1]));
 
-			if(ref != null) {
-				System.out.println("Creando pReferencia");
+			if(ref != null)
 				return new PublicacionReferencia(autor, ref);
-			}
+
 			return new PublicacionTexto(autor, data);
 		}
 	}

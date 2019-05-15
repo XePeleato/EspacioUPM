@@ -2,7 +2,9 @@ package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
+import espacioUPM.Publicaciones.Puntuacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,9 +26,9 @@ public class TweetController implements Initializable {
     @FXML
     BorderPane borderPaneTweet;
 
-    int pubId;
+    public Publicacion pub;
 
-    static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
+    private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -38,18 +40,18 @@ public class TweetController implements Initializable {
         // TODO: Ir al perfil del autor
     }
     public void onClickRetweet(ActionEvent actionEvent){
-        DB_Pub.setPublicacion(PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), "/ref" + pubId));
+        DB_Pub.setPublicacion(PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), "/ref" + pub.getIDPublicacion()));
     }
     public void onClickVerComentarios(ActionEvent actionEvent){
         //no esta en fxml todavia
     }
     public void onClickLike(ActionEvent actionEvent){
-
+        pub.like(MainController.thisUser);
     }
     public void onClickDislike(ActionEvent actionEvent){
-
+        pub.dislike(MainController.thisUser);
     }
     public void onClickBorrar(ActionEvent actionEvent){
-        //DB.borrarPublicacion(publi);
+        DB_Pub.borrarPublicacion(pub.getIDPublicacion());
     }
 }

@@ -44,8 +44,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                      <children>
                         <Label prefHeight="16.0" prefWidth="0.0" text="                          " />
-                        <Button fx:id="btnLike" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" text="Me gusta" />
-                        <Button fx:id="btnDislike" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" text="No me gusta" />
+                        <Button fx:id="btnLike" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" onAction="#onClickLike" text="Me gusta" />
+                        <Button fx:id="btnDislike" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" onAction="#onClickDislike" text="No me gusta" />
                      </children>
                   </HBox>
                </children>

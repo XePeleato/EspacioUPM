@@ -214,7 +214,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setInt(1, publication_id);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            rs.getInt("numero");
+            return rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
@@ -227,17 +227,17 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setInt(1, publication_id);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            rs.getInt("numero");
+            return rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
         return 0;
     }
 
-    public void borrarPublicacion(Publicacion publi) {
+    public void borrarPublicacion(int publi) {
         try
         {
             PreparedStatement pStmt = connection.prepareStatement("DELETE FROM publicaciones WHERE id = ?");
-            pStmt.setInt(1, publi.getIDPublicacion());
+            pStmt.setInt(1, publi);
             pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -358,9 +358,9 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public void puntuar(Usuario usuario, Publicacion publi, Puntuacion puntuacion) {
+    public void puntuar(Usuario usuario, int publi, Puntuacion puntuacion) {
         try {
-            PreparedStatement pStmt = connection.prepareStatement("INSERT INTO likes VALUES (?, ?, ?)");
+            PreparedStatement pStmt = connection.prepareStatement("INSERT IGNORE INTO likes VALUES (?, ?, ?)");
             pStmt.setString(1, usuario.getAlias());
             int puntuacionInt = 0;
             switch (puntuacion) {
@@ -374,7 +374,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                     break;
             }
             pStmt.setInt(2, puntuacionInt);
-            pStmt.setInt(3, publi.getIDPublicacion());
+            pStmt.setInt(3, publi);
             pStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -48,15 +48,15 @@ public abstract class Publicacion implements IPublicacion {
 	public void like(Usuario usuario) {
 	    Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this);
 	    if (puntuacionAnterior == Puntuacion.NEUTRO || puntuacionAnterior == Puntuacion.DISLIKE)
-            DB.puntuar(usuario, this, Puntuacion.LIKE);
-	    else DB.puntuar(usuario, this, Puntuacion.NEUTRO); // Si el usuario da like cuando ya había like este se quita
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.LIKE);
+	    else DB.puntuar(usuario, IDPublicacion, Puntuacion.NEUTRO); // Si el usuario da like cuando ya había like este se quita
 	}
 
 	public void dislike(Usuario usuario) {
         Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this);
         if (puntuacionAnterior == Puntuacion.NEUTRO || puntuacionAnterior == Puntuacion.LIKE)
-            DB.puntuar(usuario, this, Puntuacion.DISLIKE);
-        else DB.puntuar(usuario, this, Puntuacion.NEUTRO); // Si el usuario da dislike cuando ya había dislike este se quita
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.DISLIKE);
+        else DB.puntuar(usuario, IDPublicacion, Puntuacion.NEUTRO); // Si el usuario da dislike cuando ya había dislike este se quita
 	}
 
 	public void mostrarPublicacion() {
@@ -85,7 +85,7 @@ public abstract class Publicacion implements IPublicacion {
 
 	public int getNumLikes() {
 		return numLikes;
-	}
+}
 
 	public int getNumDislikes() {
 		return numDislikes;

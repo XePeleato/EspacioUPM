@@ -28,12 +28,12 @@ public class Tweet extends VBox{
     }
 
     public void setTweet(Publicacion p) {
-        controller.pubId = p.getIDPublicacion();
+        controller.pub = p;
         controller.txtUsername.setText(p.getAutor());
         controller.txtRetweet.setText("");
         controller.txtDate.setText(p.getFecha().toString());
         controller.btnLike.setText("Me gusta (" + p.getNumLikes() + ")");
-        controller.btnLike.setText("No me gusta (" + p.getNumDislikes() + ")");
+        controller.btnDislike.setText("No me gusta (" + p.getNumDislikes() + ")");
         if (p instanceof PublicacionTexto)
             controller.borderPaneTweet.setCenter(new Label(((PublicacionTexto) p).getContenido()));
 
