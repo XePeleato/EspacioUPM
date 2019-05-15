@@ -1,13 +1,18 @@
 package espacioUPM.UI;
 
+import espacioUPM.App;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Publicaciones.Publicacion;
+import espacioUPM.Publicaciones.PublicacionEnlace;
 import espacioUPM.Publicaciones.PublicacionReferencia;
 import espacioUPM.Publicaciones.PublicacionTexto;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 
@@ -44,6 +49,14 @@ public class Tweet extends VBox{
             controller.txtDate.setText(pubReferenciada.getFecha().toString());
             if (pubReferenciada instanceof PublicacionTexto)
                 controller.borderPaneTweet.setCenter(new Label(((PublicacionTexto) pubReferenciada).getContenido()));
+        }
+
+        if (p instanceof PublicacionEnlace) {
+            Hyperlink link = new Hyperlink(((PublicacionEnlace)p).getUrl());
+            link.setOnAction(ev -> {
+                App.hostServices.showDocument(link.getText());
+            });
+            controller.borderPaneTweet.setCenter(new TextFlow(link));
         }
     }
 

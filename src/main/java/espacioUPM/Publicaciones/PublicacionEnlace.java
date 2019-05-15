@@ -30,4 +30,8 @@ public class PublicacionEnlace extends Publicacion {
 	public void mostrarPublicacion() {
 	
 	}
+
+	public String getUrl() {
+		return url;
+	}
 }

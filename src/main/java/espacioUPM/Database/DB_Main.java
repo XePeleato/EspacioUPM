@@ -120,9 +120,13 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             if (publi instanceof PublicacionTexto) {
                 pStmt.setString(3, ((PublicacionTexto) publi).getContenido());
                 pStmt.setNull(4, Types.INTEGER);
-            } else {
+            } else if (publi instanceof PublicacionReferencia) {
                     pStmt.setInt(4, ((PublicacionReferencia)publi).getPublicacionRef().getIDPublicacion());
                     pStmt.setNull(3, Types.VARCHAR);
+            }
+            else {
+                pStmt.setString(3, ((PublicacionEnlace) publi).getUrl());
+                pStmt.setNull(4, Types.INTEGER);
             }
 
             return pStmt.execute();
