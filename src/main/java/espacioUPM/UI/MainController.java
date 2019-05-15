@@ -62,7 +62,7 @@ public class MainController implements Initializable {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
         Parent root = loader.load();
         if (mStage == null) {
-            System.out.println("[-] Ouch");
+            System.out.println("[-] Stage no cargada - Algo ha ido mal");
             return null;
         }
         Scene scene = new Scene(root);
@@ -79,7 +79,8 @@ public class MainController implements Initializable {
 
     public void replaceComponent(String fxml) {
         try {
-            borderPaneMain.setCenter(FXMLLoader.load(getClass().getResource(fxml)));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
+            borderPaneMain.setCenter(loader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,6 +109,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        replaceComponent("/TimelinePage.fxml");
     }
 }

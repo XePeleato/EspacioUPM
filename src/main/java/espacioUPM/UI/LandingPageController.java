@@ -43,7 +43,7 @@ public class LandingPageController implements Initializable {
             try {
                 controller.setThisUser(usuario);
                 controller.replaceScene("/LoggedInPage.fxml");
-                controller.replaceComponent("/TimelinePage.fxml");
+                //controller.replaceComponent("/TimelinePage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }

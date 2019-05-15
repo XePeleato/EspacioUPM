@@ -20,17 +20,16 @@ public class TimelineController implements Initializable {
 
     private static IDB_Usuario DB_user = DB_Main.getInstance();
     private static IDB_Publicacion DB_publi = DB_Main.getInstance();
-    private MainController maincontroller = MainController.getInstance();
+    private MainController controller = MainController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         VBox root = new VBox();
         LinkedList<Publicacion> publicaciones = new LinkedList<>();
         timelinePane.setContent(root);
 
 
-            String[] seguidos = DB_user.getSeguidos(maincontroller.getThisUser());
+            String[] seguidos = DB_user.getSeguidos(controller.getThisUser());
 
             for (String seguido : seguidos) {
                 Publicacion[] pubs = DB_publi.getPublicaciones(new Usuario(seguido));
