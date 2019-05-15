@@ -1,21 +1,44 @@
 package espacioUPM.UI;
 
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.Publicaciones.Comentario;
+import espacioUPM.Publicaciones.Publicacion;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+
 public class ComentarioController {
 
-    public TextArea txtArea;
-    public Button btnResponder;
+    @FXML
+    ScrollPane scrollPaneComments;
+    @FXML
+    public TextArea txtAreaComment;
+    @FXML
+    public Button btnSendComment;
+
+    private final IDB_Publicacion DB_Pub = DB_Main.getInstance();
 
     public void initialize() {
+        VBox root = new VBox();
+        scrollPaneComments.setContent(root);
+        Publicacion pub = TweetController.getCurrentPub();
+
+        ArrayList<Comentario> comentarios = pub.getComentarios();
+
+        for(Comentario c : comentarios)
+            root.getChildren().add(new Label(c.getAutor() + ":\n" + c.getContenido()));
     }
 
-    public void onClickResponder(ActionEvent actionEvent) {
-       /* String comentario = txtArea.getText();
-        Comentario comment = new Comentario(Main.mThisUser.getAlias(), comentario, publicacion.getIDPublicacion());
-        DBHandler.getDefault().comentar(publicacion,usuario,comment.getContenido());
-        */
+    public void onClickSendComment(ActionEvent actionEvent) {
+        String comentario = txtAreaComment.getText();
+        DB_Pub.comentar(TweetController.getCurrentPub(), MainController.thisUser , comentario);
     }
 
 }

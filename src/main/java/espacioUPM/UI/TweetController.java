@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class TweetController implements Initializable {
     @FXML
-    public Button btnRetweet, btnVerComentarios, btnLike, btnDislike, btnDelete;
+    public Button btnRetweet, btnComment, btnLike, btnDislike, btnDelete;
 
     @FXML
     public Label txtUsername, txtDate, txtRetweet;
@@ -26,13 +26,21 @@ public class TweetController implements Initializable {
     @FXML
     BorderPane borderPaneTweet;
 
-    public Publicacion pub;
+    private static Publicacion pub;
 
     private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public static void setPub(Publicacion p) {
+        pub = p;
+    }
+
+    public static Publicacion getCurrentPub() {
+        return pub;
     }
 
     public void onClickUsername(MouseEvent mouseEvent){
@@ -42,8 +50,8 @@ public class TweetController implements Initializable {
     public void onClickRetweet(ActionEvent actionEvent){
         DB_Pub.setPublicacion(PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), "/ref" + pub.getIDPublicacion()));
     }
-    public void onClickVerComentarios(ActionEvent actionEvent){
-        //no esta en fxml todavia
+    public void onClickComment(ActionEvent actionEvent){
+        MainController.getInstance().replaceComponent("/CommentsPage.fxml");
     }
     public void onClickLike(ActionEvent actionEvent){
         pub.like(MainController.thisUser);

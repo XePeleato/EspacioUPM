@@ -36,7 +36,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnComment" mnemonicParsing="false" text="Comentar" />
+                        <Button fx:id="btnComment" mnemonicParsing="false" text="Comentar" onAction="#onClickComment" />
                         <Button fx:id="btnRetweet" mnemonicParsing="false" onAction="#onClickRetweet" text="Retwittear" />
                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onClickDelete" text="Borrar" />
                      </children>
