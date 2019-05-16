@@ -32,4 +32,6 @@ public interface IDB_Usuario {
 	 boolean seguir(String seguidor, String seguido);
 	
 	 boolean dejarDeSeguir(String seguidor, String seguido);
+
+	 boolean estaSiguiendo(String aliasSeguidor, String aliasSeguido);
 }

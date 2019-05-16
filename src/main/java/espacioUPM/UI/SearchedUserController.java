@@ -20,7 +20,11 @@ public class SearchedUserController implements Initializable {
 
     private Usuario us;
 
-    private final static IDB_Usuario DB_Us = DB_Main.getInstance();
+    private final static IDB_Usuario DB = DB_Main.getInstance();
+    private final static MainController controller = MainController.getInstance();
+    private final static String thisUser = controller.getThisUser().getAlias();
+    private boolean siguiendo;
+
 
     public void setUsuario(Usuario us) {
         this.us = us;
@@ -31,12 +35,18 @@ public class SearchedUserController implements Initializable {
     }
 
     public void onFollowClick(ActionEvent actionEvent) {
-        DB_Us.seguir(MainController.thisUser.getAlias(), us.getAlias());
-        // TODO: Hacer el caso contrario "Dejar de seguir"
+        if(siguiendo)
+            DB.seguir(thisUser, us.getAlias());
+        else
+            DB.dejarDeSeguir(thisUser, us.getAlias());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        siguiendo = DB.estaSiguiendo(thisUser, us.getAlias());
+        if(siguiendo)
+            btnFollow.setText("Seguir");
+        else
+            btnFollow.setText("Dejar de seguir");
     }
 }

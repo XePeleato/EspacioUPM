@@ -350,6 +350,22 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
+    @Override
+    public boolean estaSiguiendo(String aliasSeguidor, String aliasSeguido) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS num FROM seguimiento WHERE seguidor = ? AND seguido = ?");
+            statement.setString(1, aliasSeguidor);
+            statement.setString(2, aliasSeguido);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                return rs.getInt("num") == 1;
+            }
+            return false;
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+        return false;
+    }
+
     public void puntuar(Usuario usuario, int publi, Puntuacion puntuacion) {
         try {
             PreparedStatement delete = connection.prepareStatement("DELETE FROM likes WHERE id_usuario = ? AND id_publicacion = ?");

@@ -10,10 +10,14 @@ package espacioUPM;//
 //
 
 
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 
 public class Usuario {
 	private String alias;
+	private static final IDB_Publicacion DB = DB_Main.getInstance();
+
 	public void darseDeBaja() {
 	
 	}
@@ -34,16 +38,8 @@ public class Usuario {
 	
 	}
 	
-	public void visualizarPerfil() {
-	
-	}
-	
-	public void logout() {
-	
-	}
-	
-	public void buscar() {
-	
+	public Publicacion[] obtenerPerfil() {
+		return DB.getPublicaciones(this);
 	}
 
     public String getAlias() {

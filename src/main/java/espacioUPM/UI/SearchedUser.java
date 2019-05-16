@@ -11,19 +11,19 @@ public class SearchedUser extends VBox {
     private SearchedUserController controller;
     private Node view;
 
-    public SearchedUser() {
+    public SearchedUser(Usuario us) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SearchedUser.fxml"));
         fxmlLoader.setControllerFactory(param -> controller = new SearchedUserController());
+        controller.setUsuario(us);
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        if(view == null) {
+            System.out.println("fuck");
+        }
         getChildren().add(view);
-    }
-
-    public void setUser(Usuario us) {
-        controller.setUsuario(us);
     }
 }
