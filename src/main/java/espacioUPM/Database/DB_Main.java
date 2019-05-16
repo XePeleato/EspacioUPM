@@ -352,8 +352,13 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
     public void puntuar(Usuario usuario, int publi, Puntuacion puntuacion) {
         try {
-            PreparedStatement pStmt = connection.prepareStatement("INSERT IGNORE INTO likes VALUES (?, ?, ?)");
-            pStmt.setString(1, usuario.getAlias());
+            PreparedStatement delete = connection.prepareStatement("DELETE FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
+            delete.setString(1, usuario.getAlias());
+            delete.setInt(2, publi);
+            delete.execute();
+
+            PreparedStatement insert = connection.prepareStatement("INSERT INTO likes VALUES (?, ?, ?)");
+            insert.setString(1, usuario.getAlias());
             int puntuacionInt = 0;
             switch (puntuacion) {
                 case LIKE:
@@ -365,19 +370,19 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                 default:
                     break;
             }
-            pStmt.setInt(2, puntuacionInt);
-            pStmt.setInt(3, publi);
-            pStmt.executeUpdate();
+            insert.setInt(2, puntuacionInt);
+            insert.setInt(3, publi);
+            insert.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public Puntuacion getPuntuacion(Usuario usuario, Publicacion publi) {
+    public Puntuacion getPuntuacion(Usuario usuario, int publi) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT valor FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
             statement.setString(1, usuario.getAlias());
-            statement.setInt(2, publi.getIDPublicacion());
+            statement.setInt(2, publi);
 
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {

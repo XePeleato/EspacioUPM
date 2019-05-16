@@ -39,7 +39,6 @@ public class DBTest {
 
         Usuario us2 = DB.getUsuario("test");
 
-
         assertNull(us2);
     }
 }

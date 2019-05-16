@@ -23,6 +23,6 @@ public interface IDB_Publicacion {
 	
 	void comentar(Publicacion publi, Usuario usuario, String contenido);
 
-	Puntuacion getPuntuacion(Usuario usuario, Publicacion publi);
+	Puntuacion getPuntuacion(Usuario usuario, int publi);
 
 }
