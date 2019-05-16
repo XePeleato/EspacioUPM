@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,19 +13,35 @@ public class SearchedUser extends VBox {
     private SearchedUserController controller;
     private Node view;
 
-    public SearchedUser(Usuario us) {
+    private final static IDB_Usuario DB = DB_Main.getInstance();
+
+    public SearchedUser() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SearchedUser.fxml"));
         fxmlLoader.setControllerFactory(param -> controller = new SearchedUserController());
-        controller.setUsuario(us);
         try {
             view = fxmlLoader.load();
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         if(view == null) {
             System.out.println("fuck");
         }
         getChildren().add(view);
+    }
+
+    public void setUsuario(Usuario us) {
+        controller.us = us;
+
+        if (us.getAlias().equals(MainController.thisUser.getAlias()))
+            controller.btnFollow.setDisable(true); // Nada de seguirnos a nosotros mismos
+
+        controller.txtUsername.setText(us.getAlias());
+        controller.siguiendo = DB.estaSiguiendo(MainController.thisUser.getAlias(), us.getAlias());
+        if(controller.siguiendo)
+            controller.btnFollow.setText("Dejar de seguir");
+        else
+            controller.btnFollow.setText("Seguir");
     }
 }

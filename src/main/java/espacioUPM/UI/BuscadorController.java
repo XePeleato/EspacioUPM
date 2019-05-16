@@ -38,7 +38,9 @@ public class BuscadorController {
 
         if (us != null)
             for (Usuario u : us) {
-                SearchedUser sUs = new SearchedUser(u);
+                SearchedUser sUs = new SearchedUser();
+                sUs.setUsuario(u);
+
                 root.getChildren().add(sUs);
             }
 

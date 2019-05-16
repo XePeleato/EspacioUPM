@@ -329,7 +329,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     }
 
     public boolean seguir(String seguidor, String seguido) {
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT IGNORE INTO seguimiento VALUES (?, ?)")){
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO seguimiento VALUES (?, ?)")){
             pStmt.setString(1, seguidor);
             pStmt.setString(2, seguido);
             return pStmt.executeUpdate() == 1;
