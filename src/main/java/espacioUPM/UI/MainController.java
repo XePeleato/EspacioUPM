@@ -38,8 +38,7 @@ public class MainController implements Initializable {
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
     static BorderPane sBorderPane;
-    private String currentComponent = "/TimelinePage.fxml";
-
+    private static String currentComponent = "/TimelinePage.fxml";
 
     public MainController() {}
 
