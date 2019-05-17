@@ -50,7 +50,7 @@ public class LandingPageController implements Initializable {
 
     public void onBtnRegisterClick(ActionEvent actionEvent) {
         try {
-            controller.setTitle("| Registro |");
+            controller.setTitle("Registro");
             controller.replaceScene("/RegisterPage.fxml");
         }catch(NullPointerException | IOException e) {
             System.out.println("oops");
@@ -72,6 +72,6 @@ public class LandingPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtAlias.requestFocus();
+        txtAlias.requestFocus();//FIXME: esta verga no hase na
     }
 }

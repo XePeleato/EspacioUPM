@@ -13,8 +13,7 @@ import java.io.IOException;
 
 public class SignUpController {
 
-    private static IDB_Usuario DB = DB_Main.getInstance();
-    private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
+    private static final IDB_Usuario DB = DB_Main.getInstance();
     private static MainController controller = MainController.getInstance();
 
     /* Registro */
@@ -53,6 +52,7 @@ public class SignUpController {
         else {
             DB.setUsuario(alias, correo, password);
             try {
+                controller.setTitle("EspacioUPM");
                 controller.replaceScene("/LandingPage.fxml");
             }
             catch(IOException e) { e.printStackTrace(); }
@@ -61,6 +61,7 @@ public class SignUpController {
 
     public void onBtnBack(ActionEvent actionEvent) {
         try{
+            controller.setTitle("EspacioUPM");
             controller.replaceScene("/LandingPage.fxml");
         }
         catch(IOException e) { e.printStackTrace(); }
