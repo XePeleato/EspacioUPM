@@ -29,6 +29,7 @@ public class TweetController implements Initializable {
     private static Publicacion pub;
 
     private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
+    private static final MainController controller = MainController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,15 +52,18 @@ public class TweetController implements Initializable {
         DB_Pub.setPublicacion(PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), "/ref" + pub.getIDPublicacion()));
     }
     public void onClickComment(ActionEvent actionEvent){
-        MainController.getInstance().replaceComponent("/CommentsPage.fxml");
+        controller.replaceComponent("/CommentsPage.fxml");
     }
     public void onClickLike(ActionEvent actionEvent){
         pub.like(MainController.thisUser);
+        controller.refresh();
     }
     public void onClickDislike(ActionEvent actionEvent){
         pub.dislike(MainController.thisUser);
+        controller.refresh();
     }
     public void onClickDelete(ActionEvent actionEvent){
         DB_Pub.borrarPublicacion(pub.getIDPublicacion());
+        controller.refresh();
     }
 }

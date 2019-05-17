@@ -38,6 +38,8 @@ public class MainController implements Initializable {
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
     static BorderPane sBorderPane;
+    private String currentComponent = "/TimelinePage.fxml";
+
 
     public MainController() {}
 
@@ -83,11 +85,17 @@ public class MainController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
             (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
+            currentComponent = fxml;
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("[+] Nueva subescena: " + fxml);
     }
+
+    public void refresh() {
+        replaceComponent(currentComponent);
+    }
+
 
     public void onBtnTimelineClick(ActionEvent actionEvent) {
         replaceComponent("/TimelinePage.fxml");

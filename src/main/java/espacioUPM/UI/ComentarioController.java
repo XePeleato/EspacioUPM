@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import com.sun.tools.javac.Main;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Comentario;
@@ -24,6 +25,7 @@ public class ComentarioController {
     public Button btnSendComment;
 
     private final IDB_Publicacion DB_Pub = DB_Main.getInstance();
+    private static final MainController controller = MainController.getInstance();
 
     public void initialize() {
         VBox root = new VBox();

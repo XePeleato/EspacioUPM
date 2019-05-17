@@ -33,6 +33,7 @@ public class SearchedUserController implements Initializable {
             DB.dejarDeSeguir(thisUser, us.getAlias());
         else
             DB.seguir(thisUser, us.getAlias());
+        controller.refresh();
     }
 
     @Override
