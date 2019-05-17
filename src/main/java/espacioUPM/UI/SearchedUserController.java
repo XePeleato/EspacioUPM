@@ -23,10 +23,14 @@ public class SearchedUserController implements Initializable {
     private final static IDB_Usuario DB = DB_Main.getInstance();
     private final static MainController controller = MainController.getInstance();
     private final static String thisUser = controller.getThisUser().getAlias();
-    public boolean siguiendo;
+    private boolean siguiendo;
 
     public SearchedUserController() {
     }
+
+    public void setSiguiendo(boolean value) { siguiendo = value; }
+    public boolean getSiguiendo() { return siguiendo; }
+
 
     public void onFollowClick(ActionEvent actionEvent) {
         if(siguiendo)

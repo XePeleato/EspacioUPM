@@ -33,7 +33,7 @@ public class Tweet extends VBox{
     }
 
     public void setTweet(Publicacion p) {
-        TweetController.setPub(p);
+        controller.setPub(p);
         controller.txtUsername.setText(p.getAutor());
         controller.txtRetweet.setText("");
         controller.txtDate.setText(p.getFecha().toString());

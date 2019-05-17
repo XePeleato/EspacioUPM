@@ -36,8 +36,11 @@ public class TweetController implements Initializable {
 
     }
 
-    public static void setPub(Publicacion p) {
+    public void setPub(Publicacion p) {
         pub = p;
+        if(!pub.getAutor().equals(controller.getThisUser().getAlias())) {
+            btnDelete.setDisable(true);
+        }
     }
 
     public static Publicacion getCurrentPub() {

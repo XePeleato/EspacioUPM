@@ -27,7 +27,7 @@ public class App extends Application {
         controller = MainController.getInstance();
         controller.setStage(primaryStage);
         controller.replaceScene("/LandingPage.fxml");
-        primaryStage.setTitle("| EspacioUPM |");
+        primaryStage.setTitle("Bienvenido/a a EspacioUPM");
         primaryStage.show();
     }
 }

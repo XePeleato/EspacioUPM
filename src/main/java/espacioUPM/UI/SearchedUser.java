@@ -24,10 +24,6 @@ public class SearchedUser extends VBox {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        if(view == null) {
-            System.out.println("fuck");
-        }
         getChildren().add(view);
     }
 
@@ -38,8 +34,8 @@ public class SearchedUser extends VBox {
             controller.btnFollow.setDisable(true); // Nada de seguirnos a nosotros mismos
 
         controller.txtUsername.setText(us.getAlias());
-        controller.siguiendo = DB.estaSiguiendo(MainController.thisUser.getAlias(), us.getAlias());
-        if(controller.siguiendo)
+        controller.setSiguiendo(DB.estaSiguiendo(MainController.thisUser.getAlias(), us.getAlias()));
+        if(controller.getSiguiendo())
             controller.btnFollow.setText("Dejar de seguir");
         else
             controller.btnFollow.setText("Seguir");
