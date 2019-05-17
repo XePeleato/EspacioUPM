@@ -57,6 +57,7 @@ public class TweetController implements Initializable {
     public void onClickComment(ActionEvent actionEvent){
         controller.replaceComponent("/CommentsPage.fxml");
     }
+
     public void onClickLike(ActionEvent actionEvent){
         pub.like(MainController.thisUser);
         controller.refresh();

@@ -5,11 +5,13 @@ import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +26,6 @@ public class LandingPageController implements Initializable {
     private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
     private static IDB_Usuario DB_user = DB_Main.getInstance();
     private static MainController controller = MainController.getInstance();
-
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
@@ -43,7 +44,6 @@ public class LandingPageController implements Initializable {
             try {
                 controller.setThisUser(usuario);
                 controller.replaceScene("/LoggedInPage.fxml");
-                //controller.replaceComponent("/TimelinePage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
@@ -57,8 +57,21 @@ public class LandingPageController implements Initializable {
         }
     }
 
+    public void onActionAlias(KeyEvent event) {
+        if(event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.ENTER) {
+            txtPass.requestFocus();
+        }
+    }
+
+    public void onActionPass(KeyEvent event) {
+        if(event.getCode() == KeyCode.UP)
+            txtAlias.requestFocus();
+        else if(event.getCode() == KeyCode.ENTER)
+            onBtnLoginClick(null);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        txtAlias.requestFocus();
     }
 }

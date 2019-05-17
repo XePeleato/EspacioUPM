@@ -1,6 +1,5 @@
 package espacioUPM.UI;
 
-import com.sun.tools.javac.Main;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Comentario;
@@ -41,6 +40,8 @@ public class ComentarioController {
     public void onClickSendComment(ActionEvent actionEvent) {
         String comentario = txtAreaComment.getText();
         DB_Pub.comentar(TweetController.getCurrentPub(), MainController.thisUser , comentario);
+
+        controller.refresh(); // FIXME: esto no furula
     }
 
 }
