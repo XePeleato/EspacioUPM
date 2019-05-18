@@ -2,7 +2,7 @@ package espacioUPM;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Usuario;
-import org.junit.Test;
+import org.junit.*;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -10,15 +10,30 @@ import static org.junit.Assert.assertNull;
 
 public class DBTest {
 
+    IDB_Usuario DB;
+    Usuario us;
 
-    @Test
-    public void TestCrearUsuario() {
-        IDB_Usuario DB = DB_Main.getInstance();
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {}
+
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {}
+
+    @Before
+    public void setUp() throws Exception {
+        DB = DB_Main.getInstance();
 
         byte[] testValues = new byte[] {(byte) 0xFF};
         DB.setUsuario("test", "test@test.con", testValues, testValues);
 
-        Usuario us = DB.getUsuario("test");
+        us = DB.getUsuario("test");
+    }
+
+    @After
+    public void tearDown() throws Exception {}
+
+    @Test
+    public void TestCrearUsuario() {
 
         assertNotNull(us);
         assertEquals(us.getAlias(), "test");
@@ -28,12 +43,6 @@ public class DBTest {
 
     @Test
     public void TestBorrarUsuario() {
-        IDB_Usuario DB = DB_Main.getInstance();
-
-        byte[] testValues = new byte[] {(byte) 0xFF};
-        DB.setUsuario("test", "test@test.con", testValues, testValues);
-
-        Usuario us = DB.getUsuario("test");
 
         DB.borrarUsuario(us);
 
