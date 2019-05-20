@@ -1,22 +1,18 @@
 package espacioUPM;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.Publicaciones.Comentario;
-import espacioUPM.Publicaciones.Publicacion;
-import espacioUPM.Publicaciones.Puntuacion;
+import espacioUPM.Database.*;
+import espacioUPM.Publicaciones.*;
 import org.junit.*;
-
-import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class DBTest {
 
-    IDB_Usuario DB;
+    DB_Main DB;
     Usuario us;
 
     @BeforeClass
@@ -30,21 +26,22 @@ public class DBTest {
         DB = DB_Main.getInstance();
 
         byte[] testValues = new byte[] {(byte) 0xFF};
-        DB.setUsuario("test", "test@test.con", testValues, testValues);
+        DB.setUsuario("test", "test@test.com", testValues, testValues);
+
 
         us = DB.getUsuario("test");
     }
 
     @After
-    public void tearDown() throws Exception {}
+    public void tearDown() throws Exception {
+        DB.borrarUsuario(us);
+    }
 
     @Test
     public void TestCrearUsuario() {
 
         assertNotNull(us);
         assertEquals(us.getAlias(), "test");
-
-        DB.borrarUsuario(us);
     }
 
     @Test
@@ -58,8 +55,9 @@ public class DBTest {
     }
 
     @Test
-    public void TestgetUsuario(String alias){
-        fail("No esta implementado todavia");
+    public void TestGetUsuario(String alias){
+        assertEquals(us.getAlias(), "test");
+
     }
 
     @Test
@@ -69,7 +67,9 @@ public class DBTest {
 
     @Test
     public void TestSetUsuario(String alias, String correo, String pass) {
-        fail("No esta implementado todavia");
+        DB.setUsuario("test", "test@test.com", pass);
+        assertEquals(us.getAlias(), "test");
+
     }
 
     @Test
@@ -78,55 +78,58 @@ public class DBTest {
     }
 
     @Test
-    public void TestSetPublicacion(Publicacion publi) {
+    public void TestSetPublicacion() {
+        Publicacion p = new PublicacionTexto("test","hola");
+        assertTrue(DB.setPublicacion(p));
+        DB.borrarPublicacion(p.getIDPublicacion());
+    }
+
+    @Test
+    public void TestGetPublicacion() {
+        Publicacion p = new PublicacionTexto("test","hola");
+        assertEquals("hola",((PublicacionTexto) p).getContenido());
+        DB.borrarPublicacion(p.getIDPublicacion());
+    }
+
+    @Test
+    public void TestGetPublicaciones() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestGetPublicacion(int id) {
+    public void TestGetComentarios() {
+        Publicacion p = new PublicacionTexto("test","hola");
+        p.comentar(us, "adios");
+        assertEquals("adios",p.getComentarios().get(0).getContenido());
+        DB.borrarPublicacion(p.getIDPublicacion());
+    }
+
+    @Test
+    public void TestGetLikes() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestGetPublicaciones(Usuario usuario) {
+    public void TestGetDislikes() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestGetComentarios(int publication_id) {
+    public void TestBorrarPublicacion() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestGetLikes(int publication_id) {
+    public void TestGetSeguidos() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestGetDislikes(int publication_id) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestBorrarPublicacion(int publi) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestGetSeguidos(Usuario usuario) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestgetSeguidores(Usuario usuario) {
+    public void TestgetSeguidores() {
         fail("No esta implementado todavia");
     }
     @Test
-    public void TestCambiarAlias(Usuario usuario, String aliasNuevo) {
-        fail("No esta implementado todavia");
-    }
-    @Test
-    public void TestBorrarUsuario(Usuario usuario) {
+    public void TestCambiarAlias() {
         fail("No esta implementado todavia");
     }
 
