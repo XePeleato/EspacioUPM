@@ -23,7 +23,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     private  DB_Main() {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:8080/twitter2?user=serv&password=Habichuelas73");
+            connection = DriverManager.getConnection("jdbc:mysql://79.156.62.156:22/twitter2?user=root&password=");
             System.out.println("[+] DB Conectada.");
         } catch (SQLException e) {
             e.printStackTrace();
