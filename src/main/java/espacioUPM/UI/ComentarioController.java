@@ -23,7 +23,6 @@ public class ComentarioController {
     @FXML
     public Button btnSendComment;
 
-    private final IDB_Publicacion DB_Pub = DB_Main.getInstance();
     private static final MainController controller = MainController.getInstance();
 
     public void initialize() {
@@ -39,8 +38,7 @@ public class ComentarioController {
 
     public void onClickSendComment(ActionEvent actionEvent) {
         String comentario = txtAreaComment.getText();
-        DB_Pub.comentar(TweetController.getCurrentPub(), controller.getThisUser() , comentario);
-
+        TweetController.getCurrentPub().comentar(controller.getThisUser(), comentario);
         controller.refresh(); // FIXME: esto no furula
     }
 

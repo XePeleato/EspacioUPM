@@ -2,6 +2,7 @@ package espacioUPM.Publicaciones;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.UI.MainController;
 import espacioUPM.Usuario;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     private int numDislikes;
 
     private static final IDB_Publicacion DB = DB_Main.getInstance();
+    private static final MainController controller = MainController.getInstance();
 
     public Publicacion(String autor) {
         IDPublicacion =  0; //DB.getNewID(); //FIXME: ya hablaremos sobre esto, pero de momento explota
@@ -42,7 +44,9 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void comentar(Usuario autor, String contenido) {
-        comentarios.add(new Comentario(autor.getAlias(),contenido,getIDPublicacion()));
+        Comentario comentario = new Comentario(autor.getAlias(),contenido,getIDPublicacion());
+        comentarios.add(comentario);
+        DB.comentar(this, controller.getThisUser(), comentario.getContenido());
     }
 
     public void like(Usuario usuario) {

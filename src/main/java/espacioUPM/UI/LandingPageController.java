@@ -24,13 +24,11 @@ public class LandingPageController implements Initializable {
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
-    private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
-    private static IDB_Usuario DB_user = DB_Main.getInstance();
     private static MainController controller = MainController.getInstance();
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = DB_user.getUsuario(txtAlias.getText());
+        Usuario usuario = Usuario.getUsuario(txtAlias.getText());
 
         if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
             controller.alert("Por favor rellene ambos campos.");
@@ -38,7 +36,7 @@ public class LandingPageController implements Initializable {
         else if (usuario == null) {
             controller.alert("El usuario especificado no existe.");
         }
-        else if (!DB_pass.comprobarPasswd(txtAlias.getText(), txtPass.getText())) {
+        else if (!usuario.comprobarPasswd(txtPass.getText())) {
             System.out.println("Contraseña incorrecta.");
             controller.alert("Contraseña incorrecta.");
         } else {

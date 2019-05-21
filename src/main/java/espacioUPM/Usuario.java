@@ -11,21 +11,28 @@ package espacioUPM;//
 
 
 import espacioUPM.Database.DB_Main;
+import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.Publicacion;
 
 public class Usuario {
     private String alias;
     private static final IDB_Publicacion DB = DB_Main.getInstance();
-
-    public void darseDeBaja() {
-
-    }
+    private static final IDB_Usuario DB_user = DB_Main.getInstance();
+    private static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
     public Usuario(String alias) {
         this.alias = alias;
     }
 
+    public static Usuario getUsuario(String alias) {
+        return DB_user.getUsuario(alias);
+    }
+
+    public boolean comprobarPasswd(String pass) {
+        return DB_pass.comprobarPasswd(alias, pass);
+    }
     public void escribirPublicacion() {
 
     }

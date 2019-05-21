@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    public static HostServices hostServices;
     private static App instance;
     private MainController controller;
-    public static HostServices hostServices;
     public App() {
         instance = this;
     }
