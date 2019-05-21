@@ -14,6 +14,8 @@ public class DBTest {
 
     DB_Main DB;
     Usuario us;
+    Publicacion p;
+    Comunidad comunidad;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}
@@ -27,49 +29,46 @@ public class DBTest {
 
         byte[] testValues = new byte[] {(byte) 0xFF};
         DB.setUsuario("test", "test@test.com", testValues, testValues);
-
-
         us = DB.getUsuario("test");
+        p = new PublicacionTexto("test","hola");
+        comunidad = new Comunidad("GrupoGuay",us);
     }
 
     @After
     public void tearDown() throws Exception {
         DB.borrarUsuario(us);
+        DB.borrarPublicacion(p.getIDPublicacion());
+        DB.borrarMiembroComunidad("GrupoGuay","test");
     }
 
     @Test
     public void TestCrearUsuario() {
-
         assertNotNull(us);
         assertEquals(us.getAlias(), "test");
     }
 
     @Test
     public void TestBorrarUsuario() {
-
         DB.borrarUsuario(us);
-
         Usuario us2 = DB.getUsuario("test");
-
         assertNull(us2);
     }
 
     @Test
     public void TestGetUsuario(){
         assertEquals(us.getAlias(), "test");
-
     }
 
     @Test
-    public void TestBuscarUsuario(String alias){
+    public void TestBuscarUsuario(){
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestSetUsuario(String alias, String correo, String pass) {
-        DB.setUsuario("test", "test@test.com", pass);
+    public void TestSetUsuario() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        DB.setUsuario("test", "test@test.com",testValues2, testValues2 );
         assertEquals(us.getAlias(), "test");
-
     }
 
     @Test
@@ -79,16 +78,12 @@ public class DBTest {
 
     @Test
     public void TestSetPublicacion() {
-        Publicacion p = new PublicacionTexto("test","hola");
         assertTrue(DB.setPublicacion(p));
-        DB.borrarPublicacion(p.getIDPublicacion());
     }
 
     @Test
     public void TestGetPublicacion() {
-        Publicacion p = new PublicacionTexto("test","hola");
         assertEquals("hola",((PublicacionTexto) p).getContenido());
-        DB.borrarPublicacion(p.getIDPublicacion());
     }
 
     @Test
@@ -98,111 +93,186 @@ public class DBTest {
 
     @Test
     public void TestGetComentarios() {
-        Publicacion p = new PublicacionTexto("test","hola");
-        p.comentar(us, "adios");
+        DB.comentar(p,us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
-        DB.borrarPublicacion(p.getIDPublicacion());
     }
 
     @Test
     public void TestGetLikes() {
-        fail("No esta implementado todavia");
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        assertEquals(1, DB.getLikes(p.getIDPublicacion()));
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
     }
 
     @Test
     public void TestGetDislikes() {
-        fail("No esta implementado todavia");
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
+        assertEquals(-1, DB.getDislikes(p.getIDPublicacion()));
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
     }
 
     @Test
     public void TestBorrarPublicacion() {
-        fail("No esta implementado todavia");
+        DB.borrarPublicacion(p.getIDPublicacion());
+        assertNull(p);
     }
 
     @Test
     public void TestGetSeguidos() {
-        fail("No esta implementado todavia");
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario usSeguido;
+        DB.setUsuario("usSeguido","usSeguido@test.com",testValues2,testValues2);
+        usSeguido = DB.getUsuario("usSeguido");
+        DB.seguir("test","usSeguido");
+        assertEquals("usSeguido", DB.getSeguidos(us)[0]);
+        DB.borrarUsuario(usSeguido);
     }
 
     @Test
     public void TestgetSeguidores() {
-        fail("No esta implementado todavia");
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario usSeguidor;
+        DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues2,testValues2);
+        usSeguidor = DB.getUsuario("usSeguidor");
+        DB.seguir("usSeguidor","test");
+        assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
+        DB.borrarUsuario(usSeguidor);
     }
     @Test
     public void TestCambiarAlias() {
+        DB.cambiarAlias(us, "aliasNuevo");
+        assertEquals(us,DB.getUsuario("aliasNuevo"));
+    }
+
+    @Test
+    public void TestBorrarMiembroComunidad() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        miembro = DB.getUsuario("miembro");
+
+        DB.insertarMiembroComunidad("GrupoGuay","miembro");
+        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
+        DB.borrarMiembroComunidad("GrupoGuay","miembro");
+        assertNull(DB.getMiembros(comunidad)[1]);
+        DB.borrarUsuario(miembro);
+
+    }
+
+    @Test
+    public void TestInsertarMiembroComunidad() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        miembro = DB.getUsuario("miembro");
+
+        DB.insertarMiembroComunidad("GrupoGuay","miembro");
+        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
+        assertEquals(miembro,DB.getMiembros(comunidad)[1]);
+        DB.borrarUsuario(miembro);
+    }
+
+    @Test
+    public void TestAceptarMiembroComunidad() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        miembro = DB.getUsuario("miembro");
+
+        DB.insertarMiembroComunidad("GrupoGuay","miembro");
+        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
+        assertEquals(miembro,DB.getMiembros(comunidad)[1]);
+        DB.borrarUsuario(miembro);
+    }
+    @Test
+    public void TestSeguir() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        us2 = DB.getUsuario("usSeguidor");
+        DB.seguir("us2","test");
+        assertEquals("us2",DB.getSeguidores(us)[0]);
+        DB.borrarUsuario(us2);
+    }
+
+    @Test
+    public void TestDejarDeSeguir() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        us2 = DB.getUsuario("usSeguidor");
+
+        DB.seguir("us2","test");
+        assertEquals("us2",DB.getSeguidores(us)[0]);
+        DB.borrarUsuario(us2);
+    }
+
+    @Test
+    public void TestEstaSiguiendo() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        us2 = DB.getUsuario("usSeguidor");
+
+        DB.seguir("us2","test");
+        assertTrue(DB.estaSiguiendo("us2","us"));
+        DB.borrarUsuario(us2);
+    }
+
+    @Test
+    public void TestPuntuar() {
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        assertEquals(1, DB.getLikes(p.getIDPublicacion()));
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+    }
+
+    @Test
+    public void TestGetPuntuacion() {
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        assertEquals(Puntuacion.LIKE, DB.getPuntuacion(us,p.getIDPublicacion()));
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+
+    }
+
+    @Test
+    public void TestHacerAdminComunidad() {
+        byte[] testValues2 = new byte[] {(byte) 0xFF};
+        Usuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        miembro = DB.getUsuario("miembro");
+
+        DB.insertarMiembroComunidad("GrupoGuay","miembro");
+        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
+        DB.hacerAdminComunidad("GrupoGuay","miembro");
+        assertEquals(miembro,DB.getMiembros(comunidad)[0]);
+        DB.borrarUsuario(miembro);
+        //NO ESTA BIEN HECHO
+    }
+
+    @Test
+    public void TestGetMiembros() {
+        assertEquals(us,DB.getMiembros(comunidad)[0]);
+    }
+
+    @Test
+    public void TestGetTimeline() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestBorrarMiembroComunidad(String id, String alias) {
+    public void TestBuscarComunidad() {
         fail("No esta implementado todavia");
     }
 
     @Test
-    public void TestInsertarMiembroComunidad(String id, String alias) {
-        fail("No esta implementado todavia");
+    public void TestComentar() {
+        DB.comentar(p,us,"adios");
+        assertEquals("adios",p.getComentarios().get(0).getContenido());
     }
 
     @Test
-    public void TestAceptarMiembroComunidad(String id, String alias) {
+    public void TestComprobarPasswd() {
         fail("No esta implementado todavia");
     }
-    @Test
-    public void TestSeguir(String seguidor, String seguido) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestDejarDeSeguir(String seguidor, String seguido) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestEstaSiguiendo(String aliasSeguidor, String aliasSeguido) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestPuntuar(Usuario usuario, int publi, Puntuacion puntuacion) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestGetPuntuacion(Usuario usuario, int publi) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestHacerAdminComunidad(String id, String alias) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestGetMiembros(Comunidad comunidad) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestGetTimeline(Comunidad comunidad) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestBuscarComunidad(String id) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestComentar(Publicacion publi, Usuario usuario, String contenido) {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
-    public void TestComprobarPasswd(String alias, String passwd) {
-        fail("No esta implementado todavia");
-    }
-
-
-
 
     }

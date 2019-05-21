@@ -67,7 +67,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while (rs.next())
                 ret.add(new Usuario(rs.getString("alias")));
 
-            return ret.toArray(Usuario[]::new);
+            return (Usuario[])ret.toArray();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,14 +175,13 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getInt("id")));
             }
-            return ret.toArray(Publicacion[]::new);
+            return (Publicacion[])ret.toArray();
         }
         catch (SQLException e) { e.printStackTrace(); }
 
         return null;
     }
 
-    //DONE
     public ArrayList<Comentario> getComentarios(int publication_id) {
         ArrayList<Comentario> ret = new ArrayList<>();
         try {
@@ -200,7 +199,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret;
     }
 
-    //DONE
     public int getLikes(int publication_id) {
         try{
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS numero FROM likes WHERE id_publicacion = ? AND valor = 1");
@@ -213,7 +211,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return 0;
     }
 
-    //DONE
     public int getDislikes(int publication_id) {
         try{
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS numero FROM likes WHERE id_publicacion = ? AND valor = -1");
@@ -250,7 +247,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
+        return (String[])ret.toArray();
     }
 
     public String[] getSeguidores(Usuario usuario) {
@@ -266,7 +263,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ret.toArray(String[]::new);
+        return (String[])ret.toArray();
     }
 
     public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
@@ -445,7 +442,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (Usuario[])ret.toArray();    }
+        return (Usuario[])ret.toArray();
+    }
 
     public Publicacion[] getTimeline(Comunidad comunidad) {
         ArrayList<Publicacion> ret = new ArrayList<>();
@@ -475,7 +473,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while (rs.next())
                 ret.add(new Comunidad(rs.getString("id"), new Usuario(rs.getString("fundador"))));
 
-            return ret.toArray(Comunidad[]::new);
+            return (Comunidad[])ret.toArray();
         } catch (SQLException e) {
             e.printStackTrace();
         }
