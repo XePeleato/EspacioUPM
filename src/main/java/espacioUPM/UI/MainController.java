@@ -22,8 +22,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    private static Stage mStage;
-    public static Usuario thisUser;
+    private static Stage stage;
+    private static Usuario thisUser;
     private static MainController instance;
 
     /* Principal */
@@ -50,7 +50,7 @@ public class MainController implements Initializable {
     }
 
     public void setStage(Stage stage) {
-        this.mStage = stage;
+        this.stage = stage;
     }
 
     public Usuario getThisUser() { return thisUser; }
@@ -58,19 +58,19 @@ public class MainController implements Initializable {
     public void setThisUser(Usuario value) { thisUser = value; }
 
     public void setTitle(String txt) {
-        mStage.setTitle(txt);
+        stage.setTitle(txt);
     }
 
     public Parent replaceScene(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
         Parent root = loader.load();
-        if (mStage == null) {
+        if (stage == null) {
             System.out.println("[-] Stage no cargada - Algo ha ido mal");
             return null;
         }
         Scene scene = new Scene(root);
-        mStage.setScene(scene);
-        mStage.sizeToScene();
+        stage.setScene(scene);
+        stage.sizeToScene();
         System.out.println("[+] Nueva escena: " + fxml);
         return root;
     }

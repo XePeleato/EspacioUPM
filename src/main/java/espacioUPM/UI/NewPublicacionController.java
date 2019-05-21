@@ -31,7 +31,7 @@ public class NewPublicacionController implements Initializable {
     public void onSendTweetClick(ActionEvent actionEvent)
     {
         String tweet = txtAreaTweet.getText();
-        Publicacion pub = PublicacionFactory.createPublicacion(MainController.thisUser.getAlias(), tweet);
+        Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
         DB.setPublicacion(pub);
 
         controller.replaceComponent("/TimelinePage.fxml");

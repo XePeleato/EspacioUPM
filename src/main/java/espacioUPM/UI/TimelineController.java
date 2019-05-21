@@ -27,12 +27,11 @@ public class TimelineController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         VBox root = new VBox();
-        LinkedList<Publicacion> publicaciones = new LinkedList<>();
         timelinePane.setContent(root);
 
         String[] seguidos = DB_user.getSeguidos(controller.getThisUser());
 
-        Publicacion[] nuestras = DB_publi.getPublicaciones(MainController.thisUser);
+        Publicacion[] nuestras = DB_publi.getPublicaciones(controller.getThisUser());
 
         TreeSet<Publicacion> total = new TreeSet<>(Arrays.asList(nuestras));
 

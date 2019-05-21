@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -18,10 +19,12 @@ import java.util.ResourceBundle;
 
 public class LandingPageController implements Initializable {
 
+    @FXML Button btnRegister;
+    @FXML Button btnLogin;
     @FXML
-    public TextField txtAlias;
+    TextField txtAlias;
     @FXML
-    public PasswordField txtPass;
+    PasswordField txtPass;
 
     private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
     private static IDB_Usuario DB_user = DB_Main.getInstance();
