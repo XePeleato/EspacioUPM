@@ -42,7 +42,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void comentar(Usuario autor, String contenido) {
-
+        comentarios.add(new Comentario(autor.getAlias(),contenido,getIDPublicacion()));
     }
 
     public void like(Usuario usuario) {

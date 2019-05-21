@@ -5,6 +5,7 @@ import espacioUPM.Publicaciones.*;
 import org.junit.*;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertNull;
@@ -88,12 +89,13 @@ public class DBTest {
 
     @Test
     public void TestGetPublicaciones() {
-        fail("No esta implementado todavia");
+        assertEquals("hola",((PublicacionTexto) p).getContenido());
     }
 
     @Test
     public void TestGetComentarios() {
         DB.comentar(p,us,"adios");
+        p.comentar(us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
     }
 
@@ -107,14 +109,14 @@ public class DBTest {
     @Test
     public void TestGetDislikes() {
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
-        assertEquals(-1, DB.getDislikes(p.getIDPublicacion()));
+        assertEquals(1, DB.getDislikes(p.getIDPublicacion()));
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
     }
 
     @Test
     public void TestBorrarPublicacion() {
         DB.borrarPublicacion(p.getIDPublicacion());
-        assertNull(p);
+        assertNull(DB.getPublicacion(p.getIDPublicacion()));
     }
 
     @Test
@@ -141,7 +143,7 @@ public class DBTest {
     @Test
     public void TestCambiarAlias() {
         DB.cambiarAlias(us, "aliasNuevo");
-        assertEquals(us,DB.getUsuario("aliasNuevo"));
+        assertEquals("aliasNuevo",DB.getUsuario("aliasNuevo").getAlias());
     }
 
     @Test
@@ -189,7 +191,8 @@ public class DBTest {
         byte[] testValues2 = new byte[] {(byte) 0xFF};
         Usuario us2;
         DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
-        us2 = DB.getUsuario("usSeguidor");
+        us2 = DB.getUsuario("us2");
+
         DB.seguir("us2","test");
         assertEquals("us2",DB.getSeguidores(us)[0]);
         DB.borrarUsuario(us2);
@@ -200,10 +203,11 @@ public class DBTest {
         byte[] testValues2 = new byte[] {(byte) 0xFF};
         Usuario us2;
         DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
-        us2 = DB.getUsuario("usSeguidor");
+        us2 = DB.getUsuario("us2");
 
         DB.seguir("us2","test");
-        assertEquals("us2",DB.getSeguidores(us)[0]);
+        DB.dejarDeSeguir("us2","test");
+        assertNull(DB.getSeguidores(us)[0]);
         DB.borrarUsuario(us2);
     }
 
@@ -215,7 +219,7 @@ public class DBTest {
         us2 = DB.getUsuario("usSeguidor");
 
         DB.seguir("us2","test");
-        assertTrue(DB.estaSiguiendo("us2","us"));
+        assertTrue(DB.estaSiguiendo("us2","test"));
         DB.borrarUsuario(us2);
     }
 
@@ -267,6 +271,7 @@ public class DBTest {
     @Test
     public void TestComentar() {
         DB.comentar(p,us,"adios");
+        p.comentar(us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
     }
 
