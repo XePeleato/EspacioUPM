@@ -19,7 +19,7 @@
         </rowConstraints>
          <children>
             <Label fx:id="txtUsername" text="Username" />
-            <Button fx:id="btnProfile" onAction="#onFollowClick" mnemonicParsing="false" text="Seguir" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Button fx:id="btnProfile" onAction="#onBtnProfileClick" mnemonicParsing="false" text="Ir al perfil" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

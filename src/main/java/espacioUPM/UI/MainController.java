@@ -39,7 +39,10 @@ public class MainController implements Initializable {
     static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
 
     static BorderPane sBorderPane;
+
     private static String currentComponent = "/TimelinePage.fxml";
+    private static Node currentComponentNode = null;
+    private static boolean isNodeActive = false;
 
     public MainController() {}
 
@@ -86,6 +89,7 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
             (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
             currentComponent = fxml;
+            isNodeActive = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,12 +98,15 @@ public class MainController implements Initializable {
 
     public void replaceComponent(Node node) {
         (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
-        //currentComponent = fxml;
+        currentComponentNode = node;
+        isNodeActive = true;
         System.out.println("[+] Nueva subescena.");
     }
 
     public void refresh() {
-        replaceComponent(currentComponent);
+        if(isNodeActive)
+            replaceComponent(currentComponentNode);
+        else replaceComponent(currentComponent);
     }
 
 
@@ -108,7 +115,9 @@ public class MainController implements Initializable {
     }
 
     public void onBtnProfileClick(ActionEvent actionEvent) {
-        replaceComponent("/PerfilPage.fxml");
+        Perfil p = new Perfil();
+        p.setPerfil(thisUser);
+        replaceComponent(p);
     }
 
     public void onBtnSearchClick(ActionEvent actionEvent) {

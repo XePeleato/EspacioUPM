@@ -23,16 +23,12 @@ public class SearchedUserController implements Initializable {
     private final static IDB_Usuario DB = DB_Main.getInstance();
     private final static MainController controller = MainController.getInstance();
     private final static String thisUser = controller.getThisUser().getAlias();
-    private boolean siguiendo;
 
     public SearchedUserController() {
     }
 
-    public void setSiguiendo(boolean value) { siguiendo = value; }
-    public boolean getSiguiendo() { return siguiendo; }
 
-
-    public void onFollowClick(ActionEvent actionEvent) {
+    public void onBtnProfileClick(ActionEvent actionEvent) {
         Perfil p = new Perfil();
         p.setPerfil(us);
 
@@ -40,9 +36,10 @@ public class SearchedUserController implements Initializable {
             System.out.println("BOOO");
             return;
         }
-        MainController.getInstance().replaceComponent(p);;
-        //controller.refresh();
+        MainController.getInstance().replaceComponent(p);
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

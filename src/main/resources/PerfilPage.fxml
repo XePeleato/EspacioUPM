@@ -27,7 +27,7 @@
       </VBox>
       <HBox prefHeight="199.0" prefWidth="255.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
          <children>
-            <Button fx:id="btnFollow" mnemonicParsing="false" text="Seguir" />
+            <Button fx:id="btnFollow" mnemonicParsing="false" text="Seguir" onAction="#onClickSeguir" />
          </children>
       </HBox>
       <ScrollPane fx:id="scrollPanePublis" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
