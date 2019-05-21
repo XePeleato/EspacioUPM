@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -89,6 +90,12 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         System.out.println("[+] Nueva subescena: " + fxml);
+    }
+
+    public void replaceComponent(Node node) {
+        (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
+        //currentComponent = fxml;
+        System.out.println("[+] Nueva subescena.");
     }
 
     public void refresh() {

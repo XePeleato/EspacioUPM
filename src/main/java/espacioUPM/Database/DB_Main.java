@@ -116,7 +116,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `publicaciones` VALUES (NULL, ?, ?, ?, ?)")) {
             pStmt.setString(1, publi.getAutor());
-            pStmt.setString(2, publi.getFecha().toString());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            pStmt.setString(2, publi.getFecha().format(formatter));
             if (publi instanceof PublicacionTexto) {
                 pStmt.setString(3, ((PublicacionTexto) publi).getContenido());
                 pStmt.setNull(4, Types.INTEGER);

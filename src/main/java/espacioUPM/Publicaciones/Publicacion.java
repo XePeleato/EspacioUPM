@@ -5,6 +5,7 @@ import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Usuario;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public abstract class Publicacion implements IPublicacion, Comparable {

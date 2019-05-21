@@ -16,7 +16,7 @@ public class SearchedUserController implements Initializable {
     @FXML
     Label txtUsername;
     @FXML
-    Button btnFollow;
+    Button btnProfile;
 
     public Usuario us;
 
@@ -33,11 +33,15 @@ public class SearchedUserController implements Initializable {
 
 
     public void onFollowClick(ActionEvent actionEvent) {
-        if(siguiendo)
-            DB.dejarDeSeguir(thisUser, us.getAlias());
-        else
-            DB.seguir(thisUser, us.getAlias());
-        controller.refresh();
+        Perfil p = new Perfil();
+        p.setPerfil(us);
+
+        if (us == null) {
+            System.out.println("BOOO");
+            return;
+        }
+        MainController.getInstance().replaceComponent(p);;
+        //controller.refresh();
     }
 
     @Override

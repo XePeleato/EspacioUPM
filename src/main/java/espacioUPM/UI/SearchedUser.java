@@ -31,14 +31,14 @@ public class SearchedUser extends VBox {
     public void setUsuario(Usuario us) {
         controller.us = us;
 
-        if (us.getAlias().equals(maincontroller.getThisUser().getAlias()))
-            controller.btnFollow.setDisable(true); // Nada de seguirnos a nosotros mismos
+        //if (us.getAlias().equals(MainController.thisUser.getAlias()))
+        //    controller.btnProfile.setDisable(true); // Nada de seguirnos a nosotros mismos
 
         controller.txtUsername.setText(us.getAlias());
-        controller.setSiguiendo(DB.estaSiguiendo(maincontroller.getThisUser().getAlias(), us.getAlias()));
+        controller.setSiguiendo(DB.estaSiguiendo(MainController.thisUser.getAlias(), us.getAlias()));
         if(controller.getSiguiendo())
-            controller.btnFollow.setText("Dejar de seguir");
+            controller.btnProfile.setText("Dejar de seguir");
         else
-            controller.btnFollow.setText("Seguir");
+            controller.btnProfile.setText("Seguir");
     }
 }
