@@ -108,7 +108,7 @@ public class MainController implements Initializable {
     }
 
     public void onBtnProfileClick(ActionEvent actionEvent) {
-        // TODO: aún no existe ProfilePage.fxml
+        replaceComponent("/PerfilPage.fxml");
     }
 
     public void onBtnSearchClick(ActionEvent actionEvent) {

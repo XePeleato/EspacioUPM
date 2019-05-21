@@ -16,6 +16,7 @@ public class Perfil extends GridPane {
     private PerfilController controller;
     private Node view;
     private static final IDB_Usuario DB = DB_Main.getInstance();
+    private static final MainController maincontroller = MainController.getInstance();
 
 
     public Perfil() {
@@ -33,12 +34,12 @@ public class Perfil extends GridPane {
 
     public void setPerfil(Usuario us) {
         controller.setUsuario(us);
-        controller.setEstaSiguiendo(DB.estaSiguiendo(MainController.thisUser.getAlias(), us.getAlias()));
+        controller.setEstaSiguiendo(DB.estaSiguiendo(maincontroller.getThisUser().getAlias(), us.getAlias()));
 
         controller.getBtnFollow().setText(controller.getEstaSiguiendo() ? "Dejar de seguir" : "Seguir");
         controller.getTxtUsername().setText(us.getAlias());
 
-        if (us.getAlias().equals(MainController.thisUser.getAlias()))
+        if (us.getAlias().equals(maincontroller.getThisUser().getAlias()))
             controller.getBtnFollow().setDisable(true);
 
         VBox root = new VBox();
