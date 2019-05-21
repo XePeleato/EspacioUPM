@@ -20,7 +20,6 @@ public class NewPublicacionController implements Initializable {
 
     public NewPublicacionController() {}
 
-    private static IDB_Publicacion DB = DB_Main.getInstance();
     private static MainController controller = MainController.getInstance();
     public void initialize() {
 
@@ -28,9 +27,9 @@ public class NewPublicacionController implements Initializable {
 
     public void onSendTweetClick(ActionEvent actionEvent)
     {
+
         String tweet = txtAreaTweet.getText();
         Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
-        DB.setPublicacion(pub);
 
         controller.replaceComponent("/TimelinePage.fxml");
     }

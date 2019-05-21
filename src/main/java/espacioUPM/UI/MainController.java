@@ -35,9 +35,6 @@ public class MainController implements Initializable {
     @FXML Button btnSettings;
     @FXML Button btnNew;
 
-    static final IDB_Usuario DB_user = DB_Main.getInstance();
-    static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
-
     static BorderPane sBorderPane;
 
     private static String currentComponent = "/TimelinePage.fxml";

@@ -15,7 +15,8 @@ import java.io.IOException;
 public class Perfil extends GridPane {
     private PerfilController controller;
     private Node view;
-    private static final IDB_Usuario DB = DB_Main.getInstance();
+
+
     private static final MainController maincontroller = MainController.getInstance();
 
 
@@ -34,7 +35,7 @@ public class Perfil extends GridPane {
 
     public void setPerfil(Usuario us) {
         controller.setUsuario(us);
-        controller.setEstaSiguiendo(DB.estaSiguiendo(maincontroller.getThisUser().getAlias(), us.getAlias()));
+        controller.setEstaSiguiendo(maincontroller.getThisUser().sigueA(us.getAlias()));
 
         controller.getBtnFollow().setText(controller.getEstaSiguiendo() ? "Dejar de seguir" : "Seguir");
         controller.getTxtUsername().setText(us.getAlias());
@@ -45,7 +46,7 @@ public class Perfil extends GridPane {
         VBox root = new VBox();
         controller.getScrollPanePublis().setContent(root);
 
-        Publicacion[] publis = ((IDB_Publicacion) DB).getPublicaciones(us);
+        Publicacion[] publis = us.obtenerPerfil();
 
         for (Publicacion p : publis) {
             Tweet t = new Tweet();

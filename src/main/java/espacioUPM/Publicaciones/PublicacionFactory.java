@@ -54,8 +54,9 @@ public class PublicacionFactory {
 	}
 
 	public static Publicacion createPublicacion(String autor, String data) {
+		Publicacion p = null;
 		if(isURL(data)) {
-			return new PublicacionEnlace(autor, data);
+			p =  new PublicacionEnlace(autor, data);
 		}
 		else {
             Publicacion ref = null;
@@ -63,9 +64,11 @@ public class PublicacionFactory {
                 ref = DB.getPublicacion(Integer.decode(data.split("/ref")[1]));
 
 			if(ref != null)
-				return new PublicacionReferencia(autor, ref);
+				p = new PublicacionReferencia(autor, ref);
 
-			return new PublicacionTexto(autor, data);
+			p = new PublicacionTexto(autor, data);
 		}
+		DB.setPublicacion(p);
+		return p;
 	}
 }
