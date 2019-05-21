@@ -16,16 +16,12 @@ import javafx.scene.layout.VBox;
 public class BuscadorController {
     @FXML
     public TextField txtFieldInput;
-    public Button btnSearch, btnAlias, btnUnirseComunidad;
+    public Button btnSearch;
     @FXML
     ScrollPane scrollPaneResult;
 
     private static final IDB_Usuario DB_Us = DB_Main.getInstance();
     private static final IDB_Comunidad DB_Com = DB_Main.getInstance();
-
-
-    public void initialize() {
-    }
 
     public void onClickSearch(ActionEvent actionEvent) {
         VBox root = new VBox();
@@ -51,14 +47,5 @@ public class BuscadorController {
                 root.getChildren().add(new Label(c.getNombre()));
 
 
-    }
-    public void onClickAlias(ActionEvent actionEvent) {
-
-    }
-    public void onClickUnirseComunidad(ActionEvent actionEvent) {
-       /* String comentario = txtArea.getText();
-        Comen tario comment = new Comentario(Main.mThisUser.getAlias(), comentario, publicacion.getIDPublicacion());
-        DBHandler.getDefault().comentar(publicacion,usuario,comment.getContenido());
-        */
     }
 }
