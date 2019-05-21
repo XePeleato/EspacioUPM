@@ -55,7 +55,7 @@ public class DBTest {
     }
 
     @Test
-    public void TestGetUsuario(String alias){
+    public void TestGetUsuario(){
         assertEquals(us.getAlias(), "test");
 
     }
