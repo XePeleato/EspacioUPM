@@ -67,7 +67,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while (rs.next())
                 ret.add(new Usuario(rs.getString("alias")));
 
-            return (Usuario[])ret.toArray();
+            return ret.toArray(Usuario[]::new); //no cambiar esto, que peta
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getInt("id")));
             }
-            return (Publicacion[])ret.toArray();
+            return ret.toArray(Publicacion[]::new); // dejad esto así, que hacer un cast peta
         }
         catch (SQLException e) { e.printStackTrace(); }
 
@@ -247,7 +247,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (String[])ret.toArray();
+        return ret.toArray(String[]::new); // dejad esto así, que hacer un cast peta
     }
 
     public String[] getSeguidores(Usuario usuario) {
@@ -263,7 +263,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (String[])ret.toArray();
+        return ret.toArray(String[]::new); // dejad esto así, que hacer un cast peta
     }
 
     public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
@@ -457,7 +457,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while(rs.next()) {
                 ret.add(getPublicacion(rs.getInt("pubid")));
             }
-            return (Publicacion[]) ret.toArray();
+            return ret.toArray(Publicacion[]::new); // dejad esto así, que hacer un cast peta
         }
         catch(SQLException e) { e.printStackTrace(); }
         return null;
@@ -473,7 +473,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             while (rs.next())
                 ret.add(new Comunidad(rs.getString("id"), new Usuario(rs.getString("fundador"))));
 
-            return (Comunidad[])ret.toArray();
+            return ret.toArray(Comunidad[]::new); //no cambiar esto, que peta
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -18,11 +18,9 @@ public class SearchedUserController implements Initializable {
     @FXML
     Button btnProfile;
 
-    public Usuario us;
+    private Usuario us;
 
-    private final static IDB_Usuario DB = DB_Main.getInstance();
     private final static MainController controller = MainController.getInstance();
-    private final static String thisUser = controller.getThisUser().getAlias();
 
     public SearchedUserController() {
     }
@@ -36,10 +34,10 @@ public class SearchedUserController implements Initializable {
             System.out.println("BOOO");
             return;
         }
-        MainController.getInstance().replaceComponent(p);
+        controller.replaceComponent(p);
     }
 
-
+    public void setUser(Usuario us) { this.us = us; }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

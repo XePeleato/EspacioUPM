@@ -19,8 +19,6 @@ public class TimelineController implements Initializable {
     @FXML
     ScrollPane timelinePane;
 
-    private static IDB_Usuario DB_user = DB_Main.getInstance();
-    private static IDB_Publicacion DB_publi = DB_Main.getInstance();
     private MainController controller = MainController.getInstance();
 
     @Override
@@ -28,14 +26,14 @@ public class TimelineController implements Initializable {
         VBox root = new VBox();
         timelinePane.setContent(root);
 
-        String[] seguidos = DB_user.getSeguidos(controller.getThisUser());
+        String[] seguidos = controller.getThisUser().getSeguidos();
 
-        Publicacion[] nuestras = DB_publi.getPublicaciones(controller.getThisUser());
+        Publicacion[] nuestras = controller.getThisUser().obtenerPerfil();
 
         TreeSet<Publicacion> total = new TreeSet<>(Arrays.asList(nuestras));
 
             for (String seguido : seguidos) {
-                Publicacion[] pubs = DB_publi.getPublicaciones(new Usuario(seguido));
+                Publicacion[] pubs = new Usuario(seguido).obtenerPerfil();
                 total.addAll(Arrays.asList(pubs));
             }
 

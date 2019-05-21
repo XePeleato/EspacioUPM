@@ -23,7 +23,10 @@ public class Comunidad implements IAdministracionComunidad {
 		DB.hacerAdminComunidad(id, fundador.getAlias());
 
 	}
-	
+
+	public static Comunidad[] buscar(String id) {
+		return DB.buscarComunidad(id);
+	}
 	public boolean unirse(String alias) {
 		return DB.insertarMiembroComunidad(nombre, alias);
 	}

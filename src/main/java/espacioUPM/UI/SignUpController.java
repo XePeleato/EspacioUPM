@@ -2,6 +2,7 @@ package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +13,6 @@ import java.io.IOException;
 
 public class SignUpController {
 
-    private static final IDB_Usuario DB = DB_Main.getInstance();
     private static MainController controller = MainController.getInstance();
 
     /* Registro */
@@ -38,7 +38,7 @@ public class SignUpController {
         password.isEmpty() || password2.isEmpty()) {
             controller.alert("Por favor, rellene todos los campos");
         }
-        else if(DB.getUsuario(alias) != null) {
+        else if(Usuario.getUsuario(alias) != null) {
             controller.alert("El alias pedido ya existe");
         }
         // TODO: comprobar el correo. Hay tema de conectarse con el servidor de la UPM
@@ -49,7 +49,7 @@ public class SignUpController {
             controller.alert("Las contraseñas no coinciden");
         }
         else {
-            DB.setUsuario(alias, correo, password);
+            Usuario.setUsuario(alias, correo, password);
             try {
                 controller.setTitle("EspacioUPM");
                 controller.replaceScene("/LandingPage.fxml");

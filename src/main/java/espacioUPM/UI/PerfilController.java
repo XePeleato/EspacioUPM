@@ -26,7 +26,6 @@ public class PerfilController implements Initializable {
     Label txtUsername;
 
     @FXML public ScrollPane scrollPanePublis;
-    private static final IDB_Usuario DB = DB_Main.getInstance();
     private static final MainController maincontroller = MainController.getInstance();
 
     private Usuario usuario;
@@ -51,9 +50,9 @@ public class PerfilController implements Initializable {
 
     public void onClickSeguir(ActionEvent actionEvent) {
         if (estaSiguiendo)
-            DB.dejarDeSeguir(maincontroller.getThisUser().getAlias(), usuario.getAlias());
+            maincontroller.getThisUser().dejarDeSeguir(usuario.getAlias());
         else
-            DB.seguir(maincontroller.getThisUser().getAlias(), usuario.getAlias());
+            maincontroller.getThisUser().seguir(usuario.getAlias());
         maincontroller.refresh();
     }
 
@@ -65,7 +64,7 @@ public class PerfilController implements Initializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        estaSiguiendo = DB.estaSiguiendo(maincontroller.getThisUser().getAlias(), usuario.getAlias());
+        estaSiguiendo = maincontroller.getThisUser().sigueA(usuario.getAlias());
         if(estaSiguiendo)
             btnFollow.setText("Dejar de seguir");
         else

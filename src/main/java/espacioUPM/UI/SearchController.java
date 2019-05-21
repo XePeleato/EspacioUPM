@@ -26,9 +26,9 @@ public class SearchController {
     public void onClickSearch(ActionEvent actionEvent) {
         VBox root = new VBox();
         scrollPaneResult.setContent(root);
-       String contenido = txtFieldInput.getText();
-        Usuario[] us = DB_Us.buscarUsuario(contenido);
-        Comunidad[] com = DB_Com.buscarComunidad(contenido);
+        String contenido = txtFieldInput.getText();
+        Usuario[] us = Usuario.buscar(contenido);
+        Comunidad[] com = Comunidad.buscar(contenido);
 
         root.getChildren().add(new Label("Usuarios: "));
 

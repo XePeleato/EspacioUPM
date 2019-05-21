@@ -11,10 +11,7 @@ import java.io.IOException;
 
 public class SearchedUser extends VBox {
     private SearchedUserController controller;
-    private static final MainController maincontroller = MainController.getInstance();
     private Node view;
-
-    private final static IDB_Usuario DB = DB_Main.getInstance();
 
     public SearchedUser() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SearchedUser.fxml"));
@@ -29,9 +26,7 @@ public class SearchedUser extends VBox {
     }
 
     public void setUsuario(Usuario us) {
-        controller.us = us;
+        controller.setUser(us);
         controller.txtUsername.setText(us.getAlias());
-        //if (us.getAlias().equals(MainController.thisUser.getAlias()))
-        //    controller.btnProfile.setDisable(true); // Nada de seguirnos a nosotros mismos
     }
 }

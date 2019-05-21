@@ -51,7 +51,7 @@ public class TweetController implements Initializable {
         // TODO: Ir al perfil del autor
     }
     public void onClickRetweet(ActionEvent actionEvent){
-        DB_Pub.setPublicacion(PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), "/ref" + pub.getIDPublicacion()));
+        pub.referenciar(controller.getThisUser());
     }
     public void onClickComment(ActionEvent actionEvent){
         controller.replaceComponent("/CommentsPage.fxml");
@@ -66,7 +66,7 @@ public class TweetController implements Initializable {
         controller.refresh();
     }
     public void onClickDelete(ActionEvent actionEvent){
-        DB_Pub.borrarPublicacion(pub.getIDPublicacion());
+        pub.borrar();
         controller.refresh();
     }
 }

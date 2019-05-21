@@ -30,9 +30,22 @@ public class Usuario {
         return DB_user.getUsuario(alias);
     }
 
+    public static void setUsuario(String alias, String correo, String passwd) {
+        DB_user.setUsuario(alias, correo, passwd);
+    }
+
+    public static Usuario[] buscar(String alias) {
+        return DB_user.buscarUsuario(alias);
+    }
+
     public boolean comprobarPasswd(String pass) {
         return DB_pass.comprobarPasswd(alias, pass);
     }
+
+    public boolean sigueA(String aliasSeguido) {
+        return DB_user.estaSiguiendo(this.alias, aliasSeguido);
+    }
+
     public void escribirPublicacion() {
 
     }
@@ -43,6 +56,22 @@ public class Usuario {
 
     public void visualizarTimeline() {
 
+    }
+
+    public void seguir(String aliasSeguido) {
+        DB_user.seguir(alias, aliasSeguido);
+    }
+
+    public void dejarDeSeguir(String aliasSeguido) {
+        DB_user.dejarDeSeguir(alias, aliasSeguido);
+    }
+
+    public String[] getSeguidos() {
+        return DB_user.getSeguidos(this);
+    }
+
+    public String[] getSeguidores() {
+        return DB_user.getSeguidores(this);
     }
 
     public Publicacion[] obtenerPerfil() {

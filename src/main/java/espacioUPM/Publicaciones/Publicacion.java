@@ -88,7 +88,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void referenciar(Usuario usuario) {
-
+        PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + IDPublicacion);
     }
 
     public int getIDPublicacion() {
@@ -120,5 +120,9 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         if (!(o instanceof Publicacion)) return -1;
 
         return ((Publicacion) o).getFecha().compareTo(fecha);
+    }
+
+    public void borrar() {
+        DB.borrarPublicacion(this.getIDPublicacion());
     }
 }
