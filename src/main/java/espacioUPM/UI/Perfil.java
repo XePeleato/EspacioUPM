@@ -20,7 +20,7 @@ public class Perfil extends GridPane {
 
 
     public Perfil() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/PerfilPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ProfilePage.fxml"));
         fxmlLoader.setControllerFactory(param -> controller = new PerfilController());
         try {
             view = fxmlLoader.load();

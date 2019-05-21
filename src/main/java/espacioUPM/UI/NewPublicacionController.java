@@ -4,12 +4,10 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
-import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;

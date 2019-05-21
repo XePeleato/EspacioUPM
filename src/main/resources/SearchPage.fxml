@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.BuscadorController">
+<AnchorPane prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SearchController">
    <children>
       <TextField fx:id="txtFieldInput" layoutX="300.0" layoutY="24.0" prefHeight="25.0" onAction="#onClickSearch" prefWidth="202.0" promptText="Usuario o comunidad a buscar..." />
       <Button fx:id="btnSearch" layoutX="505.0" layoutY="24.0" mnemonicParsing="false" onAction="#onClickSearch" text="Buscar" />

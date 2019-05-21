@@ -13,7 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class BuscadorController {
+public class SearchController {
     @FXML
     public TextField txtFieldInput;
     public Button btnSearch;

@@ -54,7 +54,7 @@ public class MainController implements Initializable {
     }
 
     public void setStage(Stage stage) {
-        this.stage = stage;
+        MainController.stage = stage;
     }
 
     public Usuario getThisUser() { return thisUser; }
@@ -121,7 +121,7 @@ public class MainController implements Initializable {
     }
 
     public void onBtnSearchClick(ActionEvent actionEvent) {
-        replaceComponent("/BuscadorPage.fxml");
+        replaceComponent("/SearchPage.fxml");
     }
 
     public void onBtnSettingsClick(ActionEvent actionEvent) {

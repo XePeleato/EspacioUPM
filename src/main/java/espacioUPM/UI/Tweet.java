@@ -1,12 +1,10 @@
 package espacioUPM.UI;
 
 import espacioUPM.App;
-import espacioUPM.Database.DB_Main;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionEnlace;
 import espacioUPM.Publicaciones.PublicacionReferencia;
 import espacioUPM.Publicaciones.PublicacionTexto;
-import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
@@ -25,7 +23,7 @@ public class Tweet extends VBox{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Tweet.fxml"));
         fxmlLoader.setControllerFactory(param -> controller = new TweetController());
         try {
-            view = (Node) fxmlLoader.load();
+            view = fxmlLoader.load();
 
         } catch (IOException ex) {
         }

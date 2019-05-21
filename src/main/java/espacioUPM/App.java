@@ -22,12 +22,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         DB_Main.getInstance(); // Conectamos con la BD
         hostServices = getHostServices();
+
         controller = MainController.getInstance();
         controller.setStage(primaryStage);
         controller.replaceScene("/LandingPage.fxml");
-        primaryStage.setTitle("EspacioUPM");
+        controller.setTitle("EspacioUPM");
+
         primaryStage.show();
     }
 }

@@ -5,14 +5,14 @@ import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,10 +21,8 @@ public class LandingPageController implements Initializable {
 
     @FXML Button btnRegister;
     @FXML Button btnLogin;
-    @FXML
-    TextField txtAlias;
-    @FXML
-    PasswordField txtPass;
+    @FXML TextField txtAlias;
+    @FXML PasswordField txtPass;
 
     private static IDB_PasswordHandler DB_pass = DB_Main.getInstance();
     private static IDB_Usuario DB_user = DB_Main.getInstance();
@@ -46,7 +44,7 @@ public class LandingPageController implements Initializable {
         } else {
             try {
                 controller.setThisUser(usuario);
-                controller.replaceScene("/LoggedInPage.fxml");
+                controller.replaceScene("/MainPage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
@@ -54,7 +52,7 @@ public class LandingPageController implements Initializable {
     public void onBtnRegisterClick(ActionEvent actionEvent) {
         try {
             controller.setTitle("Registro");
-            controller.replaceScene("/RegisterPage.fxml");
+            controller.replaceScene("/SignUpPage.fxml");
         }catch(NullPointerException | IOException e) {
             System.out.println("oops");
         }

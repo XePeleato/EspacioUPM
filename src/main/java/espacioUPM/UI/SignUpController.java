@@ -1,7 +1,6 @@
 package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

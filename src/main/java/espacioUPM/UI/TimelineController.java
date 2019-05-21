@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.TreeSet;
 

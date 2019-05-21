@@ -1,10 +1,7 @@
 package espacioUPM.UI;
 
-import com.sun.tools.javac.Main;
 import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,7 +38,7 @@ public class PerfilController implements Initializable {
     }
 
     public void setEstaSiguiendo(boolean estaSiguiendo) {
-        this.estaSiguiendo = estaSiguiendo;
+        PerfilController.estaSiguiendo = estaSiguiendo;
     }
 
     public boolean getEstaSiguiendo() {

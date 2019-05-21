@@ -10,9 +10,6 @@ public interface IDB_Publicacion {
 
 	Publicacion getPublicacion(int id);
 
-	//Publicacion getPublicacion(String cuerpo);
-
-
 	boolean setPublicacion(Publicacion publi);
 
 	Publicacion[] getPublicaciones(Usuario usuario);

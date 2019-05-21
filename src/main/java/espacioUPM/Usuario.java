@@ -15,32 +15,32 @@ import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 
 public class Usuario {
-	private String alias;
-	private static final IDB_Publicacion DB = DB_Main.getInstance();
+    private String alias;
+    private static final IDB_Publicacion DB = DB_Main.getInstance();
 
-	public void darseDeBaja() {
-	
-	}
-	
-	public Usuario(String alias) {
-	    this.alias = alias;
-	}
-	
-	public void escribirPublicacion() {
-	
-	}
-	public boolean borrarPublicacion(Publicacion publi) {
-	    return true;
-	}
+    public void darseDeBaja() {
+
+    }
+
+    public Usuario(String alias) {
+        this.alias = alias;
+    }
+
+    public void escribirPublicacion() {
+
+    }
+    public boolean borrarPublicacion(Publicacion publi) {
+        return true;
+    }
 
 
-	public void visualizarTimeline() {
-	
-	}
-	
-	public Publicacion[] obtenerPerfil() {
-		return DB.getPublicaciones(this);
-	}
+    public void visualizarTimeline() {
+
+    }
+
+    public Publicacion[] obtenerPerfil() {
+        return DB.getPublicaciones(this);
+    }
 
     public String getAlias() {
         return alias;
