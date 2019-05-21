@@ -54,9 +54,9 @@ public class PerfilController implements Initializable {
 
     public void onClickSeguir(ActionEvent actionEvent) {
         if (estaSiguiendo)
-            DB.dejarDeSeguir(MainController.thisUser.getAlias(), usuario.getAlias());
+            DB.dejarDeSeguir(MainController.getInstance().getThisUser().getAlias(), usuario.getAlias());
         else
-            DB.seguir(MainController.thisUser.getAlias(), usuario.getAlias());
+            DB.seguir(MainController.getInstance().getThisUser().getAlias(), usuario.getAlias());
     }
 
 
