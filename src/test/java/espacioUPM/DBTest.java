@@ -271,13 +271,13 @@ public class DBTest {
     @Test
     public void TestComentar() {
         DB.comentar(p,us,"adios");
-        p.comentar(us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
     }
 
     @Test
     public void TestComprobarPasswd() {
-        fail("No esta implementado todavia");
+        DB.setUsuario("test","miembro@test.com","pass");
+        DB.comprobarPasswd("test","pass");
     }
 
     }
