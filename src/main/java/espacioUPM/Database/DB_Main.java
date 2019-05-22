@@ -154,7 +154,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime date = LocalDateTime.parse(rs.getString("fecha"), formatter);
-                ArrayList<Comentario> comentarios = getComentarios(id);
+                ArrayList<IComentario> comentarios = getComentarios(id);
                 int numLikes = getLikes(id);
                 int numDislikes = getDislikes(id);
                 ret = PublicacionFactory.createPublicacion(id, cuerpo, autor, date, comentarios, numLikes, numDislikes);
@@ -182,8 +182,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
-    public ArrayList<Comentario> getComentarios(int publication_id) {
-        ArrayList<Comentario> ret = new ArrayList<>();
+    public ArrayList<IComentario> getComentarios(int publication_id) {
+        ArrayList<IComentario> ret = new ArrayList<>();
         try {
             PreparedStatement comentarios = connection.prepareStatement("SELECT * FROM comentarios WHERE id_publicacion = ?");
             comentarios.setInt(1, publication_id);

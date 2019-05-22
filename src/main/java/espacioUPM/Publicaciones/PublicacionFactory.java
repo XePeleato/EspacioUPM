@@ -35,7 +35,7 @@ public class PublicacionFactory {
 
 	public static Publicacion createPublicacion(int id, String data,
 										 String autor, LocalDateTime fecha,
-										 ArrayList<Comentario> comentarios,
+										 ArrayList<IComentario> comentarios,
 										 int numLikes, int numDislikes) {
 		if(isURL(data)) {
 			return new PublicacionEnlace(id, autor, fecha, comentarios, numLikes, numDislikes, data);

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class PublicacionTexto extends Publicacion {
 	private String txt;
 
-	PublicacionTexto(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios, int numLikes, int numDislikes, String txt) {
+	PublicacionTexto(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<IComentario> comentarios, int numLikes, int numDislikes, String txt) {
 		super(idPublicacion, autor, fecha, comentarios, numLikes, numDislikes);
 		this.txt = txt;
 	}
@@ -24,10 +24,6 @@ public class PublicacionTexto extends Publicacion {
 	public PublicacionTexto(String autor, String txt) {
 		super(autor);
 		this.txt = txt;
-	}
-	
-	public void mostrarPublicacion() {
-	
 	}
 
 	public String getContenido() {

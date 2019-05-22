@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Comentario;
+import espacioUPM.Publicaciones.IComentario;
 import espacioUPM.Publicaciones.Publicacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,9 +45,9 @@ public class ComentarioController {
         VBox root = new VBox();
         scrollPaneComments.setContent(root);
 
-        ArrayList<Comentario> comentarios = pub.getComentarios();
+        ArrayList<IComentario> comentarios = pub.getComentarios();
 
-        for(Comentario c : comentarios)
+        for(IComentario c : comentarios)
             root.getChildren().add(new Label(c.getAutor() + ":\n" + c.getContenido()));
     }
 

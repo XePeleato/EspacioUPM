@@ -12,7 +12,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     private int IDPublicacion;
     private String autor;
     private LocalDateTime fecha;
-    private ArrayList<Comentario> comentarios;
+    private ArrayList<IComentario> comentarios;
     private int numLikes;
     private int numDislikes;
 
@@ -28,7 +28,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         this.numDislikes = 0;
     }
 
-    public Publicacion(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<Comentario> comentarios,
+    public Publicacion(int idPublicacion, String autor, LocalDateTime fecha, ArrayList<IComentario> comentarios,
                        int numLikes, int numDislikes)
     {
         IDPublicacion = idPublicacion;
@@ -37,10 +37,6 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         this.comentarios = comentarios;
         this.numLikes = numLikes;
         this.numDislikes = numDislikes;
-    }
-
-    public void verComentarios() {
-
     }
 
     public void comentar(Usuario autor, String contenido) {
@@ -83,10 +79,6 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         }
     }
 
-    public void mostrarPublicacion() {
-
-    }
-
     public void referenciar(Usuario usuario) {
         PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + IDPublicacion);
     }
@@ -103,7 +95,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         return fecha;
     }
 
-    public ArrayList<Comentario> getComentarios() {
+    public ArrayList<IComentario> getComentarios() {
         return comentarios;
     }
 
