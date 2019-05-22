@@ -17,6 +17,7 @@ import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.Publicacion;
 
 public class Usuario {
+
     private String alias;
     private static final IDB_Publicacion DB = DB_Main.getInstance();
     private static final IDB_Usuario DB_user = DB_Main.getInstance();

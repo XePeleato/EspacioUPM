@@ -47,10 +47,14 @@ public class PerfilController implements Initializable {
     }
 
     public void onClickSeguir(ActionEvent actionEvent) {
-        if (estaSiguiendo)
+        if (estaSiguiendo) {
             maincontroller.getThisUser().dejarDeSeguir(usuario.getAlias());
-        else
+            btnFollow.setText("Seguir");
+        }
+        else {
             maincontroller.getThisUser().seguir(usuario.getAlias());
+            btnFollow.setText("Dejar de seguir");
+        }
         maincontrollerScene.refresh();
     }
 

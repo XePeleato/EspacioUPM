@@ -45,7 +45,7 @@ public class TweetController implements Initializable {
     }
 
     public void onClickUsername(MouseEvent mouseEvent){
-        String autor = txtUsername.getText();
+        String autor = txtUsername.getText().split("@")[1];
         Perfil p = new Perfil();
         p.setPerfil(Usuario.getUsuario(autor));
         controllerScene.replaceComponent(p);

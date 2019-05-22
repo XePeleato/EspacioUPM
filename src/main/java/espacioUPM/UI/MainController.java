@@ -93,9 +93,9 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
     }
 
     public void replaceComponent(Node node) {
-        (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
         currentComponentNode = node;
         isNodeActive = true;
+        (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
         System.out.println("[+] Nueva subescena.");
     }
 
