@@ -21,7 +21,6 @@ public class Comunidad implements IAdministracionComunidad {
 	public Comunidad(String id, Usuario fundador) {
 		nombre = id;
 		DB.hacerAdminComunidad(id, fundador.getAlias());
-
 	}
 
 	public static Comunidad[] buscar(String id) {

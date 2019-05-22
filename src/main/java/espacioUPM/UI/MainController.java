@@ -109,6 +109,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
 
 
     public void onBtnTimelineClick(ActionEvent actionEvent) {
+        TimelineController.setNumPagina(0);
         replaceComponent("/TimelinePage.fxml");
     }
 
