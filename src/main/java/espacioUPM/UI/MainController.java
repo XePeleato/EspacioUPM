@@ -134,7 +134,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
     }
 
     public void onBtnSettingsClick(ActionEvent actionEvent) {
-        // TODO: aún no existe SettingsPage.fxml
+        replaceComponent("/SettingsPage.fxml");
     }
 
     public void onBtnNewClick(ActionEvent actionEvent) {

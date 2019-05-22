@@ -3,23 +3,71 @@ package espacioUPM.UI;
 import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class SettingsController {
 
     @FXML Button btnCambiarAlias, btnLogout, btnBorrarDatos, btnBaja;
-    @FXML TextField txtAliasNuevo;
+    @FXML HBox actionBox, respMessageBox;
+
     private static IMainControllerUtils controller = MainController.getInstance();
     private static IMainControllerScene controllerScene = MainController.getInstance();
 
     public void onClickCambiarAlias(ActionEvent actionEvent) {
-        if(txtAliasNuevo.getText().isEmpty())
-            controller.alert("Introduce un alias");
-        else if(!controller.getThisUser().cambiarAlias(txtAliasNuevo.getText()))
-            controller.alert("El alias elegido ya está en uso");
+        actionBox.getChildren().clear();
+        respMessageBox.getChildren().clear();
+
+        TextField alias = new TextField();
+        alias.setPrefWidth(200);
+        alias.setPromptText("Nuevo alias");
+        alias.getStylesheets().add("/fextile.css");
+        alias.getStyleClass().add("text-field");
+
+        Button btnAccept = new Button("Aceptar");
+        btnAccept.getStylesheets().add("/fextile.css");
+        btnAccept.getStyleClass().add("btn-success");
+        btnAccept.setOnAction(this::onCambiarAlias);
+
+        actionBox.setAlignment(Pos.CENTER);
+        actionBox.getChildren().add(alias);
+        actionBox.getChildren().add(btnAccept);
+    }
+
+
+    public void onCambiarAlias(ActionEvent actionEvent) {
+        respMessageBox.getChildren().clear();
+
+        TextField alias = (TextField) actionBox.getChildren().get(0);
+
+        if (alias.getText().equals("")) {
+            Label responseLabel = new Label("Por favor introduce un alias");
+            responseLabel.getStylesheets().add("/fextile.css");
+            responseLabel.getStyleClass().add("alert-warning");
+
+            HBox txtBox = new HBox();
+            txtBox.getChildren().add(responseLabel);
+            respMessageBox.getChildren().add(txtBox);
+            return;
+        }
+
+        boolean ret = MainController.getInstance().getThisUser().cambiarAlias(alias.getText());
+
+        Label responseLabel = new Label(ret ? "Alias cambiado con éxito" : "Por favor, elige otro alias");
+        responseLabel.getStylesheets().add("/fextile.css");
+        responseLabel.getStyleClass().add(ret ? "alert-success" : "alert-danger");
+
+        HBox txtBox = new HBox();
+        txtBox.getChildren().add(responseLabel);
+        respMessageBox.getChildren().add(txtBox);
     }
 
     public void onClickLogout(ActionEvent actionEvent) {
@@ -31,7 +79,15 @@ public class SettingsController {
     }
 
     public void onClickBorrarDatos(ActionEvent actionEvent) {
+        actionBox.getChildren().clear();
+        respMessageBox.getChildren().clear();
+
         controller.getThisUser().borrarDatos();
+
+        Label responseLabel = new Label("Datos borrados");
+        responseLabel.getStylesheets().add("/fextile.css");
+        responseLabel.getStyleClass().add("alert-success");
+        respMessageBox.getChildren().add(responseLabel);
     }
 
     public void onClickDarseDeBaja(ActionEvent actionEvent) {

@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="espacioUPM.UI.SettingsController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="262.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="355.0" minHeight="10.0" prefHeight="354.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SettingsController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#onClickLogout" styleClass="btn-default" stylesheets="@fextile.css" text="Cerrar sesión" />
+            <Button fx:id="btnCambiarAlias" mnemonicParsing="false" onAction="#onClickCambiarAlias" styleClass="btn-default" stylesheets="@fextile.css" text="Cambiar alias" />
+            <Button fx:id="btnBorrarDatos" mnemonicParsing="false" onAction="#onClickBorrarDatos" styleClass="btn-warning" stylesheets="@fextile.css" text="Borrar datos" />
+            <Button fx:id="btnBaja" mnemonicParsing="false" onAction="#onClickDarseDeBaja" styleClass="btn-danger" stylesheets="@fextile.css" text="Darse de baja" />
+         </children>
+      </HBox>
+      <GridPane prefHeight="279.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="243.0" minHeight="10.0" prefHeight="238.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox fx:id="respMessageBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+            <VBox fx:id="actionBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
    </children>
-</GridPane>
+</VBox>
