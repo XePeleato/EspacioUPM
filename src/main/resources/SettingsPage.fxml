@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SettingsController">
+   <children>
+      <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#onClickLogout" styleClass="btn-default" stylesheets="@fextile.css" text="Cerrar sesion" />
+      <Button fx:id="btnCambiarAlias" mnemonicParsing="false" onAction="#onClickCambiarAlias" styleClass="btn-default" stylesheets="@fextile.css" text="Cambiar alias" />
+      <Button fx:id="btnBorrarDatos" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onClickBorrarDatos" styleClass="btn-warning" stylesheets="@fextile.css" text="Borrar datos" />
+      <Button mnemonicParsing="false" styleClass="btn-danger" stylesheets="@fextile.css" text="Darse de baja" />
+   </children>
+</HBox>
