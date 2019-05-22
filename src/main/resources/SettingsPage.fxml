@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="espacioUPM.UI.SettingsController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="10.0" prefWidth="262.0" />
   </columnConstraints>

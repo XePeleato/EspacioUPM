@@ -60,7 +60,7 @@ public class PerfilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        txtUsername.requestFocus();
     }
 
     public void setUsuario(Usuario usuario) {

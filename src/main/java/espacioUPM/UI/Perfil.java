@@ -39,7 +39,7 @@ public class Perfil extends GridPane {
         controller.setEstaSiguiendo(maincontroller.getThisUser().sigueA(us.getAlias()));
 
         controller.getBtnFollow().setText(controller.getEstaSiguiendo() ? "Dejar de seguir" : "Seguir");
-        controller.getTxtUsername().setText(us.getAlias());
+        controller.getTxtUsername().setText("@" + us.getAlias());
 
         if (us.getAlias().equals(maincontroller.getThisUser().getAlias()))
             controller.getBtnFollow().setDisable(true);

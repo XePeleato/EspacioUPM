@@ -44,7 +44,7 @@ public class Tweet extends VBox{
         if (p instanceof PublicacionReferencia) {
             controller.txtRetweet.setText("Retwitteado por " + p.getAutor());
             Publicacion pubReferenciada = ((PublicacionReferencia)p).getPublicacionRef();
-            controller.txtUsername.setText(pubReferenciada.getAutor());
+            controller.txtUsername.setText("@" + pubReferenciada.getAutor());
             controller.txtDate.setText(pubReferenciada.getFecha().toString());
             if (pubReferenciada instanceof PublicacionTexto)
                 controller.borderPaneTweet.setCenter(new Label(((PublicacionTexto) pubReferenciada).getContenido()));

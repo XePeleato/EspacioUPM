@@ -44,6 +44,8 @@ public class TimelineController implements Initializable {
 
         VBox root = new VBox();
         final ProgressBar progressBar = new ProgressBar();
+        btnPaginaAnt.setDisable(true);
+        btnPaginaSig.setDisable(true);
         //root.setPrefSize(timelinePane.getWidth(), timelinePane.getHeight());
         root.setAlignment(Pos.CENTER);
         root.getChildren().add(progressBar);
@@ -90,8 +92,10 @@ public class TimelineController implements Initializable {
 
                if (numPagina == 0)
                    btnPaginaAnt.setDisable(true);
+               else btnPaginaAnt.setDisable(false);
                if (total.size() < 50 * (numPagina + 1))
                    btnPaginaSig.setDisable(true);
+               else btnPaginaSig.setDisable(false);
         });
         new Thread(initTask).start();
 

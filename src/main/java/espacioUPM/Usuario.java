@@ -74,4 +74,14 @@ public class Usuario {
     public boolean cambiarAlias(String aliasNuevo) {
         return DB_user.cambiarAlias(this, aliasNuevo);
     }
+
+    public void borrarDatos() {
+        for(IPublicacion publi : DB.getPublicaciones(this)) {
+            DB.borrarPublicacion(publi.getIDPublicacion());
+        }
+    }
+
+    public void borrar() {
+        DB_user.borrarUsuario(this);
+    }
 }
