@@ -2,6 +2,7 @@ package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
 import espacioUPM.Usuario;
@@ -22,7 +23,7 @@ public class TweetController implements Initializable {
     @FXML Label txtUsername, txtDate, txtRetweet;
     @FXML BorderPane borderPaneTweet;
 
-    private Publicacion pub;
+    private IPublicacion pub;
 
     private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
     private static final IMainControllerUtils controller = MainController.getInstance();
@@ -33,14 +34,14 @@ public class TweetController implements Initializable {
 
     }
 
-    public void setPub(Publicacion p) {
+    public void setPub(IPublicacion p) {
         pub = p;
         if(!pub.getAutor().equals(controller.getThisUser().getAlias())) {
             btnDelete.setDisable(true);
         }
     }
 
-    public Publicacion getCurrentPub() {
+    public IPublicacion getCurrentPub() {
         return pub;
     }
 

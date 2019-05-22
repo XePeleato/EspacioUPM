@@ -1,10 +1,7 @@
 package espacioUPM.UI;
 
 import espacioUPM.App;
-import espacioUPM.Publicaciones.Publicacion;
-import espacioUPM.Publicaciones.PublicacionEnlace;
-import espacioUPM.Publicaciones.PublicacionReferencia;
-import espacioUPM.Publicaciones.PublicacionTexto;
+import espacioUPM.Publicaciones.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
@@ -31,7 +28,7 @@ public class Tweet extends VBox{
         getChildren().add(view);
     }
 
-    public void setTweet(Publicacion p) {
+    public void setTweet(IPublicacion p) {
         controller.setPub(p);
         controller.txtUsername.setText("@" + p.getAutor());
         controller.txtRetweet.setText("");

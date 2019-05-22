@@ -14,7 +14,7 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.Publicaciones.Publicacion;
+import espacioUPM.Publicaciones.IPublicacion;
 
 public class Usuario {
 
@@ -47,18 +47,6 @@ public class Usuario {
         return DB_user.estaSiguiendo(this.alias, aliasSeguido);
     }
 
-    public void escribirPublicacion() {
-
-    }
-    public boolean borrarPublicacion(Publicacion publi) {
-        return true;
-    }
-
-
-    public void visualizarTimeline() {
-
-    }
-
     public void seguir(String aliasSeguido) {
         DB_user.seguir(alias, aliasSeguido);
     }
@@ -75,7 +63,7 @@ public class Usuario {
         return DB_user.getSeguidores(this);
     }
 
-    public Publicacion[] obtenerPerfil() {
+    public IPublicacion[] obtenerPerfil() {
         return DB.getPublicaciones(this);
     }
 

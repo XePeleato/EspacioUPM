@@ -16,15 +16,17 @@ public interface IPublicacion {
 	
 	void referenciar(Usuario usuario);
 
-	public int getIDPublicacion();
+	int getIDPublicacion();
 
-	public String getAutor();
+	String getAutor();
 
-	public LocalDateTime getFecha();
+	LocalDateTime getFecha();
 
-	public ArrayList<IComentario> getComentarios();
+	ArrayList<IComentario> getComentarios();
 
-	public int getNumLikes();
+	void borrar();
 
-	public int getNumDislikes();
+	int getNumLikes();
+
+	int getNumDislikes();
 }

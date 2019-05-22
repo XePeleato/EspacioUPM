@@ -4,6 +4,7 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Comentario;
 import espacioUPM.Publicaciones.IComentario;
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,7 @@ public class ComentarioController {
     @FXML
     public Button btnSendComment;
 
-    private Publicacion pub;
+    private IPublicacion pub;
 
     private static final IMainControllerUtils controller = MainController.getInstance();
     private static final IMainControllerScene controllerScene = MainController.getInstance();
@@ -39,7 +40,7 @@ public class ComentarioController {
         comentarioController.setPub(pub);
     }
 
-    public void setPub(Publicacion p) {
+    public void setPub(IPublicacion p) {
         pub = p;
 
         VBox root = new VBox();

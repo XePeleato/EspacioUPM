@@ -1,18 +1,17 @@
 package espacioUPM.Database;
 
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuario;
 
 public interface IDB_Publicacion {
 
-	String getNewID();
-
 	Publicacion getPublicacion(int id);
 
 	boolean setPublicacion(Publicacion publi);
 
-	Publicacion[] getPublicaciones(Usuario usuario);
+	IPublicacion[] getPublicaciones(Usuario usuario);
 	
 	void borrarPublicacion(int publi);
 	

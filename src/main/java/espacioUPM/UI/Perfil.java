@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 import javafx.fxml.FXMLLoader;
@@ -46,9 +47,9 @@ public class Perfil extends GridPane {
         VBox root = new VBox();
         controller.getScrollPanePublis().setContent(root);
 
-        Publicacion[] publis = us.obtenerPerfil();
+        IPublicacion[] publis = us.obtenerPerfil();
 
-        for (Publicacion p : publis) {
+        for (IPublicacion p : publis) {
             Tweet t = new Tweet();
             t.setTweet(p);
             root.getChildren().add(t);

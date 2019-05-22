@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 import javafx.fxml.FXML;
@@ -42,8 +43,8 @@ public class TimelineController implements Initializable {
         ArrayList<Publicacion> total = new ArrayList<>();
 
             for (String seguido : seguidos) {
-                Publicacion[] pubs = new Usuario(seguido).obtenerPerfil();
-                total.addAll(Arrays.asList(pubs));
+                IPublicacion[] pubs = new Usuario(seguido).obtenerPerfil();
+                total.addAll(Arrays.asList((Publicacion[])pubs));
             }
 
         for (int i = 50*numPagina; i < 50*(numPagina + 1) && i < total.size(); i++) {
