@@ -22,7 +22,7 @@ public class TweetController implements Initializable {
     @FXML Label txtUsername, txtDate, txtRetweet;
     @FXML BorderPane borderPaneTweet;
 
-    private static Publicacion pub;
+    private Publicacion pub;
 
     private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
     private static final IMainControllerUtils controller = MainController.getInstance();
@@ -40,7 +40,7 @@ public class TweetController implements Initializable {
         }
     }
 
-    public static Publicacion getCurrentPub() {
+    public Publicacion getCurrentPub() {
         return pub;
     }
 
@@ -55,7 +55,8 @@ public class TweetController implements Initializable {
         pub.referenciar(controller.getThisUser());
     }
     public void onClickComment(ActionEvent actionEvent){
-        controllerScene.replaceComponent("/CommentsPage.fxml");
+        ComentarioController comentarioController = controllerScene.replaceComponent("/CommentsPage.fxml");
+        comentarioController.setPub(pub);
     }
 
     public void onClickLike(ActionEvent actionEvent){

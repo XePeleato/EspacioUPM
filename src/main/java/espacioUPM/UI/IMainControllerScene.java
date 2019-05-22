@@ -14,9 +14,9 @@ public interface IMainControllerScene {
 
     void setStage(Stage stage);
 
-    void replaceComponent(String fxml);
+    <T> T replaceComponent(String fxml);
 
     void replaceComponent(Node node);
 
-    void refresh();
+    <T> T refresh();
 }

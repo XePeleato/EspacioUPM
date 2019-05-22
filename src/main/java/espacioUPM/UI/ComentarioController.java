@@ -23,24 +23,31 @@ public class ComentarioController {
     @FXML
     public Button btnSendComment;
 
+    private Publicacion pub;
+
     private static final IMainControllerUtils controller = MainController.getInstance();
     private static final IMainControllerScene controllerScene = MainController.getInstance();
 
     public void initialize() {
+    }
+
+    public void onClickSendComment(ActionEvent actionEvent) {
+        String comentario = txtAreaComment.getText();
+        pub.comentar(controller.getThisUser(), comentario);
+        ComentarioController comentarioController = controllerScene.refresh();
+        comentarioController.setPub(pub);
+    }
+
+    public void setPub(Publicacion p) {
+        pub = p;
+
         VBox root = new VBox();
         scrollPaneComments.setContent(root);
-        Publicacion pub = TweetController.getCurrentPub();
 
         ArrayList<Comentario> comentarios = pub.getComentarios();
 
         for(Comentario c : comentarios)
             root.getChildren().add(new Label(c.getAutor() + ":\n" + c.getContenido()));
-    }
-
-    public void onClickSendComment(ActionEvent actionEvent) {
-        String comentario = txtAreaComment.getText();
-        TweetController.getCurrentPub().comentar(controller.getThisUser(), comentario);
-        controllerScene.refresh(); // FIXME: esto no furula
     }
 
 }

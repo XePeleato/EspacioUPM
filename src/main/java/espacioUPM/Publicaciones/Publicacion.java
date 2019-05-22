@@ -44,42 +44,42 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void comentar(Usuario autor, String contenido) {
-        Comentario comentario = new Comentario(autor.getAlias(),contenido,getIDPublicacion());
+        Comentario comentario = new Comentario(autor.getAlias(),contenido, IDPublicacion);
         comentarios.add(comentario);
         DB.comentar(this, controller.getThisUser(), comentario.getContenido());
     }
 
     public void like(Usuario usuario) {
-        Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this.getIDPublicacion());
+        Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, IDPublicacion);
         if(puntuacionAnterior == Puntuacion.NEUTRO) {
             numLikes++;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.LIKE);
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.LIKE);
         }
         else if(puntuacionAnterior == Puntuacion.LIKE) {
             numLikes--;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.NEUTRO); // Si ya había like este se quita
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.NEUTRO); // Si ya había like este se quita
         }
         else {
             numDislikes--;
             numLikes++;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.LIKE);
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.LIKE);
         }
     }
 
     public void dislike(Usuario usuario) {
-        Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, this.getIDPublicacion());
+        Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, IDPublicacion);
         if(puntuacionAnterior == Puntuacion.NEUTRO) {
             numDislikes++;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.DISLIKE);
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.DISLIKE);
         }
         else if(puntuacionAnterior == Puntuacion.DISLIKE) {
             numDislikes--;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.NEUTRO); // Si ya había like este se quita
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.NEUTRO); // Si ya había like este se quita
         }
         else {
             numDislikes++;
             numLikes--;
-            DB.puntuar(usuario, this.getIDPublicacion(), Puntuacion.DISLIKE);
+            DB.puntuar(usuario, IDPublicacion, Puntuacion.DISLIKE);
         }
     }
 
@@ -123,6 +123,6 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void borrar() {
-        DB.borrarPublicacion(this.getIDPublicacion());
+        DB.borrarPublicacion(IDPublicacion);
     }
 }

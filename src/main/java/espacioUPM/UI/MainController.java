@@ -1,8 +1,5 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_PasswordHandler;
-import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,16 +78,18 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         alert.show();
     }
 
-    public void replaceComponent(String fxml) {
+    public <T> T replaceComponent(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
             (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
             currentComponent = fxml;
             isNodeActive = false;
+            System.out.println("[+] Nueva subescena: " + fxml);
+            return loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("[+] Nueva subescena: " + fxml);
+        return null;
     }
 
     public void replaceComponent(Node node) {
@@ -100,10 +99,12 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         System.out.println("[+] Nueva subescena.");
     }
 
-    public void refresh() {
+    public <T> T refresh() {
         if(isNodeActive)
             replaceComponent(currentComponentNode);
-        else replaceComponent(currentComponent);
+        else return replaceComponent(currentComponent);
+
+        return null;
     }
 
 
