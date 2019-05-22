@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -67,6 +69,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
             return null;
         }
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("/fextile.css");
         stage.setScene(scene);
         stage.sizeToScene();
         System.out.println("[+] Nueva escena: " + fxml);
@@ -81,7 +84,11 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
     public <T> T replaceComponent(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource(fxml));
-            (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
+            //(borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(loader.load());
+            HBox root = (HBox)(borderPaneMain != null ? borderPaneMain : sBorderPane).getCenter();
+            root.getChildren().clear();
+            root.getChildren().add(loader.load());
+
             currentComponent = fxml;
             isNodeActive = false;
             System.out.println("[+] Nueva subescena: " + fxml);
@@ -95,7 +102,10 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
     public void replaceComponent(Node node) {
         currentComponentNode = node;
         isNodeActive = true;
-        (borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
+        HBox root = (HBox) (borderPaneMain != null ? borderPaneMain : sBorderPane).getCenter();
+        //(borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
+        root.getChildren().clear();
+        root.getChildren().add(node);
         System.out.println("[+] Nueva subescena.");
     }
 

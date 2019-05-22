@@ -38,11 +38,11 @@ public class Perfil extends GridPane {
         controller.setUsuario(us);
         controller.setEstaSiguiendo(maincontroller.getThisUser().sigueA(us.getAlias()));
 
-        controller.getBtnFollow().setText(controller.getEstaSiguiendo() ? "Dejar de seguir" : "Seguir");
+        controller.getBtnGotoProfile().setText(controller.getEstaSiguiendo() ? "Dejar de seguir" : "Seguir");
         controller.getTxtUsername().setText(us.getAlias());
 
         if (us.getAlias().equals(maincontroller.getThisUser().getAlias()))
-            controller.getBtnFollow().setDisable(true);
+            controller.getBtnGotoProfile().setDisable(true);
 
         VBox root = new VBox();
         controller.getScrollPanePublis().setContent(root);

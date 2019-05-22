@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.MainController">
+
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.MainController">
    <bottom>
-      <HBox prefHeight="31.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="31.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnTimeline" mnemonicParsing="false" onAction="#onBtnTimelineClick" text="Timeline" />
-            <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#onBtnProfileClick" text="Perfil" />
-            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onBtnSearchClick" text="Buscador" />
-            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#onBtnSettingsClick" text="Ajustes" />
-            <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewClick" text="Nueva Publicación..." />
+            <Button fx:id="btnTimeline" mnemonicParsing="false" onAction="#onBtnTimelineClick" styleClass="btn-default" stylesheets="@fextile.css" text="Timeline" />
+            <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#onBtnProfileClick" styleClass="btn-default" stylesheets="@fextile.css" text="Perfil" />
+            <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onBtnSearchClick" styleClass="btn-default" stylesheets="@fextile.css" text="Buscador" />
+            <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#onBtnSettingsClick" styleClass="btn-default" stylesheets="@fextile.css" text="Ajustes" />
+            <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewClick" styleClass="btn-default" stylesheets="@fextile.css" text="Nueva Publicación..." />
          </children>
       </HBox>
    </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="700.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

@@ -1,7 +1,5 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class PerfilController implements Initializable {
 
-    @FXML Button btnFollow;
+    @FXML Button btnGotoProfile;
     @FXML Label txtUsername;
     @FXML ScrollPane scrollPanePublis;
 
@@ -30,8 +28,8 @@ public class PerfilController implements Initializable {
         return txtUsername;
     }
 
-    public Button getBtnFollow() {
-        return btnFollow;
+    public Button getBtnGotoProfile() {
+        return btnGotoProfile;
     }
 
     public void setEstaSiguiendo(boolean estaSiguiendo) {
@@ -46,14 +44,14 @@ public class PerfilController implements Initializable {
         return scrollPanePublis;
     }
 
-    public void onClickSeguir(ActionEvent actionEvent) {
+    public void onClickGotoProfile(ActionEvent actionEvent) {
         if (estaSiguiendo) {
             maincontroller.getThisUser().dejarDeSeguir(usuario.getAlias());
-            btnFollow.setText("Seguir");
+            btnGotoProfile.setText("Seguir");
         }
         else {
             maincontroller.getThisUser().seguir(usuario.getAlias());
-            btnFollow.setText("Dejar de seguir");
+            btnGotoProfile.setText("Dejar de seguir");
         }
         maincontrollerScene.refresh();
     }
@@ -68,8 +66,8 @@ public class PerfilController implements Initializable {
         this.usuario = usuario;
         estaSiguiendo = maincontroller.getThisUser().sigueA(usuario.getAlias());
         if(estaSiguiendo)
-            btnFollow.setText("Dejar de seguir");
+            btnGotoProfile.setText("Dejar de seguir");
         else
-            btnFollow.setText("Seguir");
+            btnGotoProfile.setText("Seguir");
     }
 }

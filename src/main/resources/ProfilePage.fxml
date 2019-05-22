@@ -6,34 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="espacioUPM.UI.PerfilController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="535.0" minWidth="10.0" prefWidth="535.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="65.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.PerfilController">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0">
+      <GridPane alignment="CENTER_RIGHT">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Label fx:id="txtUsername" text="Nombre de usuario" />
+            <Label fx:id="txtUsername" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
+            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="btnGotoProfile" mnemonicParsing="false" styleClass="btn-primary" stylesheets="@fextile.css" text="Ir al perfil" />
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <HBox prefHeight="199.0" prefWidth="255.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-         <children>
-            <Button fx:id="btnFollow" mnemonicParsing="false" text="Seguir" onAction="#onClickSeguir" />
-         </children>
-      </HBox>
-      <ScrollPane fx:id="scrollPanePublis" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      </GridPane>
+      <ScrollPane fx:id="scrollPanePublis" prefHeight="296.0" prefWidth="700.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
    </children>
-</GridPane>
+</VBox>
