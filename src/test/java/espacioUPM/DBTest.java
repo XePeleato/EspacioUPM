@@ -61,8 +61,10 @@ public class DBTest {
     }
 
     @Test
-    public void TestBuscarUsuario(){
-        fail("No esta implementado todavia");
+    public void TestBuscarUsuario(){  //Correcto
+        DB.setUsuario("test","testcorreo",null,null);
+        assertNotNull(DB.getUsuario("test"));
+        DB.buscarUsuario("test");
     }
 
     @Test
