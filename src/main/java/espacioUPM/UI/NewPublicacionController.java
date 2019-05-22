@@ -31,9 +31,12 @@ public class NewPublicacionController implements Initializable {
     {
 
         String tweet = txtAreaTweet.getText();
-        Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
-
-        controllerScene.replaceComponent("/TimelinePage.fxml");
+        if(tweet.length() > 140)
+            controller.alert("El mensaje no puede tener más de 140 caracteres");
+        else {
+            Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
+            controllerScene.replaceComponent("/TimelinePage.fxml");
+        }
     }
 
 

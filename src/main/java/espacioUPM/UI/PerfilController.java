@@ -15,23 +15,20 @@ import java.util.ResourceBundle;
 
 public class PerfilController implements Initializable {
 
-    @FXML
-    public Button btnFollow;
+    @FXML Button btnFollow;
+    @FXML Label txtUsername;
+    @FXML ScrollPane scrollPanePublis;
 
-    public Label getTxtUsername() {
-        return txtUsername;
-    }
 
-    @FXML
-    Label txtUsername;
-
-    @FXML public ScrollPane scrollPanePublis;
     private static final IMainControllerUtils maincontroller = MainController.getInstance();
     private static final IMainControllerScene maincontrollerScene = MainController.getInstance();
 
     private Usuario usuario;
     private static boolean estaSiguiendo = false;
 
+    public Label getTxtUsername() {
+        return txtUsername;
+    }
 
     public Button getBtnFollow() {
         return btnFollow;
