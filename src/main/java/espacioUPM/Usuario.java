@@ -70,4 +70,8 @@ public class Usuario {
     public String getAlias() {
         return alias;
     }
+
+    public boolean cambiarAlias(String aliasNuevo) {
+        return DB_user.cambiarAlias(this, aliasNuevo);
+    }
 }

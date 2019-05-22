@@ -5,9 +5,9 @@
 
 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SettingsController">
    <children>
-      <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#onClickLogout" styleClass="btn-default" stylesheets="@fextile.css" text="Cerrar sesion" />
-      <Button fx:id="btnCambiarAlias" mnemonicParsing="false" onAction="#onClickCambiarAlias" styleClass="btn-default" stylesheets="@fextile.css" text="Cambiar alias" />
-      <Button fx:id="btnBorrarDatos" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onClickBorrarDatos" styleClass="btn-warning" stylesheets="@fextile.css" text="Borrar datos" />
-      <Button mnemonicParsing="false" styleClass="btn-danger" stylesheets="@fextile.css" text="Darse de baja" />
+      <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#onClickLogout" styleClass="btn-default" text="Cerrar sesion" />
+      <Button fx:id="btnCambiarAlias" mnemonicParsing="false" onAction="#onClickCambiarAlias" styleClass="btn-default" text="Cambiar alias" />
+      <Button fx:id="btnBorrarDatos" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onClickBorrarDatos" styleClass="btn-warning" text="Borrar datos" />
+      <Button mnemonicParsing="false" styleClass="btn-danger" onAction="#onClickDarseDeBaja" text="Darse de baja" />
    </children>
 </HBox>

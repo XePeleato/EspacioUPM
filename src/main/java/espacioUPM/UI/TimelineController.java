@@ -47,6 +47,8 @@ public class TimelineController implements Initializable {
                 total.addAll(Arrays.asList((Publicacion[])pubs));
             }
 
+        total.sort(Publicacion::compareTo);
+
         for (int i = 50*numPagina; i < 50*(numPagina + 1) && i < total.size(); i++) {
             Tweet tweet = new Tweet();
             tweet.setTweet(total.get(i));
