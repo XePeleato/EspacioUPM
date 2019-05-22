@@ -17,7 +17,7 @@ public class Perfil extends GridPane {
     private Node view;
 
 
-    private static final MainController maincontroller = MainController.getInstance();
+    private static final IMainControllerUtils maincontroller = MainController.getInstance();
 
 
     public Perfil() {

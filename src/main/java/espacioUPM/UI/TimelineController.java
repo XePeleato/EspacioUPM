@@ -16,10 +16,10 @@ import java.util.ResourceBundle;
 import java.util.TreeSet;
 
 public class TimelineController implements Initializable {
-    @FXML
-    ScrollPane timelinePane;
 
-    private MainController controller = MainController.getInstance();
+    @FXML ScrollPane timelinePane;
+
+    private static final IMainControllerUtils controller = MainController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

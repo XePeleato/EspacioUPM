@@ -24,7 +24,8 @@ public class LandingPageController implements Initializable {
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
-    private static MainController controller = MainController.getInstance();
+    private static IMainControllerUtils controller = MainController.getInstance();
+    private static IMainControllerScene controllerScene = MainController.getInstance();
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
@@ -42,15 +43,15 @@ public class LandingPageController implements Initializable {
         } else {
             try {
                 controller.setThisUser(usuario);
-                controller.replaceScene("/MainPage.fxml");
+                controllerScene.replaceScene("/MainPage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }
     }
 
     public void onBtnRegisterClick(ActionEvent actionEvent) {
         try {
-            controller.setTitle("Registro");
-            controller.replaceScene("/SignUpPage.fxml");
+            controllerScene.setTitle("Registro");
+            controllerScene.replaceScene("/SignUpPage.fxml");
         }catch(NullPointerException | IOException e) {
             System.out.println("oops");
         }

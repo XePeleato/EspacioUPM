@@ -20,7 +20,7 @@ public class SearchedUserController implements Initializable {
 
     private Usuario us;
 
-    private final static MainController controller = MainController.getInstance();
+    private final static IMainControllerScene controller = MainController.getInstance();
 
     public SearchedUserController() {
     }

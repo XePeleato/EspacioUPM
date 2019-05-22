@@ -5,6 +5,7 @@ import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -15,12 +16,13 @@ import java.util.ResourceBundle;
 
 public class NewPublicacionController implements Initializable {
 
-    public TextArea txtAreaTweet;
-    public Button btnSendTweet;
+    @FXML TextArea txtAreaTweet;
+    @FXML Button btnSendTweet;
 
     public NewPublicacionController() {}
 
-    private static MainController controller = MainController.getInstance();
+    private static IMainControllerUtils controller = MainController.getInstance();
+    private static IMainControllerScene controllerScene = MainController.getInstance();
     public void initialize() {
 
     }
@@ -31,7 +33,7 @@ public class NewPublicacionController implements Initializable {
         String tweet = txtAreaTweet.getText();
         Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
 
-        controller.replaceComponent("/TimelinePage.fxml");
+        controllerScene.replaceComponent("/TimelinePage.fxml");
     }
 
 

@@ -23,7 +23,8 @@ public class ComentarioController {
     @FXML
     public Button btnSendComment;
 
-    private static final MainController controller = MainController.getInstance();
+    private static final IMainControllerUtils controller = MainController.getInstance();
+    private static final IMainControllerScene controllerScene = MainController.getInstance();
 
     public void initialize() {
         VBox root = new VBox();
@@ -39,7 +40,7 @@ public class ComentarioController {
     public void onClickSendComment(ActionEvent actionEvent) {
         String comentario = txtAreaComment.getText();
         TweetController.getCurrentPub().comentar(controller.getThisUser(), comentario);
-        controller.refresh(); // FIXME: esto no furula
+        controllerScene.refresh(); // FIXME: esto no furula
     }
 
 }

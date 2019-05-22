@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable, IMainControllerUtils, IMainControllerScene {
 
     private static Stage stage;
     private static Usuario thisUser;

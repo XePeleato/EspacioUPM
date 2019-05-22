@@ -16,6 +16,7 @@ import java.io.IOException;
 
 
 public class Tweet extends VBox{
+
     private TweetController controller;
     private Node view;
 
@@ -32,7 +33,7 @@ public class Tweet extends VBox{
 
     public void setTweet(Publicacion p) {
         controller.setPub(p);
-        controller.txtUsername.setText(p.getAutor());
+        controller.txtUsername.setText("@" + p.getAutor());
         controller.txtRetweet.setText("");
         controller.txtDate.setText(p.getFecha().toString());
         controller.btnComment.setText("Comentar (" + p.getComentarios().size() + ")");

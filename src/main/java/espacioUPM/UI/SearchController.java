@@ -14,14 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class SearchController {
-    @FXML
-    public TextField txtFieldInput;
-    public Button btnSearch;
-    @FXML
-    ScrollPane scrollPaneResult;
 
-    private static final IDB_Usuario DB_Us = DB_Main.getInstance();
-    private static final IDB_Comunidad DB_Com = DB_Main.getInstance();
+    @FXML TextField txtFieldInput;
+    @FXML Button btnSearch;
+    @FXML ScrollPane scrollPaneResult;
 
     public void onClickSearch(ActionEvent actionEvent) {
         VBox root = new VBox();

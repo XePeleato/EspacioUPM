@@ -26,7 +26,8 @@ public class PerfilController implements Initializable {
     Label txtUsername;
 
     @FXML public ScrollPane scrollPanePublis;
-    private static final MainController maincontroller = MainController.getInstance();
+    private static final IMainControllerUtils maincontroller = MainController.getInstance();
+    private static final IMainControllerScene maincontrollerScene = MainController.getInstance();
 
     private Usuario usuario;
     private static boolean estaSiguiendo = false;
@@ -53,7 +54,7 @@ public class PerfilController implements Initializable {
             maincontroller.getThisUser().dejarDeSeguir(usuario.getAlias());
         else
             maincontroller.getThisUser().seguir(usuario.getAlias());
-        maincontroller.refresh();
+        maincontrollerScene.refresh();
     }
 
 

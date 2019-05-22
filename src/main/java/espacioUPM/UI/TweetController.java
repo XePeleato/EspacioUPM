@@ -4,6 +4,7 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
+import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,19 +17,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TweetController implements Initializable {
-    @FXML
-    public Button btnRetweet, btnComment, btnLike, btnDislike, btnDelete;
 
-    @FXML
-    public Label txtUsername, txtDate, txtRetweet;
-
-    @FXML
-    BorderPane borderPaneTweet;
+    @FXML Button btnRetweet, btnComment, btnLike, btnDislike, btnDelete;
+    @FXML Label txtUsername, txtDate, txtRetweet;
+    @FXML BorderPane borderPaneTweet;
 
     private static Publicacion pub;
 
     private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
-    private static final MainController controller = MainController.getInstance();
+    private static final IMainControllerUtils controller = MainController.getInstance();
+    private static final IMainControllerScene controllerScene = MainController.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,25 +46,28 @@ public class TweetController implements Initializable {
 
     public void onClickUsername(MouseEvent mouseEvent){
         String autor = txtUsername.getText();
-        // TODO: Ir al perfil del autor
+        Perfil p = new Perfil();
+        p.setPerfil(Usuario.getUsuario(autor));
+        controllerScene.replaceComponent(p);
+
     }
     public void onClickRetweet(ActionEvent actionEvent){
         pub.referenciar(controller.getThisUser());
     }
     public void onClickComment(ActionEvent actionEvent){
-        controller.replaceComponent("/CommentsPage.fxml");
+        controllerScene.replaceComponent("/CommentsPage.fxml");
     }
 
     public void onClickLike(ActionEvent actionEvent){
         pub.like(controller.getThisUser());
-        controller.refresh();
+        controllerScene.refresh();
     }
     public void onClickDislike(ActionEvent actionEvent){
         pub.dislike(controller.getThisUser());
-        controller.refresh();
+        controllerScene.refresh();
     }
     public void onClickDelete(ActionEvent actionEvent){
         pub.borrar();
-        controller.refresh();
+        controllerScene.refresh();
     }
 }

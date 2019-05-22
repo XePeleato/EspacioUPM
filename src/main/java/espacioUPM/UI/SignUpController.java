@@ -13,7 +13,8 @@ import java.io.IOException;
 
 public class SignUpController {
 
-    private static MainController controller = MainController.getInstance();
+    private static IMainControllerUtils controller = MainController.getInstance();
+    private static IMainControllerScene controllerScene = MainController.getInstance();
 
     /* Registro */
     @FXML
@@ -51,8 +52,8 @@ public class SignUpController {
         else {
             Usuario.setUsuario(alias, correo, password);
             try {
-                controller.setTitle("EspacioUPM");
-                controller.replaceScene("/LandingPage.fxml");
+                controllerScene.setTitle("EspacioUPM");
+                controllerScene.replaceScene("/LandingPage.fxml");
             }
             catch(IOException e) { e.printStackTrace(); }
         }
@@ -60,8 +61,8 @@ public class SignUpController {
 
     public void onBtnBack(ActionEvent actionEvent) {
         try{
-            controller.setTitle("EspacioUPM");
-            controller.replaceScene("/LandingPage.fxml");
+            controllerScene.setTitle("EspacioUPM");
+            controllerScene.replaceScene("/LandingPage.fxml");
         }
         catch(IOException e) { e.printStackTrace(); }
     }
