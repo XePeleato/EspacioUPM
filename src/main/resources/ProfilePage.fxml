@@ -24,7 +24,7 @@
             <Label fx:id="txtUsername" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
             <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="btnGotoProfile" mnemonicParsing="false" styleClass="btn-primary" stylesheets="@fextile.css" text="Ir al perfil" />
+                  <Button fx:id="btnFollow" mnemonicParsing="false" styleClass="btn-primary" stylesheets="@fextile.css" text="Ir al perfil" onAction="#onClickFollow" />
                </children>
             </VBox>
          </children>

@@ -357,7 +357,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setString(2, aliasSeguido);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                return rs.getInt("num") == 1;
+                return rs.getInt("num") >= 1; // El mayor no debería ocurrir, pero y si sí?
             }
             return false;
         }
