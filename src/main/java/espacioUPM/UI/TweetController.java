@@ -5,6 +5,7 @@ import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.PublicacionFactory;
+import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 public class TweetController implements Initializable {
 
     @FXML Button btnRetweet, btnComment, btnLike, btnDislike, btnDelete;
-    @FXML Label txtUsername, txtDate, txtRetweet;
+    @FXML Label txtUsername, txtDate, txtRetweet, txtLike;
     @FXML BorderPane borderPaneTweet;
 
     private IPublicacion pub;
@@ -39,6 +40,13 @@ public class TweetController implements Initializable {
         if(!pub.getAutor().equals(controller.getThisUser().getAlias())) {
             btnDelete.setDisable(true);
         }
+        Puntuacion punt = p.getPuntuacion(controller.getThisUser());
+        if(punt == Puntuacion.LIKE)
+            txtLike.setText("Te gusta esta publicación");
+        else if(punt == Puntuacion.DISLIKE)
+            txtLike.setText("No te gusta esta publicación");
+        else if(punt == Puntuacion.NEUTRO)
+            txtLike.setText("");
     }
 
     public IPublicacion getCurrentPub() {

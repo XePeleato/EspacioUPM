@@ -29,4 +29,6 @@ public interface IPublicacion {
 	int getNumLikes();
 
 	int getNumDislikes();
+
+	Puntuacion getPuntuacion(Usuario user);
 }

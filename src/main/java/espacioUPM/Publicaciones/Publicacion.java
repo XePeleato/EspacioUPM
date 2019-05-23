@@ -117,4 +117,8 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     public void borrar() {
         DB.borrarPublicacion(IDPublicacion);
     }
+
+    public Puntuacion getPuntuacion(Usuario user) {
+        return DB.getPuntuacion(user, this.getIDPublicacion());
+    }
 }

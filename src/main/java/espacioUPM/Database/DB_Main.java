@@ -385,8 +385,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                 default:
                     break;
             }
-            insert.setInt(2, puntuacionInt);
-            insert.setInt(3, publi);
+            insert.setInt(2, publi);
+            insert.setInt(3, puntuacionInt);
             insert.execute();
         } catch (SQLException e) {
             e.printStackTrace();

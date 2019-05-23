@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.TweetController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.TweetController">
    <children>
       <BorderPane fx:id="borderPaneTweet" prefHeight="200.0" prefWidth="700.0">
          <top>
@@ -26,6 +26,7 @@
                   <Label fx:id="txtUsername" onMouseReleased="#onClickUsername" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
                   <Label fx:id="txtDate" text="Fecha" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                   <Label fx:id="txtRetweet" text="Retwitteado por: ...." GridPane.rowIndex="1" />
+                  <Label fx:id="txtLike" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </top>
