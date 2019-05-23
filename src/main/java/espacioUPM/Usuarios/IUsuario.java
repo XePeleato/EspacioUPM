@@ -1,4 +1,4 @@
-package espacioUPM;
+package espacioUPM.Usuarios;
 
 import espacioUPM.Publicaciones.IPublicacion;
 
