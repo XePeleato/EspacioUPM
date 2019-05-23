@@ -16,10 +16,12 @@ import java.util.ArrayList;
 
 public class Comunidad implements IAdministracionComunidad {
 	private String nombre;
+	private String fundador;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
 
 	public Comunidad(String id, Usuario fundador) {
 		nombre = id;
+		this.fundador = fundador.getAlias();
 		DB.hacerAdminComunidad(id, fundador.getAlias());
 	}
 
@@ -64,5 +66,9 @@ public class Comunidad implements IAdministracionComunidad {
 	@Override
 	public boolean modificarPermisos(String alias) {
 		return DB.hacerAdminComunidad(nombre, alias);
+	}
+
+	public String getFundador() {
+		return fundador;
 	}
 }
