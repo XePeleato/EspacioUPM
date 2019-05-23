@@ -25,7 +25,7 @@
         </rowConstraints>
          <children>
             <HBox fx:id="respMessageBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
-            <VBox fx:id="actionBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" />
+            <HBox fx:id="actionBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
