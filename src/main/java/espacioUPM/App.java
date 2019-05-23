@@ -4,6 +4,7 @@ import espacioUPM.Database.DB_Main;
 import espacioUPM.UI.MainController;
 import javafx.application.Application;
 import javafx.application.HostServices;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -28,6 +29,7 @@ public class App extends Application {
 
         controller = MainController.getInstance();
         controller.setStage(primaryStage);
+        primaryStage.getIcons().add(new Image(App.class.getResourceAsStream("/EspacioUPMLogo.png")));
         controller.replaceScene("/LandingPage.fxml");
         controller.setTitle("EspacioUPM");
 

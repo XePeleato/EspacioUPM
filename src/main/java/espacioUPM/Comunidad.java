@@ -15,8 +15,9 @@ import espacioUPM.Publicaciones.Publicacion;
 
 import java.util.ArrayList;
 
-public class Comunidad implements IAdministracionComunidad {
+public class Comunidad implements IAdministracionComunidad, IComunidad {
 	private String nombre;
+	private String fundador;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
 
 	public Comunidad(String id) {
@@ -73,4 +74,5 @@ public class Comunidad implements IAdministracionComunidad {
 	public boolean modificarPermisos(String alias) {
 		return DB.hacerAdminComunidad(nombre, alias);
 	}
+
 }
