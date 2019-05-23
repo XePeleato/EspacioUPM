@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.CommunityPageController">
+   <children>
+      <HBox fx:id="boxUpper" alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="700.0">
+         <children>
+            <Label text="Crear comunidad: " />
+            <TextField fx:id="txtCommunityName" promptText="Nombre..." />
+            <Button fx:id="btnCreateCommunity" mnemonicParsing="false" onAction="#onClickCreateCommunity" text="Crear comunidad" />
+         </children>
+      </HBox>
+      <ScrollPane fx:id="scrollPaneCommunities" prefHeight="263.0" prefWidth="700.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>

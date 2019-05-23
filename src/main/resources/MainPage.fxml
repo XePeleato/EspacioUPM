@@ -11,6 +11,7 @@
             <Button fx:id="btnTimeline" mnemonicParsing="false" onAction="#onBtnTimelineClick" styleClass="btn-default" stylesheets="@fextile.css" text="Timeline" />
             <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#onBtnProfileClick" styleClass="btn-default" stylesheets="@fextile.css" text="Perfil" />
             <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#onBtnSearchClick" styleClass="btn-default" stylesheets="@fextile.css" text="Buscador" />
+            <Button fx:id="btnCommunities" mnemonicParsing="false" onAction="#onBtnCommunitiesClick" styleClass="btn-default" stylesheets="@fextile.css" text="Comunidades" />
             <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#onBtnSettingsClick" styleClass="btn-default" stylesheets="@fextile.css" text="Ajustes" />
             <Button fx:id="btnNew" mnemonicParsing="false" onAction="#onBtnNewClick" styleClass="btn-default" stylesheets="@fextile.css" text="Nueva Publicación..." />
          </children>

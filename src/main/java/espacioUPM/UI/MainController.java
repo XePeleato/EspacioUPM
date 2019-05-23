@@ -130,6 +130,10 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         replaceComponent(p);
     }
 
+    public void onBtnCommunitiesClick(ActionEvent actionEvent) {
+        replaceComponent("/CommunityPage.fxml");
+    }
+
     public void onBtnSearchClick(ActionEvent actionEvent) {
         replaceComponent("/SearchPage.fxml");
     }

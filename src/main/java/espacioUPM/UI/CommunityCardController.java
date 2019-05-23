@@ -22,10 +22,7 @@ public class CommunityCardController implements Initializable {
 
     public void onClickGotoCommunity(ActionEvent actionEvent)
     {
-        try{
-            controller.replaceScene("/CommunityPage.fxml");
-        }
-        catch(IOException e) { e.printStackTrace(); }
+        // Ir a la comunidad
     }
 
     @Override

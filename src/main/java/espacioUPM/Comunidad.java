@@ -17,13 +17,18 @@ import java.util.ArrayList;
 
 public class Comunidad implements IAdministracionComunidad {
 	private String nombre;
-	private String fundador;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
 
-	public Comunidad(String id, IUsuario fundador) {
+	public Comunidad(String id) {
 		nombre = id;
-		this.fundador = fundador.getAlias();
-		DB.hacerAdminComunidad(id, fundador.getAlias());
+	}
+
+	public static Comunidad[] getComunidades(String alias) {
+		return DB.getComunidades(alias);
+	}
+
+	public boolean crearComunidad(String fundador) {
+		return DB.crearComunidad(this, fundador);
 	}
 
 	public static Comunidad[] buscar(String id) {
@@ -42,7 +47,7 @@ public class Comunidad implements IAdministracionComunidad {
 		IPublicacion[] publicaciones = DB.getTimeline(this);
 		for (int i = pagina*50, j = 0; i < publicaciones.length && j < 50; i++, j++)
 			ret.add(publicaciones[i]);
-		return (IPublicacion[]) ret.toArray();
+		return ret.toArray(IPublicacion[]::new);
 	}
 	
 	public String getNombre() {
@@ -67,9 +72,5 @@ public class Comunidad implements IAdministracionComunidad {
 	@Override
 	public boolean modificarPermisos(String alias) {
 		return DB.hacerAdminComunidad(nombre, alias);
-	}
-
-	public String getFundador() {
-		return fundador;
 	}
 }

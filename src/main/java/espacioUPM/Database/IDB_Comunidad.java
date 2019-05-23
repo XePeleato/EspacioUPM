@@ -23,10 +23,14 @@ public interface IDB_Comunidad {
 	boolean borrarMiembroComunidad(String id, String alias);
 	
 	boolean hacerAdminComunidad(String id, String alias);
-	
+
+	boolean crearComunidad(Comunidad comunidad, String fundador);
+
 	IUsuario[] getMiembros(Comunidad comunidad);
 
 	Publicacion[] getTimeline(Comunidad comunidad);
 
 	Comunidad[] buscarComunidad(String id);
+
+	Comunidad[] getComunidades(String alias);
 }

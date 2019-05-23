@@ -304,6 +304,25 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
+    public boolean crearComunidad(Comunidad comunidad, String fundador) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comunidades VALUES (?, ?)"))
+        {
+            pStmt.setString(1, comunidad.getNombre());
+            pStmt.setString(2, fundador);
+
+            try (PreparedStatement pStmtMember = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, 1)")) {
+                pStmtMember.setString(1, fundador);
+                pStmtMember.setString(2, comunidad.getNombre());
+
+                if (pStmt.executeUpdate() == 1)
+                    return pStmtMember.executeUpdate() == 1;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     public boolean insertarMiembroComunidad(String id, String alias) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, ?)");
@@ -326,6 +345,24 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Comunidad[] getComunidades(String alias)
+    {
+        ArrayList<Comunidad> ret = new ArrayList<>();
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ? AND aceptado = 1")) {
+            pStmt.setString(1, alias);
+
+            ResultSet rs = pStmt.executeQuery();
+
+            while (rs.next())
+                ret.add(new Comunidad(rs.getString("id_comunidad")));
+
+            return ret.toArray(Comunidad[]::new);
+            } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean seguir(String seguidor, String seguido) {
@@ -473,7 +510,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             ResultSet rs = pStmt.executeQuery();
 
             while (rs.next())
-                ret.add(new Comunidad(rs.getString("id"), new Usuario(rs.getString("fundador"))));
+                ret.add(new Comunidad(rs.getString("id")));
 
             return ret.toArray(Comunidad[]::new); //no cambiar esto, que peta
         } catch (SQLException e) {

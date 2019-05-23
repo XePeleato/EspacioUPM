@@ -12,7 +12,7 @@ public class CommunityCard extends GridPane {
     private Node view;
 
     public CommunityCard() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Tweet.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CommunityCard.fxml"));
         fxmlLoader.setControllerFactory(param -> controller = new CommunityCardController());
         try {
             view = fxmlLoader.load();
