@@ -59,7 +59,7 @@ public class SettingsController {
             return;
         }
 
-        boolean ret = MainController.getInstance().getThisUser().cambiarAlias(alias.getText());
+        boolean ret = controller.getThisUser().cambiarAlias(alias.getText());
 
         Label responseLabel = new Label(ret ? "Alias cambiado con éxito" : "Por favor, elige otro alias");
         responseLabel.getStylesheets().add("/fextile.css");
@@ -68,6 +68,12 @@ public class SettingsController {
         HBox txtBox = new HBox();
         txtBox.getChildren().add(responseLabel);
         respMessageBox.getChildren().add(txtBox);
+
+        controller.setThisUser(null);
+        try {
+            controllerScene.replaceScene("/LandingPage.fxml");
+        }
+        catch(IOException e) {e.printStackTrace();}
     }
 
     public void onClickLogout(ActionEvent actionEvent) {

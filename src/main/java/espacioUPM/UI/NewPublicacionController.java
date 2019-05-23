@@ -35,7 +35,9 @@ public class NewPublicacionController implements Initializable {
             controller.alert("El mensaje no puede tener más de 140 caracteres");
         else {
             Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
-            controllerScene.replaceComponent("/TimelinePage.fxml");
+            Perfil p = new Perfil();
+            p.setPerfil(controller.getThisUser());
+            controllerScene.replaceComponent(p);
         }
     }
 
