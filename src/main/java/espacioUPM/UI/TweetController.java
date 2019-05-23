@@ -30,6 +30,8 @@ public class TweetController implements Initializable {
     private static final IMainControllerUtils controller = MainController.getInstance();
     private static final IMainControllerScene controllerScene = MainController.getInstance();
 
+    private Tweet view;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -70,14 +72,16 @@ public class TweetController implements Initializable {
 
     public void onClickLike(ActionEvent actionEvent){
         pub.like(controller.getThisUser());
-        controllerScene.refresh();
+        view.setTweet(pub);
     }
     public void onClickDislike(ActionEvent actionEvent){
         pub.dislike(controller.getThisUser());
-        controllerScene.refresh();
+        view.setTweet(pub);
     }
     public void onClickDelete(ActionEvent actionEvent){
         pub.borrar();
         controllerScene.refresh();
     }
+
+    public void setView(Tweet node) { view = node; }
 }
