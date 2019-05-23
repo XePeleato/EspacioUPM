@@ -2,6 +2,7 @@ package espacioUPM.Publicaciones;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
+import espacioUPM.IUsuario;
 import espacioUPM.UI.MainController;
 import espacioUPM.Usuario;
 
@@ -39,13 +40,13 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         this.numDislikes = numDislikes;
     }
 
-    public void comentar(Usuario autor, String contenido) {
+    public void comentar(IUsuario autor, String contenido) {
         Comentario comentario = new Comentario(autor.getAlias(),contenido, IDPublicacion);
         comentarios.add(comentario);
         DB.comentar(this, controller.getThisUser(), comentario.getContenido());
     }
 
-    public void like(Usuario usuario) {
+    public void like(IUsuario usuario) {
         Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, IDPublicacion);
         if(puntuacionAnterior == Puntuacion.NEUTRO) {
             numLikes++;
@@ -62,7 +63,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         }
     }
 
-    public void dislike(Usuario usuario) {
+    public void dislike(IUsuario usuario) {
         Puntuacion puntuacionAnterior = DB.getPuntuacion(usuario, IDPublicacion);
         if(puntuacionAnterior == Puntuacion.NEUTRO) {
             numDislikes++;
@@ -79,7 +80,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         }
     }
 
-    public void referenciar(Usuario usuario) {
+    public void referenciar(IUsuario usuario) {
         PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + IDPublicacion);
     }
 
@@ -118,7 +119,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         DB.borrarPublicacion(IDPublicacion);
     }
 
-    public Puntuacion getPuntuacion(Usuario user) {
+    public Puntuacion getPuntuacion(IUsuario user) {
         return DB.getPuntuacion(user, this.getIDPublicacion());
     }
 }

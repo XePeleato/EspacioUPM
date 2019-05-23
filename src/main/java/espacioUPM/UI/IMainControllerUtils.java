@@ -1,12 +1,13 @@
 package espacioUPM.UI;
 
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 
 public interface IMainControllerUtils {
 
     void alert(String message);
 
-    Usuario getThisUser();
+    IUsuario getThisUser();
 
-    void setThisUser(Usuario value);
+    void setThisUser(IUsuario value);
 }

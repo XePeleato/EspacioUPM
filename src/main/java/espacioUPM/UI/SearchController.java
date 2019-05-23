@@ -1,6 +1,7 @@
 package espacioUPM.UI;
 
 import espacioUPM.Comunidad;
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,13 +21,13 @@ public class SearchController {
         VBox root = new VBox();
         scrollPaneResult.setContent(root);
         String contenido = txtFieldInput.getText();
-        Usuario[] us = Usuario.buscar(contenido);
+        IUsuario[] us = Usuario.buscar(contenido);
         Comunidad[] com = Comunidad.buscar(contenido);
 
         root.getChildren().add(new Label("Usuarios: "));
 
         if (us != null)
-            for (Usuario u : us) {
+            for (IUsuario u : us) {
                 SearchedUser sUs = new SearchedUser();
                 sUs.setUsuario(u);
 

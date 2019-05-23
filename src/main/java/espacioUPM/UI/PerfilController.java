@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ public class PerfilController implements Initializable {
     private static final IMainControllerUtils maincontroller = MainController.getInstance();
     private static final IMainControllerScene maincontrollerScene = MainController.getInstance();
 
-    private Usuario usuario;
+    private IUsuario usuario;
     private static boolean estaSiguiendo = false;
 
     public Label getTxtUsername() {
@@ -63,7 +64,7 @@ public class PerfilController implements Initializable {
         txtUsername.requestFocus();
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(IUsuario usuario) {
         this.usuario = usuario;
         estaSiguiendo = maincontroller.getThisUser().sigueA(usuario.getAlias());
         if(estaSiguiendo)

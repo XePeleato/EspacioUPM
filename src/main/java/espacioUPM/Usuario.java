@@ -16,7 +16,7 @@ import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.IPublicacion;
 
-public class Usuario {
+public class Usuario implements IUsuario {
 
     private String alias;
     private static final IDB_Publicacion DB = DB_Main.getInstance();
@@ -27,7 +27,7 @@ public class Usuario {
         this.alias = alias;
     }
 
-    public static Usuario getUsuario(String alias) {
+    public static IUsuario getUsuario(String alias) {
         return DB_user.getUsuario(alias);
     }
 
@@ -35,7 +35,7 @@ public class Usuario {
         DB_user.setUsuario(alias, correo, passwd);
     }
 
-    public static Usuario[] buscar(String alias) {
+    public static IUsuario[] buscar(String alias) {
         return DB_user.buscarUsuario(alias);
     }
 

@@ -10,24 +10,25 @@ package espacioUPM.Database;//
 //
 
 
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 
 public interface IDB_Usuario {
-	 Usuario getUsuario(String alias);
+	 IUsuario getUsuario(String alias);
 
-	 Usuario[] buscarUsuario(String alias);
+	 IUsuario[] buscarUsuario(String alias);
 
 	 boolean setUsuario(String alias, String correo, byte[] password, byte[] salt);
 
 	 boolean setUsuario(String alias, String correo, String pass);
 
-	 String[] getSeguidos(Usuario usuario);
+	 String[] getSeguidos(IUsuario usuario);
 	
-	 String[] getSeguidores(Usuario usuario);
+	 String[] getSeguidores(IUsuario usuario);
 	
-	 boolean cambiarAlias(Usuario usuario, String aliasNuevo);
+	 boolean cambiarAlias(IUsuario usuario, String aliasNuevo);
 	
-	 boolean borrarUsuario(Usuario usuario);
+	 boolean borrarUsuario(IUsuario usuario);
 	
 	 boolean seguir(String seguidor, String seguido);
 	

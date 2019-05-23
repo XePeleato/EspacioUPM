@@ -2,6 +2,7 @@ package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,7 +26,7 @@ public class SearchedUser extends VBox {
         getChildren().add(view);
     }
 
-    public void setUsuario(Usuario us) {
+    public void setUsuario(IUsuario us) {
         controller.setUser(us);
         controller.txtUsername.setText(us.getAlias());
     }

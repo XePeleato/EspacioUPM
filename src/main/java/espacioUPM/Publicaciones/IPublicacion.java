@@ -1,20 +1,20 @@
 package espacioUPM.Publicaciones;//
 
 
-import espacioUPM.Usuario;
+import espacioUPM.IUsuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface IPublicacion {
 	
-	void comentar(Usuario autor, String contenido);
+	void comentar(IUsuario autor, String contenido);
 
-	void like(Usuario usuario);
+	void like(IUsuario usuario);
 	
-	void dislike(Usuario usuario);
+	void dislike(IUsuario usuario);
 	
-	void referenciar(Usuario usuario);
+	void referenciar(IUsuario usuario);
 
 	int getIDPublicacion();
 
@@ -30,5 +30,5 @@ public interface IPublicacion {
 
 	int getNumDislikes();
 
-	Puntuacion getPuntuacion(Usuario user);
+	Puntuacion getPuntuacion(IUsuario user);
 }

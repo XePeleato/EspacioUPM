@@ -1,6 +1,7 @@
 package espacioUPM.Database;
 
 import espacioUPM.Comunidad;
+import espacioUPM.IUsuario;
 import espacioUPM.Publicaciones.*;
 import espacioUPM.Usuario;
 
@@ -39,7 +40,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return instancia;
     }
 
-    public Usuario getUsuario(String alias) {
+    public IUsuario getUsuario(String alias) {
 
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias FROM `Usuarios` WHERE `alias` = ?"))
         {
@@ -165,7 +166,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret;
     }
 
-    public Publicacion[] getPublicaciones(Usuario usuario) {
+    public Publicacion[] getPublicaciones(IUsuario usuario) {
 
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT id FROM publicaciones WHERE autor = ? ORDER BY fecha DESC"))
         {
@@ -235,7 +236,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public String[] getSeguidos(Usuario usuario) {
+    public String[] getSeguidos(IUsuario usuario) {
         ArrayList<String> ret = new ArrayList<>();
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT seguido FROM seguimiento WHERE seguidor = ?")) {
             pStmt.setString(1, usuario.getAlias());
@@ -251,7 +252,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret.toArray(String[]::new); // dejad esto así, que hacer un cast peta
     }
 
-    public String[] getSeguidores(Usuario usuario) {
+    public String[] getSeguidores(IUsuario usuario) {
         ArrayList<String> ret = new ArrayList<>();
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT seguidor FROM seguimiento WHERE seguido = ?")) {
             pStmt.setString(1, usuario.getAlias());
@@ -267,7 +268,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret.toArray(String[]::new); // dejad esto así, que hacer un cast peta
     }
 
-    public boolean cambiarAlias(Usuario usuario, String aliasNuevo) {
+    public boolean cambiarAlias(IUsuario usuario, String aliasNuevo) {
         try (PreparedStatement pStmt = connection.prepareStatement("UPDATE usuarios SET alias = ? WHERE alias = ?")) {
             pStmt.setString(1, aliasNuevo);
             pStmt.setString(2, usuario.getAlias());
@@ -279,7 +280,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     }
 
     @Override
-    public boolean borrarUsuario(Usuario usuario) {
+    public boolean borrarUsuario(IUsuario usuario) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("DELETE FROM usuarios WHERE alias = ?");
             pStmt.setString(1, usuario.getAlias());
@@ -365,7 +366,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return false;
     }
 
-    public void puntuar(Usuario usuario, int publi, Puntuacion puntuacion) {
+    public void puntuar(IUsuario usuario, int publi, Puntuacion puntuacion) {
         try {
             PreparedStatement delete = connection.prepareStatement("DELETE FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
             delete.setString(1, usuario.getAlias());
@@ -393,7 +394,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public Puntuacion getPuntuacion(Usuario usuario, int publi) {
+    public Puntuacion getPuntuacion(IUsuario usuario, int publi) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT valor FROM likes WHERE id_usuario = ? AND id_publicacion = ?");
             statement.setString(1, usuario.getAlias());
@@ -428,8 +429,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public Usuario[] getMiembros(Comunidad comunidad) {
-        ArrayList<Usuario> ret = new ArrayList<>();
+    public IUsuario[] getMiembros(Comunidad comunidad) {
+        ArrayList<IUsuario> ret = new ArrayList<>();
         try {
             PreparedStatement pStmt = connection.prepareStatement("SELECT id_usuario FROM miembros_comunidad WHERE id_comunidad = ?");
             pStmt.setString(1, comunidad.getNombre());
@@ -443,7 +444,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (Usuario[])ret.toArray();
+        return (IUsuario[])ret.toArray();
     }
 
     public Publicacion[] getTimeline(Comunidad comunidad) {
@@ -482,7 +483,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     }
 
 
-    public void comentar(Publicacion publi, Usuario usuario, String contenido) {
+    public void comentar(Publicacion publi, IUsuario usuario, String contenido) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comentarios VALUES (NULL, ?, ?, ?)");
             pStmt.setString(1, usuario.getAlias());

@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class LandingPageController implements Initializable {
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {
-        Usuario usuario = Usuario.getUsuario(txtAlias.getText());
+        IUsuario usuario = Usuario.getUsuario(txtAlias.getText());
 
         if (txtAlias.getText().isEmpty() || txtPass.getText().isEmpty()) {
             controller.alert("Por favor rellene ambos campos.");

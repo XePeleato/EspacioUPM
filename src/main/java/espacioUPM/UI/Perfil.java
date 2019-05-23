@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.IUsuario;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
@@ -34,7 +35,7 @@ public class Perfil extends GridPane {
     }
 
 
-    public void setPerfil(Usuario us) {
+    public void setPerfil(IUsuario us) {
         controller.setUsuario(us);
         controller.setEstaSiguiendo(maincontroller.getThisUser().sigueA(us.getAlias()));
 

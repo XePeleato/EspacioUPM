@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable, IMainControllerUtils, IMainControllerScene {
 
     private static Stage stage;
-    private static Usuario thisUser;
+    private static IUsuario thisUser;
     private static MainController instance;
 
     /* Principal */
@@ -53,9 +54,9 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         MainController.stage = stage;
     }
 
-    public Usuario getThisUser() { return thisUser; }
+    public IUsuario getThisUser() { return thisUser; }
 
-    public void setThisUser(Usuario value) { thisUser = value; }
+    public void setThisUser(IUsuario value) { thisUser = value; }
 
     public void setTitle(String txt) {
         stage.setTitle(txt);

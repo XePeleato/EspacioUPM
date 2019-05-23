@@ -2,6 +2,7 @@ package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Usuario;
+import espacioUPM.IUsuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ public class SearchedUserController implements Initializable {
     @FXML
     Button btnProfile;
 
-    private Usuario us;
+    private IUsuario us;
 
     private final static IMainControllerScene controller = MainController.getInstance();
 
@@ -37,7 +38,7 @@ public class SearchedUserController implements Initializable {
         controller.replaceComponent(p);
     }
 
-    public void setUser(Usuario us) { this.us = us; }
+    public void setUser(IUsuario us) { this.us = us; }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

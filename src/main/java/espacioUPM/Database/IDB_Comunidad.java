@@ -11,6 +11,7 @@ package espacioUPM.Database;//
 
 
 import espacioUPM.Comunidad;
+import espacioUPM.IUsuario;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuario;
 
@@ -23,7 +24,7 @@ public interface IDB_Comunidad {
 	
 	boolean hacerAdminComunidad(String id, String alias);
 	
-	Usuario[] getMiembros(Comunidad comunidad);
+	IUsuario[] getMiembros(Comunidad comunidad);
 
 	Publicacion[] getTimeline(Comunidad comunidad);
 

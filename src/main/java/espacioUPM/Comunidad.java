@@ -19,7 +19,7 @@ public class Comunidad implements IAdministracionComunidad {
 	private String fundador;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
 
-	public Comunidad(String id, Usuario fundador) {
+	public Comunidad(String id, IUsuario fundador) {
 		nombre = id;
 		this.fundador = fundador.getAlias();
 		DB.hacerAdminComunidad(id, fundador.getAlias());
