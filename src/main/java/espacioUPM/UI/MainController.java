@@ -93,6 +93,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
             currentComponent = fxml;
             isNodeActive = false;
             System.out.println("[+] Nueva subescena: " + fxml);
+            stage.sizeToScene();
             return loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,10 +105,10 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         currentComponentNode = node;
         isNodeActive = true;
         HBox root = (HBox) (borderPaneMain != null ? borderPaneMain : sBorderPane).getCenter();
-        //(borderPaneMain != null ? borderPaneMain : sBorderPane).setCenter(node);
         root.getChildren().clear();
         root.getChildren().add(node);
         System.out.println("[+] Nueva subescena.");
+        stage.sizeToScene();
     }
 
     public <T> T refresh() {
