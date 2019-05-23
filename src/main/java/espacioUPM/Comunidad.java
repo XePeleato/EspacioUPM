@@ -10,6 +10,7 @@ package espacioUPM;//
 //
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Comunidad;
+import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 
 import java.util.ArrayList;
@@ -36,12 +37,12 @@ public class Comunidad implements IAdministracionComunidad {
 		return DB.borrarMiembroComunidad(nombre, alias);
 	}
 	
-	public Publicacion[] visualizarTimelineCompartido(int pagina) {
-		ArrayList<Publicacion> ret = new ArrayList<>();
-		Publicacion[] publicaciones = DB.getTimeline(this);
+	public IPublicacion[] obtenerTimelineCompartido(int pagina) {
+		ArrayList<IPublicacion> ret = new ArrayList<>();
+		IPublicacion[] publicaciones = DB.getTimeline(this);
 		for (int i = pagina*50, j = 0; i < publicaciones.length && j < 50; i++, j++)
 			ret.add(publicaciones[i]);
-		return (Publicacion[])ret.toArray();
+		return (IPublicacion[]) ret.toArray();
 	}
 	
 	public String getNombre() {

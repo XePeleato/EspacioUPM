@@ -34,7 +34,7 @@ public class NewPublicacionController implements Initializable {
         if(tweet.length() > 140)
             controller.alert("El mensaje no puede tener más de 140 caracteres");
         else {
-            Publicacion pub = PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
+            PublicacionFactory.createPublicacion(controller.getThisUser().getAlias(), tweet);
             Perfil p = new Perfil();
             p.setPerfil(controller.getThisUser());
             controllerScene.replaceComponent(p);
