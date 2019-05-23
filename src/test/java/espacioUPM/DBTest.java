@@ -75,11 +75,6 @@ public class DBTest {
     }
 
     @Test
-    public void TestGetNewID() {
-        fail("No esta implementado todavia");
-    }
-
-    @Test
     public void TestSetPublicacion() {
         assertTrue(DB.setPublicacion(p));
     }
@@ -105,14 +100,14 @@ public class DBTest {
     public void TestGetLikes() {
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
         assertEquals(1, DB.getLikes(p.getIDPublicacion()));
-        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.NEUTRO);
     }
 
     @Test
     public void TestGetDislikes() {
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
         assertEquals(1, DB.getDislikes(p.getIDPublicacion()));
-        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.DISLIKE);
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.NEUTRO);
     }
 
     @Test
@@ -142,6 +137,7 @@ public class DBTest {
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
         DB.borrarUsuario(usSeguidor);
     }
+
     @Test
     public void TestCambiarAlias() {
         DB.cambiarAlias(us, "aliasNuevo");
@@ -269,7 +265,7 @@ public class DBTest {
     public void TestBuscarComunidad() {
         fail("No esta implementado todavia");
     }
-*/
+
     @Test
     public void TestComentar() {
         DB.comentar(p,us,"adios");

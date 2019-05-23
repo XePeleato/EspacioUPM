@@ -62,9 +62,11 @@ public class TweetController implements Initializable {
         controllerScene.replaceComponent(p);
 
     }
+
     public void onClickRetweet(ActionEvent actionEvent){
         pub.referenciar(controller.getThisUser());
     }
+
     public void onClickComment(ActionEvent actionEvent){
         ComentarioController comentarioController = controllerScene.replaceComponent("/CommentsPage.fxml");
         comentarioController.setPub(pub);

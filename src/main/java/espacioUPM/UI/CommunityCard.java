@@ -26,7 +26,5 @@ public class CommunityCard extends GridPane {
     {
         controller.community = comunidad;
         controller.txtCommunity.setText(comunidad.getNombre());
-        controller.txtFounder.setText("Fundada por: " + comunidad.getFundador());
-        controller.txtMembers.setText(""); // TODO: jeje
     }
 }

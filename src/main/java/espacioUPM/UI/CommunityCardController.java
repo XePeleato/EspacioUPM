@@ -7,21 +7,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CommunityCardController implements Initializable {
 
-    @FXML Label txtCommunity, txtFounder, txtMembers;
+    @FXML Label txtCommunity;
     @FXML Button btnGotoCommunity;
 
     Comunidad community;
 
-    private static final MainController mainController = MainController.getInstance();
+    private static final IMainControllerScene controller = MainController.getInstance();
 
     public void onClickGotoCommunity(ActionEvent actionEvent)
     {
-        // Ir a la comunidad
+        try{
+            controller.replaceScene("/CommunityPage.fxml");
+        }
+        catch(IOException e) { e.printStackTrace(); }
     }
 
     @Override

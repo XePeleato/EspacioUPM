@@ -19,11 +19,5 @@
    <children>
       <Label fx:id="txtCommunity" alignment="TOP_LEFT" text="Nombre comunidad" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
       <Button fx:id="btnGotoCommunity" mnemonicParsing="false" onAction="#onClickGotoCommunity" text="Ir" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-         <children>
-            <Label fx:id="txtMembers" text="Miembros: " />
-            <Label fx:id="txtFounder" text="Fundada por: " />
-         </children>
-      </VBox>
    </children>
 </GridPane>

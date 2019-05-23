@@ -1,9 +1,6 @@
 package espacioUPM.UI;
 
 import espacioUPM.Comunidad;
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Comunidad;
-import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,9 +36,11 @@ public class SearchController {
         root.getChildren().add(new Label("Comunidades: "));
 
         if (com != null)
-            for (Comunidad c : com)
-                root.getChildren().add(new Label(c.getNombre()));
+            for (Comunidad c : com) {
+                CommunityCard cC = new CommunityCard();
+                cC.setCommunity(c);
 
-
+                root.getChildren().add(cC);
+            }
     }
 }
