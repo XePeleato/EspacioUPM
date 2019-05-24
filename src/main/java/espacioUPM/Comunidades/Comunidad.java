@@ -14,7 +14,7 @@ import espacioUPM.Publicaciones.IPublicacion;
 
 import java.util.ArrayList;
 
-public class Comunidad implements IAdministracionComunidad, IComunidad {
+public class Comunidad implements IComunidad {
 	private String nombre;
 	private String fundador;
 	private static final IDB_Comunidad DB = DB_Main.getInstance();
@@ -23,7 +23,7 @@ public class Comunidad implements IAdministracionComunidad, IComunidad {
 		nombre = id;
 	}
 
-	public static Comunidad[] getComunidades(String alias) {
+	public static IComunidad[] getComunidades(String alias) {
 		return DB.getComunidades(alias);
 	}
 
@@ -31,9 +31,10 @@ public class Comunidad implements IAdministracionComunidad, IComunidad {
 		return DB.crearComunidad(this, fundador);
 	}
 
-	public static Comunidad[] buscar(String id) {
+	public static IComunidad[] buscar(String id) {
 		return DB.buscarComunidad(id);
 	}
+
 	public boolean unirse(String alias) {
 		return DB.insertarMiembroComunidad(nombre, alias);
 	}
@@ -53,25 +54,4 @@ public class Comunidad implements IAdministracionComunidad, IComunidad {
 	public String getNombre() {
 		return nombre;
 	}
-
-	@Override
-	public boolean aceptarNuevoMiembro(String alias) {
-		return DB.aceptarMiembroComunidad(nombre, alias);
-	}
-
-	@Override
-	public boolean rechazarNuevoMiembro(String alias) {
-		return false;
-	}
-
-	@Override
-	public boolean expulsarMiembro(String alias) {
-		return DB.borrarMiembroComunidad(nombre, alias);
-	}
-
-	@Override
-	public boolean modificarPermisos(String alias) {
-		return DB.hacerAdminComunidad(nombre, alias);
-	}
-
 }

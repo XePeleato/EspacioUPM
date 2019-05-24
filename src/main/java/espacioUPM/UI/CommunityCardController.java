@@ -1,6 +1,7 @@
 package espacioUPM.UI;
 
 import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Comunidades.IComunidad;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ public class CommunityCardController implements Initializable {
     @FXML Label txtCommunity;
     @FXML Button btnGotoCommunity;
 
-    Comunidad community;
+    IComunidad community;
 
     private static final IMainControllerScene controller = MainController.getInstance();
 

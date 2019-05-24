@@ -1,10 +1,14 @@
 package espacioUPM;
 
 import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Database.*;
 import espacioUPM.Publicaciones.*;
+import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Usuarios.Usuario;
 import org.junit.*;
+
+import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -16,25 +20,27 @@ import static org.junit.Assert.assertTrue;
 public class DBTest {
 
     DB_Main DB;
-    Usuario us;
-    Publicacion p;
-    Comunidad comunidad;
+    IUsuario us;
+    IPublicacion p;
+    IComunidad comunidad;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}
+    private static final byte[] testValues = new byte[] {(byte) 0xFF};
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {}
 
+
+
     @Before
     public void setUp() throws Exception {
         DB = DB_Main.getInstance();
-
-        byte[] testValues = new byte[] {(byte) 0xFF};
         DB.setUsuario("test", "test@test.com", testValues, testValues);
         us = DB.getUsuario("test");
         p = new PublicacionTexto("test","hola");
-        comunidad = new Comunidad("GrupoGuay",us);
+        comunidad = new Comunidad("GrupoGuay");
+        ((Comunidad) comunidad).unirse(us.getAlias());
     }
 
     @After
@@ -53,27 +59,29 @@ public class DBTest {
     @Test
     public void TestBorrarUsuario() {
         DB.borrarUsuario(us);
-        Usuario us2 = DB.getUsuario("test");
+        IUsuario us2 = DB.getUsuario("test");
         assertNull(us2);
     }
 
     @Test
     public void TestGetUsuario(){
-        assertEquals(us.getAlias(), "test");
+        assertEquals(DB.getUsuario("test").getAlias(), "test");
     }
 
     @Test
     public void TestBuscarUsuario(){  //Correcto
-        DB.setUsuario("test","testcorreo",null,null);
-        assertNotNull(DB.getUsuario("test"));
-        DB.buscarUsuario("test");
+        IUsuario[] users = DB.buscarUsuario("test");
+        boolean guay = false;
+        for(IUsuario user : users) {
+            if(!guay)
+                guay = user.getAlias().equals("test");
+        }
+        assertTrue(guay);
     }
 
     @Test
     public void TestSetUsuario() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        DB.setUsuario("test", "test@test.com",testValues2, testValues2 );
-        assertEquals(us.getAlias(), "test");
+        assertNotNull(us);
     }
 
     @Test
@@ -83,18 +91,24 @@ public class DBTest {
 
     @Test
     public void TestGetPublicacion() {
-        assertEquals("hola",((PublicacionTexto) p).getContenido());
+        IPublicacion p1 = DB.getPublicacion(p.getIDPublicacion());
+        assertNotNull(p1);
     }
 
     @Test
     public void TestGetPublicaciones() {
-        assertEquals("hola",((PublicacionTexto) p).getContenido());
+        IPublicacion[] pubs = DB.getPublicaciones(us);
+        boolean guay = true;
+        for(IPublicacion pub : pubs) {
+            if(!pub.getAutor().equals("test"))
+                guay = false;
+        }
+        assertTrue(guay);
     }
 
     @Test
     public void TestGetComentarios() {
         DB.comentar(p,us,"adios");
-        p.comentar(us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
     }
 
@@ -114,15 +128,15 @@ public class DBTest {
 
     @Test
     public void TestBorrarPublicacion() {
-        DB.borrarPublicacion(p.getIDPublicacion());
-        assertNull(DB.getPublicacion(p.getIDPublicacion()));
+        IPublicacion p1 = new PublicacionTexto("test", "jeje");
+        DB.borrarPublicacion(p1.getIDPublicacion());
+        assertNull(DB.getPublicacion(p1.getIDPublicacion()));
     }
 
     @Test
     public void TestGetSeguidos() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario usSeguido;
-        DB.setUsuario("usSeguido","usSeguido@test.com",testValues2,testValues2);
+        IUsuario usSeguido;
+        DB.setUsuario("usSeguido","usSeguido@test.com",testValues,testValues);
         usSeguido = DB.getUsuario("usSeguido");
         DB.seguir("test","usSeguido");
         assertEquals("usSeguido", DB.getSeguidos(us)[0]);
@@ -131,9 +145,8 @@ public class DBTest {
 
     @Test
     public void TestgetSeguidores() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario usSeguidor;
-        DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues2,testValues2);
+        IUsuario usSeguidor;
+        DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues,testValues);
         usSeguidor = DB.getUsuario("usSeguidor");
         DB.seguir("usSeguidor","test");
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
@@ -148,13 +161,11 @@ public class DBTest {
 
     @Test
     public void TestBorrarMiembroComunidad() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario miembro;
-        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        IUsuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues,testValues);
         miembro = DB.getUsuario("miembro");
 
         DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
         DB.borrarMiembroComunidad("GrupoGuay","miembro");
         assertNull(DB.getMiembros(comunidad)[1]);
         DB.borrarUsuario(miembro);
@@ -163,34 +174,19 @@ public class DBTest {
 
     @Test
     public void TestInsertarMiembroComunidad() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario miembro;
-        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
+        IUsuario miembro;
+        DB.setUsuario("miembro","miembro@test.com",testValues,testValues);
         miembro = DB.getUsuario("miembro");
 
         DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
-        assertEquals(miembro,DB.getMiembros(comunidad)[1]);
+        assertEquals(miembro.getAlias(),DB.getMiembros(comunidad)[1].getAlias());
         DB.borrarUsuario(miembro);
     }
 
-    @Test
-    public void TestAceptarMiembroComunidad() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario miembro;
-        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
-        miembro = DB.getUsuario("miembro");
-
-        DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
-        assertEquals(miembro,DB.getMiembros(comunidad)[1]);
-        DB.borrarUsuario(miembro);
-    }
     @Test
     public void TestSeguir() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario us2;
-        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        IUsuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues,testValues);
         us2 = DB.getUsuario("us2");
 
         DB.seguir("us2","test");
@@ -200,22 +196,20 @@ public class DBTest {
 
     @Test
     public void TestDejarDeSeguir() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario us2;
-        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        IUsuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues,testValues);
         us2 = DB.getUsuario("us2");
 
         DB.seguir("us2","test");
         DB.dejarDeSeguir("us2","test");
-        assertNull(DB.getSeguidores(us)[0]);
+        assertEquals(DB.getSeguidores(us).length, 0);
         DB.borrarUsuario(us2);
     }
 
     @Test
     public void TestEstaSiguiendo() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario us2;
-        DB.setUsuario("us2","us2@test.com",testValues2,testValues2);
+        IUsuario us2;
+        DB.setUsuario("us2","us2@test.com",testValues,testValues);
         us2 = DB.getUsuario("usSeguidor");
 
         DB.seguir("us2","test");
@@ -227,57 +221,36 @@ public class DBTest {
     public void TestPuntuar() {
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
         assertEquals(1, DB.getLikes(p.getIDPublicacion()));
-        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.NEUTRO);
     }
 
     @Test
     public void TestGetPuntuacion() {
         DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
         assertEquals(Puntuacion.LIKE, DB.getPuntuacion(us,p.getIDPublicacion()));
-        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.NEUTRO);
 
-    }
-
-    @Test
-    public void TestHacerAdminComunidad() {
-        byte[] testValues2 = new byte[] {(byte) 0xFF};
-        Usuario miembro;
-        DB.setUsuario("miembro","miembro@test.com",testValues2,testValues2);
-        miembro = DB.getUsuario("miembro");
-
-        DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        DB.aceptarMiembroComunidad("GrupoGuay","miembro");
-        DB.hacerAdminComunidad("GrupoGuay","miembro");
-        assertEquals(miembro,DB.getMiembros(comunidad)[0]);
-        DB.borrarUsuario(miembro);
-        //NO ESTA BIEN HECHO
     }
 
     @Test
     public void TestGetMiembros() {
-        assertEquals(us,DB.getMiembros(comunidad)[0]);
+        assertEquals(us.getAlias(), DB.getMiembros(comunidad)[0].getAlias());
     }
 
     @Test
     public void TestGetTimeline() {
-        fail("No esta implementado todavia");
+        assertEquals(p.getIDPublicacion(), DB.getTimeline(comunidad)[0].getIDPublicacion());
     }
 
     @Test
     public void TestBuscarComunidad() {
-        fail("No esta implementado todavia");
+        assertEquals("GrupoGuay", DB.buscarComunidad("GrupoGuay")[0].getNombre());
     }
 
     @Test
     public void TestComentar() {
         DB.comentar(p,us,"adios");
         assertEquals("adios",p.getComentarios().get(0).getContenido());
-    }
-
-    @Test
-    public void TestComprobarPasswd() {
-        DB.comprobarPasswd("test","pass");
-        assertTrue(true);
     }
 
     }

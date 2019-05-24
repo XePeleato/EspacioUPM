@@ -1,6 +1,7 @@
 package espacioUPM.Database;
 
 import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.*;
 import espacioUPM.Usuarios.Usuario;
@@ -56,7 +57,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
-    public Usuario[] buscarUsuario(String alias) {
+    public IUsuario[] buscarUsuario(String alias) {
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias FROM `Usuarios` WHERE `alias` LIKE(?)"))
         {
             pStmt.setString(1, '%' + alias + '%');
@@ -112,7 +113,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
-    public boolean setPublicacion(Publicacion publi) {
+    public boolean setPublicacion(IPublicacion publi) {
 
 
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `publicaciones` VALUES (NULL, ?, ?, ?, ?)")) {
@@ -304,7 +305,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         }
     }
 
-    public boolean crearComunidad(Comunidad comunidad, String fundador) {
+    public boolean crearComunidad(IComunidad comunidad, String fundador) {
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comunidades VALUES (?, ?)"))
         {
             pStmt.setString(1, comunidad.getNombre());
@@ -329,17 +330,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
             pStmt.setBoolean(3, false);
-            return pStmt.executeUpdate() == 1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean aceptarMiembroComunidad(String id, String alias) {
-        try (PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET aceptado = 1 WHERE id_usuario = ? AND id_comunidad = ?")) {
-            pStmt.setString(1, alias);
-            pStmt.setString(2, id);
             return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -454,19 +444,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return Puntuacion.NEUTRO;
     }
 
-    public boolean hacerAdminComunidad(String id, String alias) {
-        try {
-            PreparedStatement pStmt = connection.prepareStatement("UPDATE miembros_comunidad SET admin = 1 WHERE id_comunidad = ? AND id_usuario = ?");
-            pStmt.setString(1, alias);
-            pStmt.setString(2, id);
-            return pStmt.executeUpdate() == 1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public IUsuario[] getMiembros(Comunidad comunidad) {
+    public IUsuario[] getMiembros(IComunidad comunidad) {
         ArrayList<IUsuario> ret = new ArrayList<>();
         try {
             PreparedStatement pStmt = connection.prepareStatement("SELECT id_usuario FROM miembros_comunidad WHERE id_comunidad = ?");
@@ -484,7 +462,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return (IUsuario[])ret.toArray();
     }
 
-    public Publicacion[] getTimeline(Comunidad comunidad) {
+    public Publicacion[] getTimeline(IComunidad comunidad) {
         ArrayList<Publicacion> ret = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
@@ -502,8 +480,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
-    public Comunidad[] buscarComunidad(String id) {
-        LinkedList<Comunidad> ret = new LinkedList<>();
+    public IComunidad[] buscarComunidad(String id) {
+        LinkedList<IComunidad> ret = new LinkedList<>();
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM comunidades WHERE id LIKE(?)"))
         {
             pStmt.setString(1, '%' + id + '%');
@@ -520,7 +498,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     }
 
 
-    public void comentar(Publicacion publi, IUsuario usuario, String contenido) {
+    public void comentar(IPublicacion publi, IUsuario usuario, String contenido) {
         try {
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comentarios VALUES (NULL, ?, ?, ?)");
             pStmt.setString(1, usuario.getAlias());

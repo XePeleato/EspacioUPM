@@ -11,25 +11,22 @@ package espacioUPM.Database;//
 
 
 import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.Publicacion;
 
 public interface IDB_Comunidad {
 	boolean insertarMiembroComunidad(String id, String alias);
-
-	boolean aceptarMiembroComunidad(String id, String alias);
 	
 	boolean borrarMiembroComunidad(String id, String alias);
-	
-	boolean hacerAdminComunidad(String id, String alias);
 
-	boolean crearComunidad(Comunidad comunidad, String fundador);
+	boolean crearComunidad(IComunidad comunidad, String fundador);
 
-	IUsuario[] getMiembros(Comunidad comunidad);
+	IUsuario[] getMiembros(IComunidad comunidad);
 
-	Publicacion[] getTimeline(Comunidad comunidad);
+	Publicacion[] getTimeline(IComunidad comunidad);
 
-	Comunidad[] buscarComunidad(String id);
+	IComunidad[] buscarComunidad(String id);
 
-	Comunidad[] getComunidades(String alias);
+	IComunidad[] getComunidades(String alias);
 }

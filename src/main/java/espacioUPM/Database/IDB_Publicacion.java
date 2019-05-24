@@ -9,7 +9,7 @@ public interface IDB_Publicacion {
 
 	Publicacion getPublicacion(int id);
 
-	boolean setPublicacion(Publicacion publi);
+	boolean setPublicacion(IPublicacion publi);
 
 	IPublicacion[] getPublicaciones(IUsuario usuario);
 	
@@ -17,7 +17,7 @@ public interface IDB_Publicacion {
 	
 	void puntuar(IUsuario usuario, int publi, Puntuacion puntuacion);
 	
-	void comentar(Publicacion publi, IUsuario usuario, String contenido);
+	void comentar(IPublicacion publi, IUsuario usuario, String contenido);
 
 	Puntuacion getPuntuacion(IUsuario usuario, int publi);
 

@@ -1,6 +1,7 @@
 package espacioUPM.UI;
 
 import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Comunidades.IComunidad;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
@@ -22,7 +23,7 @@ public class CommunityCard extends GridPane {
         getChildren().add(view);
     }
 
-    public void setCommunity(Comunidad comunidad)
+    public void setCommunity(IComunidad comunidad)
     {
         controller.community = comunidad;
         controller.txtCommunity.setText(comunidad.getNombre());

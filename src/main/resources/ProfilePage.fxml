@@ -12,7 +12,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.PerfilController">
    <children>
-      <GridPane alignment="CENTER_RIGHT">
+      <GridPane alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="700.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,7 +21,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="txtUsername" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
+            <Label fx:id="txtUsername" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="154.0" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
             <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
                   <Button fx:id="btnFollow" mnemonicParsing="false" onAction="#onClickFollow" styleClass="btn-primary" stylesheets="@fextile.css" text="Ir al perfil" />

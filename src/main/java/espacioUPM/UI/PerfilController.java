@@ -14,7 +14,11 @@ import java.util.ResourceBundle;
 public class PerfilController implements Initializable {
 
     @FXML Button btnFollow;
+    @FXML Button btnSeguidores;
+    @FXML Button btnSeguidos;
     @FXML Label txtUsername;
+    @FXML Label txtSeguidores;
+    @FXML Label txtSeguidos;
     @FXML ScrollPane scrollPanePublis;
 
 
@@ -57,6 +61,17 @@ public class PerfilController implements Initializable {
         maincontrollerScene.refresh();
     }
 
+    public void onClickSeguidores(ActionEvent actionEvent) {
+        ListaUsuarios l = new ListaUsuarios();
+        l.setUsuarios(usuario.getSeguidores());
+        maincontrollerScene.replaceComponent(l);
+    }
+
+    public void onClickSeguidos(ActionEvent actionEvent) {
+        ListaUsuarios l = new ListaUsuarios();
+        l.setUsuarios(usuario.getSeguidos());
+        maincontrollerScene.replaceComponent(l);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,5 +85,7 @@ public class PerfilController implements Initializable {
             btnFollow.setText("Dejar de seguir");
         else
             btnFollow.setText("Seguir");
+        txtSeguidores.setText("Seguidores: " + usuario.getSeguidores().length);
+        txtSeguidos.setText("Seguidos: " + usuario.getSeguidos().length);
     }
 }
