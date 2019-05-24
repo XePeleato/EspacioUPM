@@ -60,18 +60,6 @@ public class PerfilController implements Initializable {
         maincontrollerScene.refresh();
     }
 
-    public void onClickSeguidores(MouseEvent actionEvent) {
-        ListaUsuarios l = new ListaUsuarios();
-        l.setUsuarios(usuario.getSeguidores());
-        maincontrollerScene.replaceComponent(l);
-    }
-
-    public void onClickSeguidos(MouseEvent actionEvent) {
-        ListaUsuarios l = new ListaUsuarios();
-        l.setUsuarios(usuario.getSeguidos());
-        maincontrollerScene.replaceComponent(l);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtUsername.requestFocus();

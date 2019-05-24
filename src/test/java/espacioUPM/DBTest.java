@@ -31,8 +31,6 @@ public class DBTest {
     @AfterClass
     public static void tearDownAfterClass() throws Exception {}
 
-
-
     @Before
     public void setUp() throws Exception {
         DB = DB_Main.getInstance();
