@@ -1,10 +1,9 @@
 package espacioUPM.Database;
 
-import espacioUPM.IUsuario;
+import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.Puntuacion;
-import espacioUPM.Usuario;
 
 public interface IDB_Publicacion {
 

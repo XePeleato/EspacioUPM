@@ -1,13 +1,8 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Publicacion;
-import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
-import espacioUPM.Usuario;
-import javafx.application.Platform;
-import javafx.beans.property.SimpleDoubleProperty;
+import espacioUPM.Usuarios.Usuario;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,14 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.TreeSet;
 
 public class TimelineController implements Initializable {
 

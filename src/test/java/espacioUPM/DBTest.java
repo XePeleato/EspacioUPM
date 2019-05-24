@@ -1,7 +1,9 @@
 package espacioUPM;
 
+import espacioUPM.Comunidades.Comunidad;
 import espacioUPM.Database.*;
 import espacioUPM.Publicaciones.*;
+import espacioUPM.Usuarios.Usuario;
 import org.junit.*;
 
 import static junit.framework.Assert.assertEquals;

@@ -1,8 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

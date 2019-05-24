@@ -1,7 +1,7 @@
 package espacioUPM.Publicaciones;//
 
 
-import espacioUPM.IUsuario;
+import espacioUPM.Usuarios.IUsuario;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

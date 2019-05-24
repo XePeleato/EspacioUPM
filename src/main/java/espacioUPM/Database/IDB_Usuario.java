@@ -10,8 +10,7 @@ package espacioUPM.Database;//
 //
 
 
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.IUsuario;
 
 public interface IDB_Usuario {
 	 IUsuario getUsuario(String alias);

@@ -1,7 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.IUsuario;
 
 public interface IMainControllerUtils {
 

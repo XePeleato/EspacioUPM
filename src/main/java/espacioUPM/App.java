@@ -1,6 +1,7 @@
 package espacioUPM;
 
 import espacioUPM.Database.DB_Main;
+import espacioUPM.UI.IMainControllerScene;
 import espacioUPM.UI.MainController;
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -11,7 +12,7 @@ public class App extends Application {
 
     public static HostServices hostServices;
     private static App instance;
-    private MainController controller;
+    private IMainControllerScene controller;
     public App() {
         instance = this;
     }

@@ -1,6 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.Comunidad;
+import espacioUPM.Comunidades.Comunidad;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;

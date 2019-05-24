@@ -1,7 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.IUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

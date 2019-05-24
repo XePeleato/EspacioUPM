@@ -1,7 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.IUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;

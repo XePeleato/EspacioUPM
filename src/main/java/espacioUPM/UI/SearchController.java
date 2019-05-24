@@ -1,8 +1,8 @@
 package espacioUPM.UI;
 
-import espacioUPM.Comunidad;
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Usuarios.IUsuario;
+import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

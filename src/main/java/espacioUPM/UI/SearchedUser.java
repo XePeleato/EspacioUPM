@@ -1,9 +1,6 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.IUsuario;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.IUsuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;

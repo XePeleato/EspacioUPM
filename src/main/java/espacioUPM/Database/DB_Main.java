@@ -1,9 +1,9 @@
 package espacioUPM.Database;
 
-import espacioUPM.Comunidad;
-import espacioUPM.IUsuario;
+import espacioUPM.Comunidades.Comunidad;
+import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.*;
-import espacioUPM.Usuario;
+import espacioUPM.Usuarios.Usuario;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

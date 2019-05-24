@@ -1,12 +1,7 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Publicacion;
-import espacioUPM.Database.IDB_Usuario;
-import espacioUPM.IUsuario;
+import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.IPublicacion;
-import espacioUPM.Publicaciones.Publicacion;
-import espacioUPM.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
