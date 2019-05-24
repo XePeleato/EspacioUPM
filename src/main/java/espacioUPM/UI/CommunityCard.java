@@ -1,6 +1,5 @@
 package espacioUPM.UI;
 
-import espacioUPM.Comunidades.Comunidad;
 import espacioUPM.Comunidades.IComunidad;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

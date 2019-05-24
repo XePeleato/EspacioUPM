@@ -10,10 +10,9 @@ package espacioUPM.Database;//
 //
 
 
-import espacioUPM.Comunidades.Comunidad;
 import espacioUPM.Comunidades.IComunidad;
-import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Publicaciones.Publicacion;
+import espacioUPM.Usuarios.IUsuario;
 
 public interface IDB_Comunidad {
 	boolean insertarMiembroComunidad(String id, String alias);
