@@ -1,6 +1,7 @@
 package espacioUPM.UI;
 
 import espacioUPM.Usuarios.Usuario;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -12,9 +13,7 @@ import java.io.IOException;
 public class ListaUsuarios extends GridPane {
     private Node view;
 
-
-    private static final IMainControllerUtils maincontroller = MainController.getInstance();
-
+    @FXML ScrollPane scrollPane;
 
     public ListaUsuarios() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SeguidoresPage.fxml"));
@@ -31,7 +30,7 @@ public class ListaUsuarios extends GridPane {
     public void setUsuarios(String[] usuarios) {
 
         VBox root = new VBox();
-        new ScrollPane().setContent(root);
+        scrollPane.setContent(root);
 
         for (String u : usuarios) {
             SearchedUser sU = new SearchedUser();
