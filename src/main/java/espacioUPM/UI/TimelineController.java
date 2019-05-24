@@ -4,6 +4,7 @@ import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuarios.Usuario;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -12,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;

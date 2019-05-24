@@ -15,7 +15,6 @@ import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.IPublicacion;
-import espacioUPM.Usuarios.IUsuario;
 
 public class Usuario implements IUsuario {
 

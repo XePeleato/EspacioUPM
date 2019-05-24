@@ -41,7 +41,7 @@ public class DBTest {
         p = new PublicacionTexto("test","hola");
         comunidad = new Comunidad("GrupoGuay");
         DB.crearComunidad(comunidad, us.getAlias());
-        ((Comunidad) comunidad).unirse(us.getAlias());
+        comunidad.unirse(us.getAlias());
     }
 
     @After

@@ -2,7 +2,6 @@ package espacioUPM.UI;
 
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Publicaciones.IPublicacion;
-import espacioUPM.Usuarios.IUsuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;

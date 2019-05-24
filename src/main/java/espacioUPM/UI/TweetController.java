@@ -1,7 +1,5 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuarios.Usuario;
@@ -24,7 +22,6 @@ public class TweetController implements Initializable {
 
     private IPublicacion pub;
 
-    private static final IDB_Publicacion DB_Pub = DB_Main.getInstance();
     private static final IMainControllerUtils controller = MainController.getInstance();
     private static final IMainControllerScene controllerScene = MainController.getInstance();
 
@@ -49,10 +46,6 @@ public class TweetController implements Initializable {
             txtLike.setText("");
     }
 
-    public IPublicacion getCurrentPub() {
-        return pub;
-    }
-
     public void onClickUsername(MouseEvent mouseEvent){
         String autor = txtUsername.getText().split("@")[1];
         Perfil p = new Perfil();
@@ -63,6 +56,7 @@ public class TweetController implements Initializable {
 
     public void onClickRetweet(ActionEvent actionEvent){
         pub.referenciar(controller.getThisUser());
+        controllerScene.replaceComponent("/TimelinePage.fxml");
     }
 
     public void onClickComment(ActionEvent actionEvent){
@@ -80,7 +74,7 @@ public class TweetController implements Initializable {
     }
     public void onClickDelete(ActionEvent actionEvent){
         pub.borrar();
-        controllerScene.refresh();
+        controllerScene.replaceComponent("/TimelinePage.fxml");
     }
 
     public void setView(Tweet node) { view = node; }

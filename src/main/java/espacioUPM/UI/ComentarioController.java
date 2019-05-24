@@ -1,11 +1,7 @@
 package espacioUPM.UI;
 
-import espacioUPM.Database.DB_Main;
-import espacioUPM.Database.IDB_Publicacion;
-import espacioUPM.Publicaciones.Comentario;
 import espacioUPM.Publicaciones.IComentario;
 import espacioUPM.Publicaciones.IPublicacion;
-import espacioUPM.Publicaciones.Publicacion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
