@@ -20,7 +20,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     private static final MainController controller = MainController.getInstance();
 
     public Publicacion(String autor) {
-        IDPublicacion =  0; //DB.getNewID(); //FIXME: ya hablaremos sobre esto, pero de momento explota
+        IDPublicacion =  0;
         this.autor = autor;
         this.fecha = LocalDateTime.now();
         this.comentarios = new ArrayList<>();

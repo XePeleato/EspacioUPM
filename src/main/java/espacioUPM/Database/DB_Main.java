@@ -330,16 +330,16 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
             pStmt.setBoolean(3, false);
-            return pStmt.executeUpdate() == 1;
+            return pStmt.executeUpdate() >= 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public Comunidad[] getComunidades(String alias)
+    public IComunidad[] getComunidades(String alias)
     {
-        ArrayList<Comunidad> ret = new ArrayList<>();
+        ArrayList<IComunidad> ret = new ArrayList<>();
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ? AND aceptado = 1")) {
             pStmt.setString(1, alias);
 

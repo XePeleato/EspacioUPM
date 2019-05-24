@@ -70,6 +70,6 @@ public class LandingPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtAlias.requestFocus();//FIXME: esta verga no hase na
+        txtAlias.requestFocus();
     }
 }

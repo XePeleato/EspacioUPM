@@ -40,6 +40,7 @@ public class DBTest {
         us = DB.getUsuario("test");
         p = new PublicacionTexto("test","hola");
         comunidad = new Comunidad("GrupoGuay");
+        DB.crearComunidad(comunidad, us.getAlias());
         ((Comunidad) comunidad).unirse(us.getAlias());
     }
 
@@ -48,6 +49,8 @@ public class DBTest {
         DB.borrarUsuario(us);
         DB.borrarPublicacion(p.getIDPublicacion());
         DB.borrarMiembroComunidad("GrupoGuay","test");
+        DB.borrarMiembroComunidad("GrupoGuay", "test");
+        DB.borrarUsuario(DB.getUsuario("miembro"));
     }
 
     @Test
@@ -168,6 +171,7 @@ public class DBTest {
         DB.insertarMiembroComunidad("GrupoGuay","miembro");
         DB.borrarMiembroComunidad("GrupoGuay","miembro");
         assertNull(DB.getMiembros(comunidad)[1]);
+        DB.borrarMiembroComunidad("GrupoGuay", miembro.getAlias());
         DB.borrarUsuario(miembro);
 
     }

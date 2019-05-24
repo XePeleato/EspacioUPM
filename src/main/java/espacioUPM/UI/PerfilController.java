@@ -14,8 +14,6 @@ import java.util.ResourceBundle;
 public class PerfilController implements Initializable {
 
     @FXML Button btnFollow;
-    @FXML Button btnSeguidores;
-    @FXML Button btnSeguidos;
     @FXML Label txtUsername;
     @FXML Label txtSeguidores;
     @FXML Label txtSeguidos;

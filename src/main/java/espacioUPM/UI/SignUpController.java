@@ -40,10 +40,6 @@ public class SignUpController {
         else if(Usuario.getUsuario(alias) != null) {
             controller.alert("El alias pedido ya existe");
         }
-        // TODO: comprobar el correo. Hay tema de conectarse con el servidor de la UPM
-        //  y a lo mejor es demasiado para hacer. Yo lo dejo aquí por si acaso luego nos sobra
-        //  el tiempo.
-        //else if() {}
         else if(!password.equals(password2)) {
             controller.alert("Las contraseñas no coinciden");
         }

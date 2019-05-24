@@ -3,6 +3,7 @@ package espacioUPM.UI;
 import espacioUPM.Usuarios.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -30,6 +31,7 @@ public class ListaUsuarios extends GridPane {
     public void setUsuarios(String[] usuarios) {
 
         VBox root = new VBox();
+        new ScrollPane().setContent(root);
 
         for (String u : usuarios) {
             SearchedUser sU = new SearchedUser();
