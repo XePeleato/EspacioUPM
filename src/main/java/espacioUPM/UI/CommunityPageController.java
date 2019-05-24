@@ -20,6 +20,8 @@ public class CommunityPageController implements Initializable {
 
     private static final IMainControllerUtils controller = MainController.getInstance();
     private static final IMainControllerScene controllerScene = MainController.getInstance();
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         VBox root = new VBox();
@@ -33,6 +35,7 @@ public class CommunityPageController implements Initializable {
             root.getChildren().add(card);
         }
     }
+
 
     public void onClickCreateCommunity(ActionEvent actionEvent)
     {

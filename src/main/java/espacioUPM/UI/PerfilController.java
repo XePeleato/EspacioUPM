@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -59,13 +60,13 @@ public class PerfilController implements Initializable {
         maincontrollerScene.refresh();
     }
 
-    public void onClickSeguidores(ActionEvent actionEvent) {
+    public void onClickSeguidores(MouseEvent actionEvent) {
         ListaUsuarios l = new ListaUsuarios();
         l.setUsuarios(usuario.getSeguidores());
         maincontrollerScene.replaceComponent(l);
     }
 
-    public void onClickSeguidos(ActionEvent actionEvent) {
+    public void onClickSeguidos(MouseEvent actionEvent) {
         ListaUsuarios l = new ListaUsuarios();
         l.setUsuarios(usuario.getSeguidos());
         maincontrollerScene.replaceComponent(l);
