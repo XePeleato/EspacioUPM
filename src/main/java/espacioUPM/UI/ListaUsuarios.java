@@ -12,18 +12,11 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class ListaUsuarios extends ScrollPane {
-    private Node view;
+    private ScrollPane view;
     private ListaUsuariosController controller;
 
     public ListaUsuarios() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SeguidoresPage.fxml"));
-        fxmlLoader.setControllerFactory(param -> controller = new ListaUsuariosController());
-        try {
-            view = fxmlLoader.load();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        view = new ScrollPane();
         getChildren().add(view);
     }
 
@@ -32,7 +25,8 @@ public class ListaUsuarios extends ScrollPane {
 
         VBox root = new VBox();
 
-        controller.scrollPane.setContent(root);
+        view.setContent(root);
+
         for (String u : usuarios) {
             SearchedUser sU = new SearchedUser();
             sU.setUsuario(Usuario.getUsuario(u));

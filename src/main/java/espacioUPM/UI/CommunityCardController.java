@@ -22,7 +22,9 @@ public class CommunityCardController implements Initializable {
 
     public void onClickGotoCommunity(ActionEvent actionEvent)
     {
-        // Ir a la comunidad
+        CommunityTimeline c = new CommunityTimeline();
+        c.setComunidad(community);
+        controller.replaceComponent(c);
     }
 
     @Override

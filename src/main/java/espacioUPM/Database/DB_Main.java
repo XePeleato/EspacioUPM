@@ -298,11 +298,21 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_usuario = ? AND id_comunidad = ?");
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            return pStmt.executeUpdate() == 1;
+            if (pStmt.executeUpdate() == 1) {
+                PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS numero FROM miembros_comunidad WHERE id_comunidad = ?");
+                statement.setString(1, id);
+                ResultSet rs = statement.executeQuery();
+                if (rs.next() && rs.getInt("numero") == 0) {
+                    PreparedStatement statement1 = connection.prepareStatement("DELETE FROM comunidades WHERE id = ?");
+                    statement1.setString(1, id);
+                    statement.execute();
+                }
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     public boolean crearComunidad(IComunidad comunidad, String fundador) {
@@ -340,7 +350,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     public IComunidad[] getComunidades(String alias)
     {
         ArrayList<IComunidad> ret = new ArrayList<>();
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ? AND aceptado = 1")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ?")) {
             pStmt.setString(1, alias);
 
             ResultSet rs = pStmt.executeQuery();
@@ -466,8 +476,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         ArrayList<Publicacion> ret = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
-                                                                          "FROM publicaciones AS p, miembros_comunidad AS mc" +
-                                                                          "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad" +
+                                                                          "FROM publicaciones AS p, miembros_comunidad AS mc " +
+                                                                          "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad " +
                                                                           "ORDER BY fec DESC");
             statement.setString(1, comunidad.getNombre());
             ResultSet rs = statement.executeQuery();

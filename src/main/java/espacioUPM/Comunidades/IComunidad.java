@@ -13,4 +13,5 @@ public interface IComunidad {
     IPublicacion[] obtenerTimelineCompartido(int pagina);
 
     String getNombre();
+
 }

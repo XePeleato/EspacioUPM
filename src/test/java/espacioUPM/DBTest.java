@@ -72,7 +72,7 @@ public class DBTest {
     }
 
     @Test
-    public void TestBuscarUsuario(){  //Correcto
+    public void TestBuscarUsuario(){
         IUsuario[] users = DB.buscarUsuario("test");
         boolean guay = false;
         for(IUsuario user : users) {
