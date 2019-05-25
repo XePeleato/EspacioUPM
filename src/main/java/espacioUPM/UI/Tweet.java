@@ -49,6 +49,13 @@ public class Tweet extends VBox{
             controller.txtDate.setText(pubReferenciada.getFecha().toString());
             if (pubReferenciada instanceof PublicacionTexto)
                 controller.borderPaneTweet.setCenter(new Label(((PublicacionTexto) pubReferenciada).getContenido()));
+            else if(pubReferenciada instanceof  PublicacionEnlace) {
+                Hyperlink link = new Hyperlink(((PublicacionEnlace) pubReferenciada).getUrl());
+                link.setOnAction(ev -> {
+                    App.hostServices.showDocument(link.getText());
+                });
+                controller.borderPaneTweet.setCenter(new TextFlow(link));
+            }
         }
 
         if (p instanceof PublicacionEnlace) {

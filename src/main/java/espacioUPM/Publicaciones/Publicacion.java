@@ -80,7 +80,9 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     }
 
     public void referenciar(IUsuario usuario) {
-        PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + IDPublicacion);
+        if(this instanceof PublicacionReferencia)
+            PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + ((PublicacionReferencia)this).getPublicacionRef().getIDPublicacion());
+        else PublicacionFactory.createPublicacion(usuario.getAlias(), "/ref" + IDPublicacion);
     }
 
     public int getIDPublicacion() {
