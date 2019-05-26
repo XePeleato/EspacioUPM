@@ -1,6 +1,7 @@
 package espacioUPM.Usuarios;
 
 import espacioUPM.Publicaciones.IPublicacion;
+import javafx.beans.property.DoubleProperty;
 
 public interface IUsuario {
     boolean comprobarPasswd(String pass);
@@ -15,7 +16,7 @@ public interface IUsuario {
 
     String[] getSeguidores();
 
-    IPublicacion[] obtenerPerfil();
+    IPublicacion[] obtenerPerfil(DoubleProperty progressProp);
 
     String getAlias();
 

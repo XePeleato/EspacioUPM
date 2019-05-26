@@ -1,6 +1,7 @@
 package espacioUPM.Comunidades;
 
 import espacioUPM.Publicaciones.IPublicacion;
+import javafx.beans.property.DoubleProperty;
 
 public interface IComunidad {
 
@@ -8,7 +9,7 @@ public interface IComunidad {
 
     boolean salir(String alias);
 
-    IPublicacion[] obtenerTimelineCompartido(int pagina);
+    IPublicacion[] obtenerTimelineCompartido(int pagina, DoubleProperty progressProp);
 
     String getNombre();
 

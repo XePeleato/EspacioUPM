@@ -5,6 +5,9 @@ import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Publicaciones.*;
 import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Usuarios.Usuario;
+import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -154,14 +157,28 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret;
     }
 
-    public Publicacion[] getPublicaciones(IUsuario usuario) {
+    public Publicacion[] getPublicaciones(IUsuario usuario, DoubleProperty progressProp) {
 
         try (PreparedStatement pStmt = connection.prepareStatement("SELECT id FROM publicaciones WHERE autor = ? ORDER BY fecha DESC"))
         {
             pStmt.setString(1, usuario.getAlias());
             ResultSet rs = pStmt.executeQuery();
             ArrayList<Publicacion> ret = new ArrayList<>();
+
+            rs.last();
+            int rows = rs.getRow();
+            rs.beforeFirst();
+
             while(rs.next()) {
+                if (progressProp != null) {
+                    Platform.runLater(() -> {
+                        try {
+                            progressProp.set((double) rs.getRow() / (double) rows);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
                 ret.add(getPublicacion(rs.getInt("id")));
             }
             return ret.toArray(Publicacion[]::new); // dejad esto así, que hacer un cast peta
@@ -473,7 +490,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return ret.toArray(IUsuario[]::new);
     }
 
-    public Publicacion[] getTimeline(IComunidad comunidad) {
+    public Publicacion[] getTimeline(IComunidad comunidad, DoubleProperty progressProp)
+    {
         ArrayList<Publicacion> ret = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
@@ -482,7 +500,20 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                                                                           "ORDER BY fec DESC");
             statement.setString(1, comunidad.getNombre());
             ResultSet rs = statement.executeQuery();
+
+            /* Este bloque de aquí cuenta las publicaciones para la progressbar */
+            rs.last();
+            int rows = rs.getRow();
+            rs.beforeFirst();
+
             while(rs.next()) {
+                Platform.runLater(() -> {
+                    try {
+                        progressProp.set((double)rs.getRow() / (double) rows);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
                 ret.add(getPublicacion(rs.getInt("pubid")));
             }
             return ret.toArray(Publicacion[]::new); // dejad esto así, que hacer un cast peta

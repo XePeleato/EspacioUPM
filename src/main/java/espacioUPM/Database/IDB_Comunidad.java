@@ -13,6 +13,7 @@ package espacioUPM.Database;//
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuarios.IUsuario;
+import javafx.beans.property.DoubleProperty;
 
 public interface IDB_Comunidad {
 	boolean insertarMiembroComunidad(String id, String alias);
@@ -23,7 +24,7 @@ public interface IDB_Comunidad {
 
 	IUsuario[] getMiembros(IComunidad comunidad);
 
-	Publicacion[] getTimeline(IComunidad comunidad);
+	Publicacion[] getTimeline(IComunidad comunidad, DoubleProperty progressProp);
 
 	IComunidad[] buscarComunidad(String id);
 

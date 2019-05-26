@@ -2,8 +2,13 @@ package espacioUPM.UI;
 
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Publicaciones.IPublicacion;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -38,14 +43,37 @@ public class CommunityTimeline extends GridPane {
         VBox root = new VBox();
         controller.getScrollPanePublis().setContent(root);
 
-        IPublicacion[] publis = c.obtenerTimelineCompartido(0);
-        if(publis != null) {
-            for (IPublicacion p : publis) {
-                Tweet t = new Tweet();
-                t.setTweet(p);
-                root.getChildren().add(t);
+        final ProgressBar progressBar = new ProgressBar();
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().add(progressBar);
+        root.prefWidthProperty().bind(controller.getScrollPanePublis().widthProperty().multiply(0.8));
+        root.prefHeightProperty().bind(controller.getScrollPanePublis().heightProperty().multiply(0.8));
+
+
+        Task getTimelineTask = new Task<IPublicacion[]>() {
+
+            @Override
+            protected IPublicacion[] call() {
+                return  c.obtenerTimelineCompartido(0, progressBar.progressProperty());
             }
-        }
+        };
+
+        new Thread(getTimelineTask).start();
+
+        getTimelineTask.setOnSucceeded(taskFinishEv -> {
+            IPublicacion[] publis = (IPublicacion[]) getTimelineTask.getValue();
+            root.getChildren().clear();
+
+            if(publis != null) {
+                for (IPublicacion p : publis) {
+                    Tweet t = new Tweet();
+                    t.setTweet(p);
+                    root.getChildren().add(t);
+                }
+            }
+        });
+
+
     }
 
 }

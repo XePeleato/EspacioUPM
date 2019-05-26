@@ -4,6 +4,7 @@ package espacioUPM.Comunidades;//
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Comunidad;
 import espacioUPM.Publicaciones.IPublicacion;
+import javafx.beans.property.DoubleProperty;
 
 import java.util.ArrayList;
 
@@ -36,9 +37,9 @@ public class Comunidad implements IComunidad {
 		return DB.borrarMiembroComunidad(nombre, alias);
 	}
 	
-	public IPublicacion[] obtenerTimelineCompartido(int pagina) {
+	public IPublicacion[] obtenerTimelineCompartido(int pagina, DoubleProperty progressProp) {
 		ArrayList<IPublicacion> ret = new ArrayList<>();
-		IPublicacion[] publicaciones = DB.getTimeline(this);
+		IPublicacion[] publicaciones = DB.getTimeline(this, progressProp);
 		if(publicaciones == null) return null;
 		for (int i = pagina*50, j = 0; i < publicaciones.length && j < 50; i++, j++)
 			ret.add(publicaciones[i]);

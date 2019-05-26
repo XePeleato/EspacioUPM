@@ -4,6 +4,7 @@ import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuarios.IUsuario;
+import javafx.beans.property.DoubleProperty;
 
 public interface IDB_Publicacion {
 
@@ -11,7 +12,7 @@ public interface IDB_Publicacion {
 
 	boolean setPublicacion(IPublicacion publi);
 
-	IPublicacion[] getPublicaciones(IUsuario usuario);
+	IPublicacion[] getPublicaciones(IUsuario usuario, DoubleProperty progressProp);
 	
 	void borrarPublicacion(int publi);
 	

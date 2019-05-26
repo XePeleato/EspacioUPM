@@ -57,9 +57,8 @@ public class TimelineController implements Initializable {
 
                 ArrayList<Publicacion> total = new ArrayList<>();
 
-                for (int i = 0; i < seguidos.length; i++) {
-                    updateProgress(i, seguidos.length);
-                    IPublicacion[] pubs = new Usuario(seguidos[i]).obtenerPerfil();
+                for (String seguido : seguidos) {
+                    IPublicacion[] pubs = new Usuario(seguido).obtenerPerfil(progressBar.progressProperty());
                     total.addAll(Arrays.asList((Publicacion[]) pubs));
                 }
 

@@ -2,13 +2,17 @@ package espacioUPM.UI;
 
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Usuarios.IUsuario;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
+@SuppressWarnings("Duplicates")
 public class Perfil extends GridPane {
     private PerfilController controller;
     private Node view;
@@ -43,14 +47,30 @@ public class Perfil extends GridPane {
         VBox root = new VBox();
         controller.getScrollPanePublis().setContent(root);
 
-        IPublicacion[] publis = us.obtenerPerfil();
+        final ProgressBar progressBar = new ProgressBar();
+        root.setAlignment(Pos.CENTER);
+        root.getChildren().add(progressBar);
+        root.prefWidthProperty().bind(controller.getScrollPanePublis().widthProperty().multiply(0.8));
+        root.prefHeightProperty().bind(controller.getScrollPanePublis().heightProperty().multiply(0.8));
 
-        for (IPublicacion p : publis) {
-            Tweet t = new Tweet();
-            t.setTweet(p);
-            root.getChildren().add(t);
-        }
+        Task getTimelineTask = new Task<IPublicacion[]>() {
+
+            @Override
+            protected IPublicacion[] call() {
+                return  us.obtenerPerfil(progressBar.progressProperty());
+            }
+        };
+
+        new Thread(getTimelineTask).start();
+
+        getTimelineTask.setOnSucceeded(taskFinishEv -> {
+            IPublicacion[] publis = (IPublicacion[]) getTimelineTask.getValue();
+
+            for (IPublicacion p : publis) {
+                Tweet t = new Tweet();
+                t.setTweet(p);
+                root.getChildren().add(t);
+            }
+        });
     }
-
-
 }

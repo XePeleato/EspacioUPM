@@ -15,6 +15,7 @@ import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
 import espacioUPM.Publicaciones.IPublicacion;
+import javafx.beans.property.DoubleProperty;
 
 public class Usuario implements IUsuario {
 
@@ -63,8 +64,8 @@ public class Usuario implements IUsuario {
         return DB_user.getSeguidores(this);
     }
 
-    public IPublicacion[] obtenerPerfil() {
-        return DB.getPublicaciones(this);
+    public IPublicacion[] obtenerPerfil(DoubleProperty progressProp) {
+        return DB.getPublicaciones(this, progressProp);
     }
 
     public String getAlias() {
@@ -76,7 +77,7 @@ public class Usuario implements IUsuario {
     }
 
     public void borrarDatos() {
-        for(IPublicacion publi : DB.getPublicaciones(this)) {
+        for(IPublicacion publi : DB.getPublicaciones(this, null)) {
             DB.borrarPublicacion(publi.getIDPublicacion());
         }
     }
