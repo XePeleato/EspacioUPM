@@ -38,7 +38,7 @@ public class DBTest {
         DB = DB_Main.getInstance();
         us = new Usuario("testEstatico"); // contraseña "test"
         p = new PublicacionTexto("testEstatico", "publicacionTest");
-        ((PublicacionTexto) p).setIDPublicacion(89); // El id de la publicación de los tests
+        ((PublicacionTexto) p).setIDPublicacion(89); // valor de esa publicacion
     }
 
     @After
@@ -94,7 +94,7 @@ public class DBTest {
 
     @Test
     public void TestSetPublicacion() {
-        IPublicacion p1 = new PublicacionTexto(us.getAlias(), "hola");
+        PublicacionTexto p1 = new PublicacionTexto(us.getAlias(), "hola");
         DB.setPublicacion(p1);
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM publicaciones WHERE autor = ? AND cuerpo = ?");
@@ -102,14 +102,14 @@ public class DBTest {
             statement.setString(2, "hola");
             ResultSet rs = statement.executeQuery();
             assertTrue(rs.next());
-            assertEquals(rs.getString("autor"), us.getAlias());
-            assertEquals(rs.getString("cuerpo"), "hola");
+            assertEquals(rs.getInt("id"), p1.getIDPublicacion());
+            assertEquals(rs.getString("autor"), p1.getAutor());
+            assertEquals(rs.getString("cuerpo"), p1.getContenido());
         } catch(SQLException e) { e.printStackTrace(); }
         try
         {
-            PreparedStatement pStmt = connection.prepareStatement("DELETE FROM publicaciones WHERE cuerpo = ? AND autor = ?");
-            pStmt.setString(1, "hola");
-            pStmt.setString(2, us.getAlias());
+            PreparedStatement pStmt = connection.prepareStatement("DELETE FROM publicaciones WHERE id = ?");
+            pStmt.setInt(1, p1.getIDPublicacion());
             pStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,7 +161,7 @@ public class DBTest {
     public void TestBorrarPublicacion() {
         IPublicacion p1 = new PublicacionTexto("testEstatico", "jeje");
         DB.setPublicacion(p1);
-        DB.borrarPublicacion(DB.getPublicaciones(us)[0].getIDPublicacion());
+        DB.borrarPublicacion(p1.getIDPublicacion());
         assertNull(DB.getPublicacion(p1.getIDPublicacion()));
     }
 

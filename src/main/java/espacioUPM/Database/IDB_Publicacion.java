@@ -21,4 +21,6 @@ public interface IDB_Publicacion {
 
 	Puntuacion getPuntuacion(IUsuario usuario, int publi);
 
+	int getNewID();
+
 }

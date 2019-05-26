@@ -212,6 +212,20 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return 0;
     }
 
+    public int getNewID() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT AUTO_INCREMENT \n" +
+                    "FROM  INFORMATION_SCHEMA.TABLES\n" +
+                    "WHERE TABLE_SCHEMA = 'twitter2'\n" +
+                    "AND   TABLE_NAME   = 'publicaciones';");
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return rs.getInt("auto_increment");
+
+        } catch(SQLException e) { e.printStackTrace(); }
+        return 0;
+    }
+
     public void borrarPublicacion(int publi) {
         try
         {
