@@ -9,7 +9,6 @@ import espacioUPM.Usuarios.Usuario;
 import org.junit.*;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -19,11 +18,11 @@ import static org.junit.Assert.assertTrue;
 
 public class DBTest {
 
-    DB_Main DB;
-    Connection connection;
-    IUsuario us;
-    IPublicacion p;
-    IComunidad comunidad;
+    private DB_Main DB;
+    private Connection connection;
+    private IUsuario us;
+    private IPublicacion p;
+    private IComunidad comunidad;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}
