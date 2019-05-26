@@ -38,7 +38,7 @@ public class DBTest {
         DB = DB_Main.getInstance();
         us = new Usuario("testEstatico"); // contraseña "test"
         p = new PublicacionTexto("testEstatico", "publicacionTest");
-        ((PublicacionTexto) p).setIDPublicacion(79); // El id de la publicación de los tests
+        ((PublicacionTexto) p).setIDPublicacion(89); // El id de la publicación de los tests
     }
 
     @After
@@ -136,23 +136,18 @@ public class DBTest {
 
     @Test
     public void TestGetComentarios() {
-        try {
-            PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comentarios VALUES (NULL, ?, ?, ?)");
-            pStmt.setString(1, us.getAlias());
-            pStmt.setString(2, "adios");
-            pStmt.setInt(3, p.getIDPublicacion());
-            pStmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        assertEquals("adios",DB.getComentarios(p.getIDPublicacion()).get(0).getContenido());
+        IComentario c = DB.getComentarios(p.getIDPublicacion()).get(0);
+        assertNotNull(c);
+        assertEquals(c.getContenido(), "comentarioTest");
+        assertEquals(c.getAutor(), us.getAlias());
+        assertEquals(c.getPublicacionMadre(), p.getIDPublicacion());
     }
 
     @Test
     public void TestGetLikes() {
-        DB.puntuar(us, 79, Puntuacion.LIKE);
-        assertEquals(1, DB.getLikes(79));
-        DB.puntuar(us, 79, Puntuacion.NEUTRO);
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.LIKE);
+        assertEquals(1, DB.getLikes(p.getIDPublicacion()));
+        DB.puntuar(us, p.getIDPublicacion(), Puntuacion.NEUTRO);
     }
 
     @Test
@@ -164,8 +159,9 @@ public class DBTest {
 
     @Test
     public void TestBorrarPublicacion() {
-        IPublicacion p1 = new PublicacionTexto("test", "jeje");
-        DB.borrarPublicacion(p1.getIDPublicacion());
+        IPublicacion p1 = new PublicacionTexto("testEstatico", "jeje");
+        DB.setPublicacion(p1);
+        DB.borrarPublicacion(DB.getPublicaciones(us)[0].getIDPublicacion());
         assertNull(DB.getPublicacion(p1.getIDPublicacion()));
     }
 
@@ -174,7 +170,7 @@ public class DBTest {
         IUsuario usSeguido;
         DB.setUsuario("usSeguido","usSeguido@test.com",testValues,testValues);
         usSeguido = DB.getUsuario("usSeguido");
-        DB.seguir("test","usSeguido");
+        DB.seguir("testEstatico","usSeguido");
         assertEquals("usSeguido", DB.getSeguidos(us)[0]);
         DB.borrarUsuario(usSeguido);
     }
@@ -184,15 +180,16 @@ public class DBTest {
         IUsuario usSeguidor;
         DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues,testValues);
         usSeguidor = DB.getUsuario("usSeguidor");
-        DB.seguir("usSeguidor","test");
+        DB.seguir("usSeguidor","testEstatico");
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
         DB.borrarUsuario(usSeguidor);
     }
 
     @Test
     public void TestCambiarAlias() {
-        DB.cambiarAlias(us, "aliasNuevo");
+        DB.cambiarAlias(new Usuario("testEstatico"), "aliasNuevo");
         assertEquals("aliasNuevo",DB.getUsuario("aliasNuevo").getAlias());
+        DB.cambiarAlias(new Usuario("aliasNuevo"), "testEstatico");
     }
 
     @Test
