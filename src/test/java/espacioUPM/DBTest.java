@@ -8,10 +8,10 @@ import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Usuarios.Usuario;
 import org.junit.*;
 
+import java.sql.*;
 import java.util.ArrayList;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertNull;
@@ -23,6 +23,7 @@ public class DBTest {
     IUsuario us;
     IPublicacion p;
     IComunidad comunidad;
+    Connection connection;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {}
@@ -33,84 +34,106 @@ public class DBTest {
 
     @Before
     public void setUp() throws Exception {
+        connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:8080/twitter2?user=serv&password=Habichuelas73");
         DB = DB_Main.getInstance();
-        DB.setUsuario("test", "test@test.com", testValues, testValues);
-        us = DB.getUsuario("test");
+        us = new Usuario("test"); // Su contraseña es "test"
         p = new PublicacionTexto("test","hola");
         comunidad = new Comunidad("GrupoGuay");
-        DB.crearComunidad(comunidad, us.getAlias());
-        comunidad.unirse(us.getAlias());
     }
 
     @After
     public void tearDown() throws Exception {
-        DB.borrarUsuario(us);
-        DB.borrarPublicacion(p.getIDPublicacion());
-        DB.borrarMiembroComunidad("GrupoGuay","test");
-        DB.borrarMiembroComunidad("GrupoGuay", "test");
-        DB.borrarUsuario(DB.getUsuario("miembro"));
+        try {
+            PreparedStatement pStmt = connection.prepareStatement("DELETE FROM usuarios WHERE alias = ?");
+            pStmt.setString(1, us.getAlias());
+            pStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Test
-    public void TestCrearUsuario() {
-        assertNotNull(us);
-        assertEquals(us.getAlias(), "test");
-    }
 
     @Test
-    public void TestBorrarUsuario() {
-        DB.borrarUsuario(us);
-        IUsuario us2 = DB.getUsuario("test");
-        assertNull(us2);
+    public void TestSetUsuario() {
+        DB.setUsuario(us.getAlias(), "test@test.com", "test");
+
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT alias, correo FROM `Usuarios` WHERE `alias` = ?"))
+        {
+            pStmt.setString(1, us.getAlias());
+
+            ResultSet rs = pStmt.executeQuery();
+
+            assertTrue(rs.next());
+            assertEquals(rs.getString("alias"), us.getAlias());
+            assertEquals(rs.getString("correo"), "test@test.com");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Test
     public void TestGetUsuario(){
-        assertEquals(DB.getUsuario("test").getAlias(), "test");
+        IUsuario user = DB.getUsuario("test");
+        assertNotNull(user);
+        assertEquals(user.getAlias(), "test");
     }
 
     @Test
     public void TestBuscarUsuario(){
         IUsuario[] users = DB.buscarUsuario("test");
-        boolean guay = false;
+        boolean encontrado = false;
         for(IUsuario user : users) {
-            if(!guay)
-                guay = user.getAlias().equals("test");
+            if(!encontrado)
+                encontrado = user.getAlias().equals("test");
         }
-        assertTrue(guay);
-    }
-
-    @Test
-    public void TestSetUsuario() {
-        assertNotNull(us);
+        assertTrue(encontrado);
     }
 
     @Test
     public void TestSetPublicacion() {
-        assertTrue(DB.setPublicacion(p));
+        IPublicacion p1 = new PublicacionTexto("test", "hola2");
+        DB.setPublicacion(p1);
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM publicaciones WHERE autor = ? AND cuerpo = ?");
+            statement.setString(1, "test");
+            statement.setString(2, "hola2");
+            ResultSet rs = statement.executeQuery();
+            assertTrue(rs.next());
+            assertEquals(rs.getString("autor"), "test");
+            assertEquals(rs.getString("cuerpo"), "hola2");
+        } catch(SQLException e) { e.printStackTrace(); }
     }
 
     @Test
     public void TestGetPublicacion() {
-        IPublicacion p1 = DB.getPublicacion(p.getIDPublicacion());
-        assertNotNull(p1);
     }
 
     @Test
     public void TestGetPublicaciones() {
         IPublicacion[] pubs = DB.getPublicaciones(us);
-        boolean guay = true;
+        boolean correcto = true;
         for(IPublicacion pub : pubs) {
             if(!pub.getAutor().equals("test"))
-                guay = false;
+                correcto = false;
         }
-        assertTrue(guay);
+        assertTrue(correcto);
     }
 
     @Test
     public void TestGetComentarios() {
-        DB.comentar(p,us,"adios");
-        assertEquals("adios",p.getComentarios().get(0).getContenido());
+        try {
+            PreparedStatement pStmt = connection.prepareStatement("INSERT INTO comentarios VALUES (NULL, ?, ?, ?)");
+            pStmt.setString(1, us.getAlias());
+            pStmt.setString(2, "adios");
+            pStmt.setInt(3, p.getIDPublicacion());
+            pStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        assertEquals("adios",DB.getComentarios(p.getIDPublicacion()).get(0).getContenido());
     }
 
     @Test

@@ -100,23 +100,10 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
        return setUsuario(alias, correo, password, salt);
     }
 
-    public String getNewID() {
-        try (PreparedStatement pStmt = connection.prepareStatement("NEXT VALUE FOR numeroPublicacionID AS id")) {
-            ResultSet rs = pStmt.executeQuery();
-            rs.next();
-
-            return "/pub"+ rs.getInt("id");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public boolean setPublicacion(IPublicacion publi) {
 
 
-        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO `publicaciones` VALUES (NULL, ?, ?, ?, ?)")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO publicaciones VALUES (NULL, ?, ?, ?, ?)")) {
             pStmt.setString(1, publi.getAutor());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             pStmt.setString(2, publi.getFecha().format(formatter));
