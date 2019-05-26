@@ -20,7 +20,7 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     private static final MainController controller = MainController.getInstance();
 
     public Publicacion(String autor) {
-        IDPublicacion =  0;
+        IDPublicacion = 0;
         this.autor = autor;
         this.fecha = LocalDateTime.now();
         this.comentarios = new ArrayList<>();
@@ -38,6 +38,8 @@ public abstract class Publicacion implements IPublicacion, Comparable {
         this.numLikes = numLikes;
         this.numDislikes = numDislikes;
     }
+
+    public void setIDPublicacion(int value) { IDPublicacion = value; }
 
     public void comentar(IUsuario autor, String contenido) {
         Comentario comentario = new Comentario(autor.getAlias(),contenido, IDPublicacion);
