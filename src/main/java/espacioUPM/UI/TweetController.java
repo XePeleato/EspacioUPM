@@ -56,7 +56,9 @@ public class TweetController implements Initializable {
 
     public void onClickRetweet(ActionEvent actionEvent){
         pub.referenciar(controller.getThisUser());
-        controllerScene.replaceComponent("/TimelinePage.fxml");
+        Perfil p = new Perfil();
+        p.setPerfil(controller.getThisUser());
+        controllerScene.replaceComponent(p);
     }
 
     public void onClickComment(ActionEvent actionEvent){
@@ -74,7 +76,9 @@ public class TweetController implements Initializable {
     }
     public void onClickDelete(ActionEvent actionEvent){
         pub.borrar();
-        controllerScene.replaceComponent("/TimelinePage.fxml");
+        Perfil p = new Perfil();
+        p.setPerfil(controller.getThisUser());
+        controllerScene.replaceComponent(p);
     }
 
     public void setView(Tweet node) { view = node; }

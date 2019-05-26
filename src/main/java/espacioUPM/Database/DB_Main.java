@@ -207,7 +207,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setInt(1, publication_id);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            System.out.println("se piden likes de " + publication_id + ": " + rs.getInt("numero"));
             return rs.getInt("numero");
         }
         catch(SQLException e) { e.printStackTrace(); }
