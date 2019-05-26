@@ -36,9 +36,10 @@ public class DBTest {
     public void setUp() throws Exception {
         connection = DriverManager.getConnection("jdbc:mysql://37.187.200.26:8080/twitter2?user=serv&password=Habichuelas73");
         DB = DB_Main.getInstance();
-        us = new Usuario("testEstatico"); // contraseña "test"
-        p = new PublicacionTexto("testEstatico", "publicacionTest");
+        us = new Usuario("usuarioTest"); // contraseña "test"
+        p = new PublicacionTexto("usuarioTest", "publicacionTest");
         ((PublicacionTexto) p).setIDPublicacion(89); // valor de esa publicacion
+        comunidad = new Comunidad("comunidadTest");
     }
 
     @After
@@ -76,18 +77,18 @@ public class DBTest {
 
     @Test
     public void TestGetUsuario(){
-        IUsuario user = DB.getUsuario("testEstatico");
+        IUsuario user = DB.getUsuario("usuarioTest");
         assertNotNull(user);
-        assertEquals(user.getAlias(), "testEstatico");
+        assertEquals(user.getAlias(), "usuarioTest");
     }
 
     @Test
     public void TestBuscarUsuario(){
-        IUsuario[] users = DB.buscarUsuario("testEstatico");
+        IUsuario[] users = DB.buscarUsuario("usuarioTest");
         boolean encontrado = false;
         for(IUsuario user : users) {
             if(!encontrado)
-                encontrado = user.getAlias().equals("testEstatico");
+                encontrado = user.getAlias().equals("usuarioTest");
         }
         assertTrue(encontrado);
     }
@@ -159,7 +160,7 @@ public class DBTest {
 
     @Test
     public void TestBorrarPublicacion() {
-        IPublicacion p1 = new PublicacionTexto("testEstatico", "jeje");
+        IPublicacion p1 = new PublicacionTexto("usuarioTest", "jeje");
         DB.setPublicacion(p1);
         DB.borrarPublicacion(p1.getIDPublicacion());
         assertNull(DB.getPublicacion(p1.getIDPublicacion()));
@@ -168,7 +169,7 @@ public class DBTest {
     @Test
     public void TestGetSeguidos() {
         DB.setUsuario("usSeguido","usSeguido@test.com",testValues,testValues);
-        DB.seguir("testEstatico","usSeguido");
+        DB.seguir("usuarioTest","usSeguido");
         assertEquals("usSeguido", DB.getSeguidos(us)[0]);
         DB.borrarUsuario(new Usuario("usSeguido"));
     }
@@ -176,47 +177,42 @@ public class DBTest {
     @Test
     public void TestgetSeguidores() {
         DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues,testValues);
-        DB.seguir("usSeguidor","testEstatico");
+        DB.seguir("usSeguidor","usuarioTest");
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
         DB.borrarUsuario(new Usuario("usSeguidor"));
     }
 
     @Test
     public void TestCambiarAlias() {
-        DB.cambiarAlias(new Usuario("testEstatico"), "aliasNuevo");
+        DB.cambiarAlias(us, "aliasNuevo");
         assertEquals("aliasNuevo",DB.getUsuario("aliasNuevo").getAlias());
-        DB.cambiarAlias(new Usuario("aliasNuevo"), "testEstatico");
+        DB.cambiarAlias(new Usuario("aliasNuevo"), "usuarioTest");
     }
 
     @Test
     public void TestBorrarMiembroComunidad() {
-        IUsuario miembro;
         DB.setUsuario("miembro","miembro@test.com",testValues,testValues);
-        miembro = DB.getUsuario("miembro");
 
-        DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        DB.borrarMiembroComunidad("GrupoGuay","miembro");
-        assertNull(DB.getMiembros(comunidad)[1]);
-        DB.borrarMiembroComunidad("GrupoGuay", miembro.getAlias());
-        DB.borrarUsuario(miembro);
-
+        DB.insertarMiembroComunidad("comunidadTest","miembro");
+        DB.borrarMiembroComunidad("comunidadTest","miembro");
+        assertEquals(DB.getMiembros(comunidad).length, 1);
+        DB.borrarUsuario(new Usuario("miembro"));
     }
 
     @Test
     public void TestInsertarMiembroComunidad() {
-        IUsuario miembro;
         DB.setUsuario("miembro","miembro@test.com",testValues,testValues);
-        miembro = DB.getUsuario("miembro");
 
-        DB.insertarMiembroComunidad("GrupoGuay","miembro");
-        assertEquals(miembro.getAlias(),DB.getMiembros(comunidad)[1].getAlias());
-        DB.borrarUsuario(miembro);
+        DB.insertarMiembroComunidad("comunidadTest","miembro");
+        assertEquals("miembro",DB.getMiembros(comunidad)[1].getAlias());
+        DB.borrarMiembroComunidad("comunidadTest", "miembro");
+        DB.borrarUsuario(new Usuario("miembro"));
     }
 
     @Test
     public void TestSeguir() {
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        DB.seguir("us2","testEstatico");
+        DB.seguir("us2","usuarioTest");
         assertEquals("us2",DB.getSeguidores(us)[0]);
         DB.borrarUsuario(new Usuario("us2"));
     }
@@ -224,8 +220,8 @@ public class DBTest {
     @Test
     public void TestDejarDeSeguir() {
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        DB.seguir("us2","testEstatico");
-        DB.dejarDeSeguir("us2","testEstatico");
+        DB.seguir("us2","usuarioTest");
+        DB.dejarDeSeguir("us2","usuarioTest");
         assertEquals(DB.getSeguidores(us).length, 0);
         DB.borrarUsuario(new Usuario("us2"));
     }
@@ -233,8 +229,8 @@ public class DBTest {
     @Test
     public void TestEstaSiguiendo() {
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        DB.seguir("us2","testEstatico");
-        assertTrue(DB.estaSiguiendo("us2","testEstatico"));
+        DB.seguir("us2","usuarioTest");
+        assertTrue(DB.estaSiguiendo("us2","usuarioTest"));
         DB.borrarUsuario(new Usuario("us2"));
     }
 
@@ -255,17 +251,23 @@ public class DBTest {
 
     @Test
     public void TestGetMiembros() {
-        assertEquals(us.getAlias(), DB.getMiembros(comunidad)[0].getAlias());
+        IUsuario[] miembros = DB.getMiembros(comunidad);
+        assertEquals(1, miembros.length);
+        assertEquals(us.getAlias(), miembros[0].getAlias());
     }
 
     @Test
-    public void TestGetTimeline() {
-        assertEquals(p.getIDPublicacion(), DB.getTimeline(comunidad)[0].getIDPublicacion());
+    public void TestGetTimelineComunidad() {
+        IPublicacion[] timeline = DB.getTimeline(comunidad);
+        assertEquals(1, timeline.length);
+        assertEquals(p.getIDPublicacion(), timeline[0].getIDPublicacion());
     }
 
     @Test
     public void TestBuscarComunidad() {
-        assertEquals("GrupoGuay", DB.buscarComunidad("GrupoGuay")[0].getNombre());
+        IComunidad[] coms = DB.buscarComunidad("comunidadTest");
+        assertEquals(1, coms.length);
+        assertEquals("comunidadTest", coms[0].getNombre());
     }
 
     @Test

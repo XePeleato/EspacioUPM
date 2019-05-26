@@ -339,7 +339,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, ?)");
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            pStmt.setBoolean(3, false);
+            pStmt.setBoolean(3, true);
             return pStmt.executeUpdate() >= 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -470,7 +470,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return (IUsuario[])ret.toArray();
+        return ret.toArray(IUsuario[]::new);
     }
 
     public Publicacion[] getTimeline(IComunidad comunidad) {
