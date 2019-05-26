@@ -167,22 +167,18 @@ public class DBTest {
 
     @Test
     public void TestGetSeguidos() {
-        IUsuario usSeguido;
         DB.setUsuario("usSeguido","usSeguido@test.com",testValues,testValues);
-        usSeguido = DB.getUsuario("usSeguido");
         DB.seguir("testEstatico","usSeguido");
         assertEquals("usSeguido", DB.getSeguidos(us)[0]);
-        DB.borrarUsuario(usSeguido);
+        DB.borrarUsuario(new Usuario("usSeguido"));
     }
 
     @Test
     public void TestgetSeguidores() {
-        IUsuario usSeguidor;
         DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues,testValues);
-        usSeguidor = DB.getUsuario("usSeguidor");
         DB.seguir("usSeguidor","testEstatico");
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
-        DB.borrarUsuario(usSeguidor);
+        DB.borrarUsuario(new Usuario("usSeguidor"));
     }
 
     @Test
@@ -219,36 +215,27 @@ public class DBTest {
 
     @Test
     public void TestSeguir() {
-        IUsuario us2;
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        us2 = DB.getUsuario("us2");
-
-        DB.seguir("us2","test");
+        DB.seguir("us2","testEstatico");
         assertEquals("us2",DB.getSeguidores(us)[0]);
-        DB.borrarUsuario(us2);
+        DB.borrarUsuario(new Usuario("us2"));
     }
 
     @Test
     public void TestDejarDeSeguir() {
-        IUsuario us2;
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        us2 = DB.getUsuario("us2");
-
-        DB.seguir("us2","test");
-        DB.dejarDeSeguir("us2","test");
+        DB.seguir("us2","testEstatico");
+        DB.dejarDeSeguir("us2","testEstatico");
         assertEquals(DB.getSeguidores(us).length, 0);
-        DB.borrarUsuario(us2);
+        DB.borrarUsuario(new Usuario("us2"));
     }
 
     @Test
     public void TestEstaSiguiendo() {
-        IUsuario us2;
         DB.setUsuario("us2","us2@test.com",testValues,testValues);
-        us2 = DB.getUsuario("usSeguidor");
-
-        DB.seguir("us2","test");
-        assertTrue(DB.estaSiguiendo("us2","test"));
-        DB.borrarUsuario(us2);
+        DB.seguir("us2","testEstatico");
+        assertTrue(DB.estaSiguiendo("us2","testEstatico"));
+        DB.borrarUsuario(new Usuario("us2"));
     }
 
     @Test
@@ -284,7 +271,14 @@ public class DBTest {
     @Test
     public void TestComentar() {
         DB.comentar(p,us,"adios");
-        assertEquals("adios",p.getComentarios().get(0).getContenido());
+        assertEquals("adios",DB.getComentarios(p.getIDPublicacion()).get(1).getContenido());
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM comentarios WHERE id_publicacion = ? and texto = ?");
+            statement.setInt(1, p.getIDPublicacion());
+            statement.setString(2, "adios");
+            statement.execute();
+        }
+        catch(SQLException e) { e.printStackTrace(); }
     }
 
-    }
+}
