@@ -126,7 +126,7 @@ public class DBTest {
 
     @Test
     public void TestGetPublicaciones() {
-        IPublicacion[] pubs = DB.getPublicaciones(us);
+        IPublicacion[] pubs = DB.getPublicaciones(us, null);
         try {
             assertEquals(p.getIDPublicacion(), pubs[0].getIDPublicacion());
         } catch(ArrayIndexOutOfBoundsException e) {
@@ -174,7 +174,7 @@ public class DBTest {
     }
 
     @Test
-    public void TestgetSeguidores() {
+    public void TestGetSeguidores() {
         DB.setUsuario("usSeguidor","usSeguidor@test.com",testValues,testValues);
         DB.seguir("usSeguidor","usuarioTest");
         assertEquals("usSeguidor", DB.getSeguidores(us)[0]);
@@ -257,7 +257,7 @@ public class DBTest {
 
     @Test
     public void TestGetTimelineComunidad() {
-        IPublicacion[] timeline = DB.getTimeline(comunidad);
+        IPublicacion[] timeline = DB.getTimeline(comunidad, null);
         assertEquals(1, timeline.length);
         assertEquals(p.getIDPublicacion(), timeline[0].getIDPublicacion());
     }

@@ -507,13 +507,15 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             rs.beforeFirst();
 
             while(rs.next()) {
-                Platform.runLater(() -> {
-                    try {
-                        progressProp.set((double)rs.getRow() / (double) rows);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                });
+                if (progressProp != null) {
+                    Platform.runLater(() -> {
+                        try {
+                            progressProp.set((double) rs.getRow() / (double) rows);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
                 ret.add(getPublicacion(rs.getInt("pubid")));
             }
             return ret.toArray(Publicacion[]::new); // dejad esto así, que hacer un cast peta
