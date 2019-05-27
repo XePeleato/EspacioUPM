@@ -4,6 +4,7 @@ package espacioUPM.Comunidades;//
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Comunidad;
 import espacioUPM.Publicaciones.IPublicacion;
+import espacioUPM.Usuarios.IUsuario;
 import javafx.beans.property.DoubleProperty;
 
 import java.util.ArrayList;
@@ -48,5 +49,14 @@ public class Comunidad implements IComunidad {
 	
 	public String getNombre() {
 		return nombre;
+	}
+
+	public boolean esMiembro(IUsuario user) {
+		boolean ret = false;
+		for(IUsuario usuario : DB.getMiembros(this)) {
+			if(usuario.getAlias().equals(user.getAlias()))
+				ret = true;
+		}
+		return ret;
 	}
 }

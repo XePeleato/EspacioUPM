@@ -28,6 +28,8 @@ public class CommunityTimelineController implements Initializable {
 
     public void setComunidad(IComunidad value) {
         comunidad = value;
+        if(comunidad.esMiembro(maincontroller.getThisUser()))
+            btnUnirse.setDisable(true);
     }
 
     public Label getTxtNombre() {
@@ -58,6 +60,5 @@ public class CommunityTimelineController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }
