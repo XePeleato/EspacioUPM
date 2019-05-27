@@ -80,6 +80,7 @@ public class Usuario implements IUsuario {
         for(IPublicacion publi : DB.getPublicaciones(this, null)) {
             DB.borrarPublicacion(publi.getIDPublicacion());
         }
+        DB_user.borrarComentarios(this);
     }
 
     public void borrar() {

@@ -34,4 +34,6 @@ public interface IDB_Usuario {
 	 boolean dejarDeSeguir(String seguidor, String seguido);
 
 	 boolean estaSiguiendo(String aliasSeguidor, String aliasSeguido);
+
+	 void borrarComentarios(IUsuario user);
 }

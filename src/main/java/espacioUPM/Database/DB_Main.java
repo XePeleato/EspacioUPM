@@ -539,6 +539,15 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
+    @Override
+    public void borrarComentarios(IUsuario user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM comentarios WHERE alias = ?");
+            statement.setString(1, user.getAlias());
+            statement.execute();
+        }
+        catch(SQLException e) { e.printStackTrace(); }
+    }
 
     public void comentar(IPublicacion publi, IUsuario usuario, String contenido) {
         try {
