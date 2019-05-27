@@ -19,6 +19,7 @@ public class LandingPageController implements Initializable {
 
     @FXML Button btnRegister;
     @FXML Button btnLogin;
+    @FXML Button btnSalir;
     @FXML TextField txtAlias;
     @FXML PasswordField txtPass;
 
@@ -66,6 +67,10 @@ public class LandingPageController implements Initializable {
             txtAlias.requestFocus();
         else if(event.getCode() == KeyCode.ENTER)
             onBtnLoginClick(null);
+    }
+
+    public void onBtnSalirClick(ActionEvent actionEvent) {
+        System.exit(0);
     }
 
     @Override

@@ -176,7 +176,8 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
                             progressProp.set((double) rs.getRow() / (double) rows);
                         } catch (SQLException e) {
                             e.printStackTrace();
-                        }
+                        } catch(RuntimeException ignored) {}
+
                     });
                 }
                 ret.add(getPublicacion(rs.getInt("id")));
