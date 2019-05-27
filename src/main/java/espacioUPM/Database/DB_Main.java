@@ -293,7 +293,6 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(2, usuario.getAlias());
             return pStmt.executeUpdate() == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }

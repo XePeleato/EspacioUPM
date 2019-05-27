@@ -57,19 +57,26 @@ public class SettingsController {
 
         boolean ret = controller.getThisUser().cambiarAlias(alias.getText());
 
-        Label responseLabel = new Label(ret ? "Alias cambiado con éxito" : "Por favor, elige otro alias");
-        responseLabel.getStylesheets().add("/fextile.css");
-        responseLabel.getStyleClass().add(ret ? "alert-success" : "alert-danger");
+        Label responseLabel = new Label("Por favor, elige otro alias");
+        if(!ret) {
 
-        HBox txtBox = new HBox();
-        txtBox.getChildren().add(responseLabel);
-        respMessageBox.getChildren().add(txtBox);
+            responseLabel.getStylesheets().add("/fextile.css");
+            responseLabel.getStyleClass().add("alert-danger");
 
-        controller.setThisUser(null);
-        try {
-            controllerScene.replaceScene("/LandingPage.fxml");
+            HBox txtBox = new HBox();
+            txtBox.getChildren().add(responseLabel);
+            respMessageBox.getChildren().add(txtBox);
+
+
         }
-        catch(IOException e) {e.printStackTrace();}
+        else {
+            controller.setThisUser(null);
+            try {
+                controllerScene.replaceScene("/LandingPage.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onClickLogout(ActionEvent actionEvent) {
