@@ -65,6 +65,7 @@ public class Perfil extends GridPane {
 
         getTimelineTask.setOnSucceeded(taskFinishEv -> {
             IPublicacion[] publis = (IPublicacion[]) getTimelineTask.getValue();
+            root.getChildren().clear();
 
             for (IPublicacion p : publis) {
                 Tweet t = new Tweet();
