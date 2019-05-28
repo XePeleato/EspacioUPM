@@ -52,11 +52,23 @@ public class Comunidad implements IComunidad {
 	}
 
 	public boolean esMiembro(IUsuario user) {
-		boolean ret = false;
-		for(IUsuario usuario : DB.getMiembros(this)) {
-			if(usuario.getAlias().equals(user.getAlias()))
-				ret = true;
-		}
-		return ret;
+		return DB.esMiembroComunidad(nombre, user.getAlias()) == 1;
+	}
+
+	@Override
+	public boolean aceptarMiembroNuevo(String alias) {
+		return DB.aceptarMiembroComunidad(nombre, alias);
+	}
+
+	public void rechazarMiembro(String alias) {
+		DB.rechazarMiembro(this.nombre, alias);
+	}
+
+	public void hacerAdmin(String alias) {
+		DB.hacerAdmin(this.nombre, alias);
+	}
+
+	public boolean esAdmin(String alias) {
+		return DB.esAdmin(this.nombre, alias);
 	}
 }

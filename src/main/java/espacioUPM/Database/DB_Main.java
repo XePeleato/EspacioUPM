@@ -382,6 +382,32 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
         return null;
     }
 
+    public boolean aceptarMiembroComunidad(String id, String alias) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE miembros_comunidad SET aceptado = 1 WHERE id_comunidad = ? AND id_usuario = ?");
+            statement.setString(1, id);
+            statement.setString(2, alias);
+            return statement.executeUpdate() == 1;
+        } catch(SQLException e) { e.printStackTrace(); }
+        return false;
+    }
+
+    public int esMiembroComunidad(String id, String alias) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT aceptado FROM miembros_comunidad WHERE id_comunidad = ? AND id_usuario = ?");
+            statement.setString(1, id);
+            statement.setString(2, alias);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                if(rs.getInt("aceptado") == 1)
+                    return 1;
+                else return 2;
+            }
+            else return 0;
+        } catch(SQLException e) { e.printStackTrace(); }
+        return 0;
+    }
+
     public boolean seguir(String seguidor, String seguido) {
         try (PreparedStatement pStmt = connection.prepareStatement("INSERT INTO seguimiento VALUES (?, ?)")){
             pStmt.setString(1, seguidor);
@@ -587,5 +613,41 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void rechazarMiembro(String id, String alias) {
+        try {
+            PreparedStatement pStmt = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_comunidad = ? AND id_usuario = ?");
+            pStmt.setString(1, id);
+            pStmt.setString(2, alias);
+            pStmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hacerAdmin(String id, String alias) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE miembros_comunidad SET aceptado = 2 WHERE id_comunidad = ? AND id_usuario = ?");
+            statement.setString(1, id);
+            statement.setString(2, alias);
+            statement.execute();
+        } catch(SQLException e) { e.printStackTrace(); }
+    }
+
+    @Override
+    public boolean esAdmin(String id, String alias) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT aceptado FROM miembros_comunidad WHERE id_comunidad = ? AND id_usuario = ?");
+            statement.setString(1, id);
+            statement.setString(2, alias);
+            ResultSet rs = statement.executeQuery();
+            if(rs.next())
+                return rs.getInt("aceptado") == 2;
+            return false;
+        } catch(SQLException e) { e.printStackTrace(); }
+        return false;
     }
 }

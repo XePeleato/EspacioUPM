@@ -29,4 +29,14 @@ public interface IDB_Comunidad {
 	IComunidad[] buscarComunidad(String id);
 
 	IComunidad[] getComunidades(String alias);
+
+	int esMiembroComunidad(String id, String alias);
+
+	boolean aceptarMiembroComunidad(String id, String alias);
+
+	void rechazarMiembro(String id, String alias);
+
+	void hacerAdmin(String id, String alias);
+
+	boolean esAdmin(String id, String alias);
 }
