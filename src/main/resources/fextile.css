@@ -227,8 +227,8 @@
 }
 
 .btn-danger {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #d9534f;
+    -fx-text-fill: #d43f3a;
+    -fx-background-color: #ffffff;
     -fx-border-color: #d43f3a;
 }
 .btn-danger:hover {
@@ -242,8 +242,8 @@
 }
 
 .btn-success {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #5cb85c;
+    -fx-text-fill: #4cae4c;
+    -fx-background-color: #ffffff;
     -fx-border-color: #4cae4c;
 }
 .btn-success:hover {
@@ -269,4 +269,9 @@
 .btn-info:disabled {
     -fx-background-color: #5bc0de;
     -fx-border-color: #46b8da;
+}
+.separator {
+    -fx-border-color: #f0f0f000;
+    -fx-pref-width: 5px;
+    -fx-border-width: 30px;
 }

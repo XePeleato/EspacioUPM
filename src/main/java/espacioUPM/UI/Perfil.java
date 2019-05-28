@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -71,6 +72,7 @@ public class Perfil extends GridPane {
                 Tweet t = new Tweet();
                 t.setTweet(p);
                 root.getChildren().add(t);
+                root.getChildren().add(new Separator());
             }
         });
     }

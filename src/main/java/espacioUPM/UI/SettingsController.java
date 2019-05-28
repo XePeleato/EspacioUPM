@@ -57,7 +57,7 @@ public class SettingsController {
 
         boolean ret = controller.getThisUser().cambiarAlias(alias.getText());
 
-        Label responseLabel = new Label("Por favor, elige otro alias");
+        Label responseLabel = new Label("El alias escogido ya está en uso");
         if(!ret) {
 
             responseLabel.getStylesheets().add("/fextile.css");

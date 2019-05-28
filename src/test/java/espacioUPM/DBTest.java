@@ -9,6 +9,7 @@ import espacioUPM.Usuarios.Usuario;
 import org.junit.*;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -72,7 +73,6 @@ public class DBTest {
             e.printStackTrace();
         }
     }
-
 
     @Test
     public void TestGetUsuario(){
