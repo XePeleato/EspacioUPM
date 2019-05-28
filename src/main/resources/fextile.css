@@ -11,11 +11,19 @@
 
 .hbox,
 .vbox,
-.pane,
+.pane
+{
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+}
+
 .scroll-pane {
     -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     -fx-font-size: 14px;
     -fx-background-color: transparent;
+    -fx-border-width: 5px;
+    -fx-border-color: #2a6496;
 }
 
 .accordion,
@@ -274,4 +282,9 @@
     -fx-border-color: #f0f0f000;
     -fx-pref-width: 5px;
     -fx-border-width: 30px;
+}
+
+.title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #269abc;
 }

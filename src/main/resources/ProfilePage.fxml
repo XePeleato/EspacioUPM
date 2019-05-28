@@ -19,7 +19,7 @@
                   <Button fx:id="btnFollow" mnemonicParsing="false" onAction="#onClickFollow" styleClass="btn-primary" stylesheets="@fextile.css" text="Ir al perfil" />
                </children>
             </VBox>
-            <Label text="PERFIL" textFill="#2e29c9" GridPane.halignment="RIGHT">
+            <Label text="PERFIL" styleClass="title" GridPane.halignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>

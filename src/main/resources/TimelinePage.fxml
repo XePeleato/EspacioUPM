@@ -21,7 +21,7 @@
                </children>
             </HBox>
             <Label fx:id="txtPagina" text="pagina: " GridPane.halignment="LEFT" />
-            <Label alignment="CENTER" text="TIMELINE" textAlignment="CENTER" textFill="#5d7bff" GridPane.halignment="RIGHT">
+            <Label alignment="CENTER" text="TIMELINE" styleClass="title" textAlignment="CENTER" GridPane.halignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>

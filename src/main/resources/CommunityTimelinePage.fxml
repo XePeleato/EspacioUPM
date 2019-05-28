@@ -20,7 +20,7 @@
                         <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="32.0" prefWidth="72.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Salir" />
                     </children>
                 </VBox>
-                <Label text="COMUNIDAD" textFill="#2e29c9" GridPane.halignment="RIGHT">
+                <Label text="COMUNIDAD" styleClass="title" GridPane.halignment="RIGHT">
                     <font>
                         <Font size="18.0" />
                     </font>

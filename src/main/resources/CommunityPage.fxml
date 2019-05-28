@@ -9,7 +9,7 @@
    <children>
       <HBox fx:id="boxUpper" alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="700.0">
          <children>
-            <Label alignment="CENTER" text="COMUNIDADES       " textFill="#431bd3">
+            <Label alignment="CENTER" text="COMUNIDADES       " styleClass="title">
                <font>
                   <Font size="18.0" />
                </font>
