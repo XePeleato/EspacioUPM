@@ -24,7 +24,7 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>espacioUPM.App</mainClass>
+              <mainClass>espacioUPM.UI.App</mainClass>
               <useUniqueVersions>false</useUniqueVersions>
             </manifest>
           </archive>
@@ -45,7 +45,7 @@
           <outputDirectory>${project.build.directory}/bin</outputDirectory>
           <archive>
             <manifest>
-              <mainClass>espacioUPM.App</mainClass>
+              <mainClass>espacioUPM.UI.App</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
@@ -69,7 +69,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.2</version>
         <configuration>
-          <mainClass>espacioUPM.App</mainClass>
+          <mainClass>espacioUPM.UI.App</mainClass>
         </configuration>
       </plugin>
     </plugins>

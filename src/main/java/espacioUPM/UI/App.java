@@ -1,8 +1,6 @@
-package espacioUPM;
+package espacioUPM.UI;
 
 import espacioUPM.Database.DB_Main;
-import espacioUPM.UI.IMainControllerScene;
-import espacioUPM.UI.MainController;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.scene.image.Image;

@@ -212,8 +212,8 @@
 }
 
 .btn-warning {
-    -fx-text-fill: #ffffff;
-    -fx-background-color: #f0ad4e;
+    -fx-text-fill: #eea236;
+    -fx-background-color: #ffffff;
     -fx-border-color: #eea236;
 }
 .btn-warning:hover {
