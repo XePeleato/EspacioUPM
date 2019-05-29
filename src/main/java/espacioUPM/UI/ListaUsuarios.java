@@ -15,6 +15,7 @@ public class ListaUsuarios extends VBox{
 
     public ListaUsuarios() {
         s = new ScrollPane();
+        s.setPrefWidth(700.0);
         this.getChildren().add(s);
     }
 
