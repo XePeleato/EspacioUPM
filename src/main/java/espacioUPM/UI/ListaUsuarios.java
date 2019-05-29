@@ -1,20 +1,17 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Usuarios.IUsuario;
-import espacioUPM.Usuarios.Usuario;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-
 public class ListaUsuarios extends VBox{
 
     private ScrollPane s;
-    private static final IMainControllerScene controller = MainController.getInstance();
+    private static final IMainControllerScene controller = IMainControllerScene.getInstance();
 
     public ListaUsuarios() {
         s = new ScrollPane();

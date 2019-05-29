@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Publicaciones.PublicacionFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,8 +23,8 @@ public class NewPublicacionController implements Initializable {
 
     public NewPublicacionController() {}
 
-    private static IMainControllerUtils controller = MainController.getInstance();
-    private static IMainControllerScene controllerScene = MainController.getInstance();
+    private static IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static IMainControllerScene controllerScene = IMainControllerScene.getInstance();
     public void initialize() {
 
     }

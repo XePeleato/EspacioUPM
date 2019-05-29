@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Usuarios.IUsuario;
 import javafx.concurrent.Task;
@@ -19,7 +20,7 @@ public class Perfil extends GridPane {
     private Node view;
 
 
-    private static final IMainControllerUtils maincontroller = MainController.getInstance();
+    private static final IMainControllerUtils maincontroller = IMainControllerUtils.getInstance();
 
 
     public Perfil() {

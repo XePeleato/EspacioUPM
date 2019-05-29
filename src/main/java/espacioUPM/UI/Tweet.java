@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.App;
 import espacioUPM.Publicaciones.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

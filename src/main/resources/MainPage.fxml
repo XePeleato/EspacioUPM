@@ -2,9 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.MainController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.App.MainController">
    <bottom>
-      <HBox prefHeight="31.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="20.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnTimeline" mnemonicParsing="false" onAction="#onBtnTimelineClick" styleClass="btn-default" stylesheets="@fextile.css" text="Timeline" />
             <Button fx:id="btnProfile" mnemonicParsing="false" onAction="#onBtnProfileClick" styleClass="btn-default" stylesheets="@fextile.css" text="Perfil" />

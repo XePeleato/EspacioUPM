@@ -1,4 +1,4 @@
-package espacioUPM.UI;
+package espacioUPM.App;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,4 +19,8 @@ public interface IMainControllerScene {
     void replaceComponent(Node node);
 
     <T> T refresh();
+
+    static IMainControllerScene getInstance() {
+        return MainController.getInstance();
+    }
 }

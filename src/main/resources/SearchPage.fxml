@@ -6,12 +6,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="329.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SearchController">
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SearchController">
    <children>
-      <TextField fx:id="txtFieldInput" layoutX="300.0" layoutY="24.0" onAction="#onClickSearch" prefHeight="25.0" prefWidth="202.0" promptText="Usuario o comunidad a buscar..." styleClass="text-area" stylesheets="@fextile.css" />
-      <Button fx:id="btnSearch" layoutX="505.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClickSearch" styleClass="btn-primary" stylesheets="@fextile.css" text="Buscar" />
-      <ScrollPane fx:id="scrollPaneResult" layoutX="13.0" layoutY="86.0" prefHeight="200.0" prefWidth="575.0" />
-      <Label layoutX="51.0" layoutY="29.0" text="BUSCADOR" textFill="#3c2ddd">
+      <TextField fx:id="txtFieldInput" layoutX="350.0" layoutY="48.0" onAction="#onClickSearch" prefHeight="25.0" prefWidth="202.0" promptText="Usuario o comunidad a buscar..." styleClass="text-area" stylesheets="@fextile.css" />
+      <Button fx:id="btnSearch" layoutX="564.0" layoutY="44.0" mnemonicParsing="false" onAction="#onClickSearch" styleClass="btn-primary" stylesheets="@fextile.css" text="Buscar" />
+      <ScrollPane fx:id="scrollPaneResult" layoutX="63.0" layoutY="100.0" prefHeight="200.0" prefWidth="575.0" />
+      <Label layoutX="63.0" layoutY="50.0" styleClass="title" text="BUSCADOR" textFill="#3c2ddd">
          <font>
             <Font size="18.0" />
          </font>

@@ -10,7 +10,6 @@ import javafx.beans.property.DoubleProperty;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -648,5 +647,14 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             return false;
         } catch(SQLException e) { e.printStackTrace(); }
         return false;
+    }
+
+    @Override
+    public void borrarComunidades(IUsuario user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM miembros_comunidad WHERE id_usuario = ?");
+            statement.setString(1, user.getAlias());
+            statement.executeUpdate();
+        } catch(SQLException e) { e.printStackTrace(); }
     }
 }

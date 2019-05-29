@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
@@ -22,8 +24,8 @@ public class PerfilController implements Initializable {
     @FXML ScrollPane scrollPanePublis;
 
 
-    private static final IMainControllerUtils maincontroller = MainController.getInstance();
-    private static final IMainControllerScene maincontrollerScene = MainController.getInstance();
+    private static final IMainControllerUtils maincontroller = IMainControllerUtils.getInstance();
+    private static final IMainControllerScene maincontrollerScene = IMainControllerScene.getInstance();
 
     private IUsuario usuario;
     private static boolean estaSiguiendo = false;

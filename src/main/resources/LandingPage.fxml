@@ -12,11 +12,11 @@
       <Label layoutX="185.0" layoutY="39.0" prefHeight="54.0" prefWidth="280.0" style="-fx-font-size: 20px" styleClass="text-primary" stylesheets="@fextile.css" text="Bienvenid@ a EspacioUPM" />
       <PasswordField fx:id="txtPass" layoutX="180.0" layoutY="211.0" onKeyPressed="#onActionPass" prefHeight="24.0" prefWidth="167.0" styleClass="text-area" stylesheets="@fextile.css" />
       <TextField fx:id="txtAlias" layoutX="180.0" layoutY="159.0" onKeyPressed="#onActionAlias" prefHeight="24.0" prefWidth="167.0" styleClass="text-area" stylesheets="@fextile.css" />
-      <Label layoutX="106.0" layoutY="163.0" text="Alias:" />
+      <Label layoutX="110.0" layoutY="163.0" text="Alias:" />
       <Label layoutX="66.0" layoutY="215.0" text="Contraseña:" />
-      <Button fx:id="btnLogin" layoutX="363.0" layoutY="207.0" mnemonicParsing="false" onAction="#onBtnLoginClick" prefHeight="16.0" prefWidth="83.0" styleClass="btn-default" stylesheets="@fextile.css" text="Acceder" />
-      <Button fx:id="btnRegister" layoutX="198.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnRegisterClick" prefHeight="32.0" prefWidth="131.0" styleClass="btn-default" stylesheets="@fextile.css" text="Crear cuenta" />
-      <Button fx:id="btnSalir" layoutX="240.0" layoutY="320.0" mnemonicParsing="false" onAction="#onBtnSalirClick" styleClass="btn-default" text="Salir" />
+      <Button fx:id="btnLogin" layoutX="357.0" layoutY="207.0" mnemonicParsing="false" onAction="#onBtnLoginClick" prefHeight="16.0" prefWidth="83.0" styleClass="btn-default" stylesheets="@fextile.css" text="Acceder" />
+      <Button fx:id="btnRegister" layoutX="198.0" layoutY="258.0" mnemonicParsing="false" onAction="#onBtnRegisterClick" prefHeight="32.0" prefWidth="131.0" styleClass="btn-default" stylesheets="@fextile.css" text="Crear cuenta" />
+      <Button fx:id="btnSalir" layoutX="438.0" layoutY="336.0" mnemonicParsing="false" onAction="#onBtnSalirClick" styleClass="btn-default" text="Salir" />
       <VBox fx:id="logo" layoutX="42.0" layoutY="20.0" maxHeight="91.0" maxWidth="100.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="91.0" prefWidth="100.0" />
    </children>
 </AnchorPane>

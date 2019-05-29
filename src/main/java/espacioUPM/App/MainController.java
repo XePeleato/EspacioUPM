@@ -1,5 +1,7 @@
-package espacioUPM.UI;
+package espacioUPM.App;
 
+import espacioUPM.UI.Perfil;
+import espacioUPM.UI.TimelineController;
 import espacioUPM.Usuarios.IUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,6 +32,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
     @FXML Button btnTimeline;
     @FXML Button btnProfile;
     @FXML Button btnSearch;
+    @FXML Button btnCommunities;
     @FXML Button btnSettings;
     @FXML Button btnNew;
 

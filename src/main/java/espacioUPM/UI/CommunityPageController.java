@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Comunidades.Comunidad;
 import espacioUPM.Comunidades.IComunidad;
 import javafx.event.ActionEvent;
@@ -18,8 +20,8 @@ public class CommunityPageController implements Initializable {
     @FXML TextField txtCommunityName;
     @FXML ScrollPane scrollPaneCommunities;
 
-    private static final IMainControllerUtils controller = MainController.getInstance();
-    private static final IMainControllerScene controllerScene = MainController.getInstance();
+    private static final IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static final IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
 
     @Override

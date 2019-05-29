@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Comunidades.IComunidad;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,8 +26,8 @@ public class CommunityTimelineController implements Initializable {
     @FXML
     ScrollPane scrollPanePublis;
 
-    private static final IMainControllerUtils maincontroller = MainController.getInstance();
-    private static final IMainControllerScene maincontrollerScene = MainController.getInstance();
+    private static final IMainControllerUtils maincontroller = IMainControllerUtils.getInstance();
+    private static final IMainControllerScene maincontrollerScene = IMainControllerScene.getInstance();
 
     public void setComunidad(IComunidad value) {
         comunidad = value;

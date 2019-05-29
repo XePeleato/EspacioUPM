@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Usuarios.IUsuario;
 import javafx.event.ActionEvent;
@@ -28,8 +30,8 @@ public class CommunityMemberCardController implements Initializable {
     private IUsuario us;
     private IComunidad com;
 
-    private final static IMainControllerScene controller = MainController.getInstance();
-    private final static IMainControllerUtils controllerUtils = MainController.getInstance();
+    private final static IMainControllerScene controller = IMainControllerScene.getInstance();
+    private final static IMainControllerUtils controllerUtils = IMainControllerUtils.getInstance();
 
     public CommunityMemberCardController() {
     }

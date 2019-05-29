@@ -1,11 +1,12 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Usuarios.IUsuario;
 import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,8 +29,8 @@ public class LandingPageController implements Initializable {
     @FXML PasswordField txtPass;
     @FXML VBox logo;
 
-    private static IMainControllerUtils controller = MainController.getInstance();
-    private static IMainControllerScene controllerScene = MainController.getInstance();
+    private static IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
     @FXML
     public void onBtnLoginClick(ActionEvent actionEvent) {

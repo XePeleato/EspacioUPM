@@ -2,8 +2,6 @@ package espacioUPM.UI;
 
 import espacioUPM.Comunidades.IComunidad;
 import espacioUPM.Publicaciones.IPublicacion;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -19,9 +17,6 @@ public class CommunityTimeline extends GridPane {
 
     private CommunityTimelineController controller;
     private Node view;
-
-
-    private static final IMainControllerUtils maincontroller = MainController.getInstance();
 
 
     public CommunityTimeline() {

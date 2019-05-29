@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +13,8 @@ import java.io.IOException;
 
 public class SignUpController {
 
-    private static IMainControllerUtils controller = MainController.getInstance();
-    private static IMainControllerScene controllerScene = MainController.getInstance();
+    private static IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
     /* Registro */
     @FXML

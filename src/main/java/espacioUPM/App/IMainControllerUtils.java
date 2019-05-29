@@ -1,4 +1,4 @@
-package espacioUPM.UI;
+package espacioUPM.App;
 
 import espacioUPM.Usuarios.IUsuario;
 
@@ -9,4 +9,8 @@ public interface IMainControllerUtils {
     IUsuario getThisUser();
 
     void setThisUser(IUsuario value);
+
+    static IMainControllerUtils getInstance() {
+        return MainController.getInstance();
+    }
 }

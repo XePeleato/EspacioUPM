@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Publicacion;
 import espacioUPM.Usuarios.Usuario;
@@ -23,8 +25,8 @@ public class TimelineController implements Initializable {
     @FXML Button btnPaginaAnt;
     @FXML Label txtPagina;
 
-    private static final IMainControllerUtils controller = MainController.getInstance();
-    private static final IMainControllerScene controllerScene = MainController.getInstance();
+    private static final IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static final IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
     private static int numPagina = 0;
 

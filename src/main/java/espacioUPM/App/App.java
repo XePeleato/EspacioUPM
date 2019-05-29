@@ -1,6 +1,5 @@
-package espacioUPM.UI;
+package espacioUPM.App;
 
-import espacioUPM.Database.DB_Main;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.scene.image.Image;
@@ -22,8 +21,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        DB_Main.getInstance(); // Conectamos con la BD
         hostServices = getHostServices();
 
         controller = MainController.getInstance();

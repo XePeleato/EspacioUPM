@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.Publicaciones.IPublicacion;
 import espacioUPM.Publicaciones.Puntuacion;
 import espacioUPM.Usuarios.Usuario;
@@ -22,8 +24,8 @@ public class TweetController implements Initializable {
 
     private IPublicacion pub;
 
-    private static final IMainControllerUtils controller = MainController.getInstance();
-    private static final IMainControllerScene controllerScene = MainController.getInstance();
+    private static final IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static final IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
     private Tweet view;
 

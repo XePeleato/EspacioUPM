@@ -1,5 +1,6 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
 import espacioUPM.Usuarios.IUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ public class SearchedUserController implements Initializable {
 
     private IUsuario us;
 
-    private final static IMainControllerScene controller = MainController.getInstance();
+    private final static IMainControllerScene controller = IMainControllerScene.getInstance();
 
     public SearchedUserController() {
     }

@@ -1,5 +1,7 @@
 package espacioUPM.UI;
 
+import espacioUPM.App.IMainControllerScene;
+import espacioUPM.App.IMainControllerUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -15,8 +17,8 @@ public class SettingsController {
     @FXML Button btnCambiarAlias, btnLogout, btnBorrarDatos, btnBaja;
     @FXML HBox actionBox, respMessageBox;
 
-    private static IMainControllerUtils controller = MainController.getInstance();
-    private static IMainControllerScene controllerScene = MainController.getInstance();
+    private static IMainControllerUtils controller = IMainControllerUtils.getInstance();
+    private static IMainControllerScene controllerScene = IMainControllerScene.getInstance();
 
     public void onClickCambiarAlias(ActionEvent actionEvent) {
         actionBox.getChildren().clear();

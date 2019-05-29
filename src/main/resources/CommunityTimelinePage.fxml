@@ -24,7 +24,6 @@
                     <children>
                         <Button fx:id="btnUnirse" mnemonicParsing="false" onAction="#onClickUnirse" styleClass="btn-primary" stylesheets="@fextile.css" text="Unirse" />
                         <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="32.0" prefWidth="71.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Salir" />
-                        <Button fx:id="btnVerUsuarios" prefHeight="25.0" mnemonicParsing="false" stylesheets="fextile.css" styleClass="btn-default" text="Ver usuarios" onAction="#onBtnVerUsuariosClick"/>
                     </children>
                 </VBox>
                 <Label styleClass="title" text="COMUNIDAD" GridPane.halignment="RIGHT">
@@ -35,6 +34,7 @@
                 <VBox prefHeight="128.0" prefWidth="353.0">
                     <children>
                         <Label fx:id="txtNombre" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="154.0" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
+                        <Button fx:id="btnVerUsuarios" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#onBtnVerUsuariosClick" prefHeight="25.0" styleClass="btn-default" stylesheets="fextile.css" text="Ver miembros" />
                     </children>
                 </VBox>
             </children>
