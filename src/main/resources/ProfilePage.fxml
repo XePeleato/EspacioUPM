@@ -27,8 +27,8 @@
              <VBox prefHeight="128.0" prefWidth="353.0">
                  <children>
                      <Label fx:id="txtUsername" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="154.0" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
-                     <Label fx:id="txtSeguidores" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="154.0" styleClass="text-info" stylesheets="@fextile.css" text="Nombre de usuario" />
-                     <Label fx:id="txtSeguidos" alignment="TOP_LEFT"  prefHeight="26.0" prefWidth="154.0" styleClass="text-info" stylesheets="@fextile.css" text="Nombre de usuario" />
+                     <Label fx:id="txtSeguidores" onMouseClicked="#onClickSeguidores" alignment="TOP_LEFT" prefHeight="26.0" prefWidth="154.0" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
+                     <Label fx:id="txtSeguidos" onMouseClicked="#onClickSeguidos" alignment="TOP_LEFT"  prefHeight="26.0" prefWidth="154.0" styleClass="hyperlink" stylesheets="@fextile.css" text="Nombre de usuario" />
                  </children>
              </VBox>
 

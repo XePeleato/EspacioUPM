@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="329.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.CommunityTimelineController">
     <children>
         <GridPane alignment="CENTER_RIGHT" prefHeight="136.0" prefWidth="697.0">
@@ -17,10 +23,11 @@
                 <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                     <children>
                         <Button fx:id="btnUnirse" mnemonicParsing="false" onAction="#onClickUnirse" styleClass="btn-primary" stylesheets="@fextile.css" text="Unirse" />
-                        <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="32.0" prefWidth="72.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Salir" />
+                        <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="32.0" prefWidth="71.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Salir" />
+                        <Button fx:id="btnVerUsuarios" prefHeight="25.0" mnemonicParsing="false" stylesheets="fextile.css" styleClass="btn-default" text="Ver usuarios" onAction="#onBtnVerUsuariosClick"/>
                     </children>
                 </VBox>
-                <Label text="COMUNIDAD" styleClass="title" GridPane.halignment="RIGHT">
+                <Label styleClass="title" text="COMUNIDAD" GridPane.halignment="RIGHT">
                     <font>
                         <Font size="18.0" />
                     </font>

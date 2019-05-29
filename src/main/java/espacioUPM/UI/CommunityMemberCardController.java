@@ -49,45 +49,56 @@ public class CommunityMemberCardController implements Initializable {
     public void setData(IUsuario us, IComunidad com) {
         this.us = us;
         this.com = com;
-        isAccepted = com.esMiembro(us);
+        isAccepted = com.esMiembroAceptado(us);
         isAdmin = com.esAdmin(us.getAlias());
         if(controllerUtils.getThisUser().getAlias().equals(us.getAlias())) {
             btnMakeAdminOrAccept.setDisable(true);
             btnKickOrReject.setDisable(true);
+            btnMakeAdminOrAccept.setText("Hacer admin");
+            btnKickOrReject.setText("Expulsar");
+        }
+        if(!com.esAdmin(controllerUtils.getThisUser().getAlias())) {
+            btnKickOrReject.setDisable(true);
+            btnMakeAdminOrAccept.setDisable(true);
         }
         if(isAccepted) {
             btnKickOrReject.setText("Expulsar");
             btnMakeAdminOrAccept.setText("Hacer admin");
             if(isAdmin) {
+                btnMakeAdminOrAccept.setDisable(true);
                 txtAccepted.setText("Admin");
             }
             else {
-                btnMakeAdminOrAccept.setDisable(true);
                 txtAccepted.setText("Miembro");
             }
         }
         else {
+            btnMakeAdminOrAccept.setText("Aceptar");
+            btnKickOrReject.setText("Rechazar");
             txtAccepted.setText("No aceptado");
         }
     }
 
+    private void refreshCommunity() {
+        CommunityTimeline ct = new CommunityTimeline();
+        ct.setComunidad(com);
+        controller.replaceComponent(ct);
+    }
+
     public void onBtnGoodClick(ActionEvent actionEvent) {
-        if(isAccepted) {
+        if(isAccepted)
             com.hacerAdmin(us.getAlias());
-            controller.refresh();
-        }
-        else {
+        else
             com.aceptarMiembroNuevo(us.getAlias());
-        }
+        refreshCommunity();
     }
 
     public void onBtnBadClick(ActionEvent actionEvent) {
-        if(isAccepted) {
-            com.salir(us.getAlias());
-        }
-        else {
+        if(isAccepted)
+            com.salir(us.getAlias()); // Expulsado
+        else
             com.rechazarMiembro(us.getAlias());
-        }
+        refreshCommunity();
     }
 
     @Override

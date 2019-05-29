@@ -16,6 +16,8 @@ public interface IComunidad {
 
     boolean esMiembro(IUsuario user);
 
+    boolean esMiembroAceptado(IUsuario user);
+
     boolean aceptarMiembroNuevo(String alias);
 
     boolean esAdmin(String alias);
@@ -23,5 +25,7 @@ public interface IComunidad {
     void hacerAdmin(String alias);
 
     void rechazarMiembro(String alias);
+
+    IUsuario[] getMiembros();
 
 }

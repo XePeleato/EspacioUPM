@@ -1,12 +1,14 @@
 package espacioUPM.UI;
 
 import espacioUPM.Usuarios.IUsuario;
+import espacioUPM.Usuarios.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,5 +75,27 @@ public class PerfilController implements Initializable {
             btnFollow.setText("Seguir");
         txtSeguidores.setText("Seguidores: " + usuario.getSeguidores().length);
         txtSeguidos.setText("Seguidos: " + usuario.getSeguidos().length);
+    }
+
+    public void onClickSeguidores(MouseEvent event) {
+        ListaUsuarios l = new ListaUsuarios();
+        String[] users = usuario.getSeguidores();
+        IUsuario[] users2 = new IUsuario[users.length];
+        for(int i = 0; i < users.length; i++) {
+            users2[i] = new Usuario(users[i]);
+        }
+        l.setData(users2, usuario);
+        maincontrollerScene.replaceComponent(l);
+    }
+
+    public void onClickSeguidos(MouseEvent event) {
+        ListaUsuarios l = new ListaUsuarios();
+        String[] users = usuario.getSeguidos();
+        IUsuario[] users2 = new IUsuario[users.length];
+        for(int i = 0; i < users.length; i++) {
+            users2[i] = new Usuario(users[i]);
+        }
+        l.setData(users2, usuario);
+        maincontrollerScene.replaceComponent(l);
     }
 }

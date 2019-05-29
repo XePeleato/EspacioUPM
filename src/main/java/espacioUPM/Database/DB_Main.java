@@ -338,7 +338,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             pStmt.setString(1, comunidad.getNombre());
             pStmt.setString(2, fundador);
 
-            try (PreparedStatement pStmtMember = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, 1)")) {
+            try (PreparedStatement pStmtMember = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, 2)")) {
                 pStmtMember.setString(1, fundador);
                 pStmtMember.setString(2, comunidad.getNombre());
 
@@ -356,7 +356,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement pStmt = connection.prepareStatement("INSERT INTO miembros_comunidad VALUES (?, ?, ?)");
             pStmt.setString(1, alias);
             pStmt.setString(2, id);
-            pStmt.setBoolean(3, true);
+            pStmt.setInt(3, 0);
             return pStmt.executeUpdate() >= 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -367,7 +367,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
     public IComunidad[] getComunidades(String alias)
     {
         ArrayList<IComunidad> ret = new ArrayList<>();
-        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ?")) {
+        try (PreparedStatement pStmt = connection.prepareStatement("SELECT id_comunidad FROM miembros_comunidad WHERE id_usuario = ? AND aceptado <> 0")) {
             pStmt.setString(1, alias);
 
             ResultSet rs = pStmt.executeQuery();
@@ -399,13 +399,11 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             statement.setString(2, alias);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                if(rs.getInt("aceptado") == 1)
-                    return 1;
-                else return 2;
+                return rs.getInt("aceptado");
             }
-            else return 0;
+            else return -1;
         } catch(SQLException e) { e.printStackTrace(); }
-        return 0;
+        return -1;
     }
 
     public boolean seguir(String seguidor, String seguido) {
@@ -523,6 +521,7 @@ public class DB_Main implements IDB_Usuario, IDB_Comunidad, IDB_Publicacion, IDB
             PreparedStatement statement = connection.prepareStatement("SELECT p.id AS pubid, p.fecha AS fec " +
                                                                           "FROM publicaciones AS p, miembros_comunidad AS mc " +
                                                                           "WHERE p.autor = mc.id_usuario AND ? = mc.id_comunidad " +
+                                                                          "AND mc.aceptado <> 0 " +
                                                                           "ORDER BY fec DESC");
             statement.setString(1, comunidad.getNombre());
             ResultSet rs = statement.executeQuery();

@@ -18,6 +18,7 @@ public class CommunityTimelineController implements Initializable {
     Button btnSalir;
     @FXML
     Button btnUnirse;
+    @FXML Button btnVerUsuarios;
     @FXML
     Label txtNombre;
     @FXML
@@ -58,6 +59,12 @@ public class CommunityTimelineController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onBtnVerUsuariosClick(ActionEvent actionEvent) {
+        ListaUsuarios l = new ListaUsuarios();
+        l.setData(comunidad);
+        maincontrollerScene.replaceComponent(l);
     }
 
     @Override

@@ -16,7 +16,7 @@
             </Label>
             <Label text="Crear comunidad: " />
             <TextField fx:id="txtCommunityName" promptText="Nombre..." />
-            <Button fx:id="btnCreateCommunity" mnemonicParsing="false" onAction="#onClickCreateCommunity" text="Crear comunidad" />
+            <Button fx:id="btnCreateCommunity" mnemonicParsing="false" stylesheets="fextile.css" styleClass="btn-default" onAction="#onClickCreateCommunity" text="Crear comunidad" />
          </children>
       </HBox>
       <ScrollPane fx:id="scrollPaneCommunities" prefHeight="263.0" prefWidth="700.0">
