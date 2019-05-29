@@ -36,4 +36,6 @@ public interface IDB_Usuario {
 	 boolean estaSiguiendo(String aliasSeguidor, String aliasSeguido);
 
 	 void borrarComentarios(IUsuario user);
+
+	 void borrarComunidades(IUsuario user);
 }
