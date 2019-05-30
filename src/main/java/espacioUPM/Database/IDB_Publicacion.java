@@ -24,4 +24,8 @@ public interface IDB_Publicacion {
 
 	int getNewID();
 
+	static IDB_Publicacion getInstance() {
+		return DB_Main.getInstance();
+	}
+
 }

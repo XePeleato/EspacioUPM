@@ -1,5 +1,6 @@
 package espacioUPM.Publicaciones;
 
+import espacioUPM.App.IMainControllerUtils;
 import espacioUPM.App.MainController;
 import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_Publicacion;
@@ -16,8 +17,8 @@ public abstract class Publicacion implements IPublicacion, Comparable {
     private int numLikes;
     private int numDislikes;
 
-    private static final IDB_Publicacion DB = DB_Main.getInstance();
-    private static final MainController controller = MainController.getInstance();
+    private static final IDB_Publicacion DB = IDB_Publicacion.getInstance();
+    private static final IMainControllerUtils controller = IMainControllerUtils.getInstance();
 
     public Publicacion(String autor) {
         IDPublicacion = DB.getNewID();

@@ -38,4 +38,8 @@ public interface IDB_Usuario {
 	 void borrarComentarios(IUsuario user);
 
 	 void borrarComunidades(IUsuario user);
+
+	 static IDB_Usuario getInstance() {
+	 	return DB_Main.getInstance();
+	 }
 }

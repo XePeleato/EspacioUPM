@@ -39,4 +39,8 @@ public interface IDB_Comunidad {
 	void hacerAdmin(String id, String alias);
 
 	boolean esAdmin(String id, String alias);
+
+	static IDB_Comunidad getInstance() {
+		return DB_Main.getInstance();
+	}
 }

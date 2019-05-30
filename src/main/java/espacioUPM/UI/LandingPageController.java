@@ -48,6 +48,7 @@ public class LandingPageController implements Initializable {
         } else {
             try {
                 controller.setThisUser(usuario);
+                controllerScene.setTitle("EspacioUPM - @" + usuario.getAlias());
                 controllerScene.replaceScene("/MainPage.fxml");
             } catch (IOException e) { e.printStackTrace(); }
         }

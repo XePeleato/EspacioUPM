@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class PublicacionFactory {
 
-	private static final IDB_Publicacion DB = DB_Main.getInstance();
+	private static final IDB_Publicacion DB = IDB_Publicacion.getInstance();
 
 	// Clase estática - no debe instanciarse
 	private PublicacionFactory() {}

@@ -10,7 +10,6 @@ package espacioUPM.Usuarios;//
 //
 
 
-import espacioUPM.Database.DB_Main;
 import espacioUPM.Database.IDB_PasswordHandler;
 import espacioUPM.Database.IDB_Publicacion;
 import espacioUPM.Database.IDB_Usuario;
@@ -20,24 +19,24 @@ import javafx.beans.property.DoubleProperty;
 public class Usuario implements IUsuario {
 
     private String alias;
-    private static final IDB_Publicacion DB = DB_Main.getInstance();
-    private static final IDB_Usuario DB_user = DB_Main.getInstance();
-    private static final IDB_PasswordHandler DB_pass = DB_Main.getInstance();
+    private static final IDB_Publicacion DB_publicacion = IDB_Publicacion.getInstance();
+    private static final IDB_Usuario DB = IDB_Usuario.getInstance();
+    private static final IDB_PasswordHandler DB_pass = IDB_PasswordHandler.getInstance();
 
     public Usuario(String alias) {
         this.alias = alias;
     }
 
     public static IUsuario getUsuario(String alias) {
-        return DB_user.getUsuario(alias);
+        return DB.getUsuario(alias);
     }
 
     public static void setUsuario(String alias, String correo, String passwd) {
-        DB_user.setUsuario(alias, correo, passwd);
+        DB.setUsuario(alias, correo, passwd);
     }
 
     public static IUsuario[] buscar(String alias) {
-        return DB_user.buscarUsuario(alias);
+        return DB.buscarUsuario(alias);
     }
 
     public boolean comprobarPasswd(String pass) {
@@ -45,27 +44,27 @@ public class Usuario implements IUsuario {
     }
 
     public boolean sigueA(String aliasSeguido) {
-        return DB_user.estaSiguiendo(this.alias, aliasSeguido);
+        return DB.estaSiguiendo(this.alias, aliasSeguido);
     }
 
     public void seguir(String aliasSeguido) {
-        DB_user.seguir(alias, aliasSeguido);
+        DB.seguir(alias, aliasSeguido);
     }
 
     public void dejarDeSeguir(String aliasSeguido) {
-        DB_user.dejarDeSeguir(alias, aliasSeguido);
+        DB.dejarDeSeguir(alias, aliasSeguido);
     }
 
     public String[] getSeguidos() {
-        return DB_user.getSeguidos(this);
+        return DB.getSeguidos(this);
     }
 
     public String[] getSeguidores() {
-        return DB_user.getSeguidores(this);
+        return DB.getSeguidores(this);
     }
 
     public IPublicacion[] obtenerPerfil(DoubleProperty progressProp) {
-        return DB.getPublicaciones(this, progressProp);
+        return DB_publicacion.getPublicaciones(this, progressProp);
     }
 
     public String getAlias() {
@@ -73,18 +72,18 @@ public class Usuario implements IUsuario {
     }
 
     public boolean cambiarAlias(String aliasNuevo) {
-        return DB_user.cambiarAlias(this, aliasNuevo);
+        return DB.cambiarAlias(this, aliasNuevo);
     }
 
     public void borrarDatos() {
-        for(IPublicacion publi : DB.getPublicaciones(this, null)) {
-            DB.borrarPublicacion(publi.getIDPublicacion());
+        for(IPublicacion publi : DB_publicacion.getPublicaciones(this, null)) {
+            DB_publicacion.borrarPublicacion(publi.getIDPublicacion());
         }
-        DB_user.borrarComentarios(this);
-        DB_user.borrarComunidades(this);
+        DB.borrarComentarios(this);
+        DB.borrarComunidades(this);
     }
 
     public void borrar() {
-        DB_user.borrarUsuario(this);
+        DB.borrarUsuario(this);
     }
 }

@@ -75,6 +75,7 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         stage.setScene(scene);
         stage.sizeToScene();
         System.out.println("[+] Nueva escena: " + fxml);
+        if(fxml.equals("/LandingPage.fxml")) setTitle("EspacioUPM");
         return root;
     }
 
@@ -108,7 +109,8 @@ public class MainController implements Initializable, IMainControllerUtils, IMai
         HBox root = (HBox) (borderPaneMain != null ? borderPaneMain : sBorderPane).getCenter();
         root.getChildren().clear();
         root.getChildren().add(node);
-        System.out.println("[+] Nueva subescena.");
+        System.out.println("[+] Nueva subescena que depende de una instancia\n" +
+                "Es un perfil, una comunidad o una lista de usuarios");
         stage.sizeToScene();
     }
 
