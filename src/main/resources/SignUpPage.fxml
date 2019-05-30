@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="238.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espacioUPM.UI.SignUpController">
    <children>
       <TextField fx:id="txtMail" layoutX="146.0" layoutY="71.0" styleClass="text-area" stylesheets="@fextile.css" />
@@ -12,7 +16,7 @@
       <Label layoutX="3.0" layoutY="150.0" text="Repetir Contraseña: " />
       <Label layoutX="95.0" layoutY="30.0" stylesheets="@fextile.css" text="Alias: " />
       <Label layoutX="54.0" layoutY="111.0" text="Contraseña: " />
-      <Button fx:id="btnSendReg" layoutX="324.0" layoutY="181.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" prefHeight="16.0" prefWidth="71.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Enviar" />
+      <Button fx:id="btnSendReg" layoutX="283.0" layoutY="181.0" mnemonicParsing="false" onAction="#onBtnRegSendClick" prefHeight="32.0" prefWidth="112.0" styleClass="btn-primary" stylesheets="@fextile.css" text="Registrarse" />
       <Button fx:id="btnBack" layoutX="32.0" layoutY="181.0" mnemonicParsing="false" onAction="#onBtnBack" styleClass="btn-default" stylesheets="@fextile.css" text="Atrás" />
    </children>
 </AnchorPane>

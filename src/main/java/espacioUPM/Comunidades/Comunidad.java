@@ -8,6 +8,7 @@ import espacioUPM.Usuarios.IUsuario;
 import javafx.beans.property.DoubleProperty;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Comunidad implements IComunidad {
 	private String nombre;
@@ -35,6 +36,22 @@ public class Comunidad implements IComunidad {
 	}
 	
 	public boolean salir(String alias) {
+		IUsuario[] miembros = getMiembros();
+		if(miembros.length != 1) {
+			int numAdmins = 0;
+			for (IUsuario usuario : miembros) {
+				if (esAdmin(usuario.getAlias()))
+					numAdmins++;
+			}
+			if (numAdmins == 1 && esAdmin(alias)) { //Si es el ultimo admin, ponemos un admin al azar
+				Random r = new Random();
+				int i = r.nextInt();
+				while (miembros[i].getAlias().equals(alias)) {
+					i = r.nextInt();
+				}
+				hacerAdmin(miembros[i].getAlias());
+			}
+		}
 		return DB.borrarMiembroComunidad(nombre, alias);
 	}
 	
