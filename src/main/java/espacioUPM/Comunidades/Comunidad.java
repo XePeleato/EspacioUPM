@@ -45,7 +45,7 @@ public class Comunidad implements IComunidad {
 			}
 			if (numAdmins == 1 && esAdmin(alias)) { //Si es el ultimo admin, ponemos un admin al azar
 				Random r = new Random();
-				int i = r.nextInt();
+				int i = r.nextInt(miembros.length);
 				while (miembros[i].getAlias().equals(alias)) {
 					i = r.nextInt();
 				}
